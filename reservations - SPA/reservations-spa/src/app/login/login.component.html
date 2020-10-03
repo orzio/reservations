@@ -1,0 +1,24 @@
+<div class="container d-flex justify-content-center align-items-center mt-5 mb-5" style ="height: 50vh; border:gray 1px solid; border-radius: 5px;">
+<form (submit) = "login()">
+        <div class="row ">
+            <div class ="col-12">
+                <div class="row">
+                    <div class="col-12">
+                        <input type="text" class="form-control" name="username"  placeholder="Email" [(ngModel)]="model.email">
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-12">
+                        <input type="text" class="form-control" name="password" placeholder="Password" type="password" [(ngModel)]="model.password">
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <a href="http://">Zapomnialem hasła</a>
+                </div>
+                <div class="row mt-2">
+                    <button class="btn btn-primary" type="submit">Zaloguj</button>
+                </div>
+            </div>
+        </div>  
+    </form>
+</div>
