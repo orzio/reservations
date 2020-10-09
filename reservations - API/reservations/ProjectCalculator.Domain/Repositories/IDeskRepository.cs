@@ -1,10 +1,11 @@
-﻿using System;
+﻿using ProjectCalculator.Api.Repositories;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Reservations.Core.Repositories
 {
-    public interface IDeskRepository
+    public interface IDeskRepository:IRepository
     {
     }
 }
