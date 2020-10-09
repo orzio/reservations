@@ -4,41 +4,43 @@ using Reservations.Core.Domain;
 using Reservations.Core.Repositories;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace Reservations.Infrastructure.Repositories
 {
-    public class DeskRepository : IDeskRepository
+    public class RoomRepository : IRoomRepository
     {
         private readonly DataContext _context;
-        public DeskRepository(DataContext context)
+
+        public RoomRepository(DataContext context)
         {
             _context = context;
         }
-        public async Task AddAsync(Desk desk)
+
+        public async Task AddAsync(Room room)
         {
-            await _context.Desks.AddAsync(desk);
+            await _context.Rooms.AddAsync(room);
             await _context.SaveChangesAsync();
         }
+
         public async Task DeleteAsync(Guid id)
         {
-            var desk = await GetAsync(id);
-            _context.Desks.Remove(desk);
+            var room = await GetAsync(id);
+            _context.Remove(room);
             await _context.SaveChangesAsync();
-
         }
 
-        public async Task<IEnumerable<Desk>> GetAllAsync()
-            => await _context.Desks.ToListAsync();
+        public async Task<IEnumerable<Room>> GetAllAsync()
+        => await _context.Rooms.ToListAsync();
 
-        public async Task<Desk> GetAsync(Guid id)
-            => await _context.Desks.SingleOrDefaultAsync(x => x.Id == id);
+        public async Task<Room> GetAsync(Guid id)
+        => await _context.Rooms.SingleOrDefaultAsync(x => x.Id == id);
 
-        public async Task UpdateAsync(Desk desk)
+
+        public async Task UpdateAsync(Room room)
         {
-            _context.Desks.Update(desk);
+            _context.Update(room);
             await _context.SaveChangesAsync();
         }
     }
