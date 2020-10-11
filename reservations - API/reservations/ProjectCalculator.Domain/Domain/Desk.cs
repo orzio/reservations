@@ -11,9 +11,9 @@ namespace Reservations.Core.Domain
         {
             UserDesks = new List<UserDesk>();
         }
-        public string Name { get; protected set; }
-        public Guid Id { get; protected set; }
-        public Guid OfficeId { get; protected set; }
+        public string Name { get;  set; }
+        public Guid Id { get;  set; }
+        public Guid OfficeId { get;  set; }
         List<UserDesk> UserDesks { get; set; }
     }
 }
