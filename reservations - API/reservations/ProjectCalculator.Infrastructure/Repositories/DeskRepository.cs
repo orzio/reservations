@@ -36,6 +36,9 @@ namespace Reservations.Infrastructure.Repositories
         public async Task<Desk> GetAsync(Guid id)
             => await _context.Desks.SingleOrDefaultAsync(x => x.Id == id);
 
+        public async Task<Desk> GetAsync(string name)
+            => await _context.Desks.SingleOrDefaultAsync(x => x.Name == name);
+
         public async Task UpdateAsync(Desk desk)
         {
             _context.Desks.Update(desk);

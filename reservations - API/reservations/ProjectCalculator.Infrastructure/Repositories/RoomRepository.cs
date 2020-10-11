@@ -37,6 +37,8 @@ namespace Reservations.Infrastructure.Repositories
         public async Task<Room> GetAsync(Guid id)
         => await _context.Rooms.SingleOrDefaultAsync(x => x.Id == id);
 
+        public async Task<Room> GetAsync(string name)
+        => await _context.Rooms.SingleOrDefaultAsync(x => x.Name == name);
 
         public async Task UpdateAsync(Room room)
         {
