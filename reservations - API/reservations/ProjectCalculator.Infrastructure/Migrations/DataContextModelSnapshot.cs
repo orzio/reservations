@@ -138,6 +138,8 @@ namespace Reservations.Infrastructure.Migrations
 
                     b.HasIndex("AddressId");
 
+                    b.HasIndex("UserId");
+
                     b.ToTable("Offices");
                 });
 
@@ -213,6 +215,12 @@ namespace Reservations.Infrastructure.Migrations
                     b.HasOne("Reservations.Core.Domain.Address", "Address")
                         .WithMany()
                         .HasForeignKey("AddressId");
+
+                    b.HasOne("ProjectCalculator.Core.Domain.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Reservations.Core.Domain.Room", b =>
