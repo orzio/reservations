@@ -37,4 +37,8 @@
     <ProjectReference Include="..\ProjectCalculator.Domain\Reservations.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Repositories\Revervations\Room\" />
+  </ItemGroup>
+
 </Project>
