@@ -9,6 +9,8 @@ namespace Reservations.Infrastructure.Services
 {
     public interface IOfficeService:IService
     {
-        Task CreateAsync(Guid userId, string name, Address address);
+        Task CreateAsync(Guid officeId, Guid userId, string name, Address address);
+        Task DeleteOffice(Guid officeId);
+        Task UpdateOffice(Guid officeId,Guid userId, Address address, string name);
     }
 }
