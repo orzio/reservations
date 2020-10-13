@@ -44,10 +44,10 @@ namespace ProjectCalculator
             //services.AddCors();
             services.AddAuthorization(x => x.AddPolicy("admin", p => p.RequireRole("admin")));
             services.AddAuthorization(x => x.AddPolicy("user", p => p.RequireRole("user")));
-            //services.AddDbContext<DataContext>(options =>
+            services.AddDbContext<DataContext>(options =>
             //            options.UseSqlServer(Configuration["sql:connectionString"]));
-                        //options.UseSqlite(Configuration
-                        //.GetConnectionString("DefaultConnection")));
+                        options.UseSqlite(Configuration
+                        .GetConnectionString("DefaultConnection")));
             services.AddControllers();
             services.AddMemoryCache();
 

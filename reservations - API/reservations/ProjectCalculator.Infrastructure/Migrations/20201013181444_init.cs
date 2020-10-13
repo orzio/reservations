@@ -58,12 +58,6 @@ namespace Reservations.Infrastructure.Migrations
                         principalTable: "Addresses",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Offices_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -183,11 +177,6 @@ namespace Reservations.Infrastructure.Migrations
                 column: "AddressId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Offices_UserId",
-                table: "Offices",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Rooms_OfficeId",
                 table: "Rooms",
                 column: "OfficeId");
@@ -227,13 +216,13 @@ namespace Reservations.Infrastructure.Migrations
                 name: "Rooms");
 
             migrationBuilder.DropTable(
+                name: "Users");
+
+            migrationBuilder.DropTable(
                 name: "Offices");
 
             migrationBuilder.DropTable(
                 name: "Addresses");
-
-            migrationBuilder.DropTable(
-                name: "Users");
         }
     }
 }
