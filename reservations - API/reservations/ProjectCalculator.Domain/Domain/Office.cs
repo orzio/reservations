@@ -12,15 +12,13 @@ namespace Reservations.Core.Domain
         public Address Address { get; protected set; }
         public string Name { get; protected set; }
 
-        public User User { get; set; }
         public List<Room> Rooms { get; protected set; }
         public List<Desk> Desks { get; protected set; }
 
         protected Office() { }
 
-        public Office(Guid officeId,Guid userId, Address address, string name)
+        public Office(Guid userId, Address address, string name)
         {
-            Id = officeId;
             UserId = userId;
             Address = address;
             Name = name;

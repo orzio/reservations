@@ -10,8 +10,8 @@ using ProjectCalculator.Infrastructure.Data;
 namespace Reservations.Infrastructure.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20201012201828_init")]
-    partial class init
+    [Migration("20201009190200_jtab")]
+    partial class jtab
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -140,8 +140,6 @@ namespace Reservations.Infrastructure.Migrations
 
                     b.HasIndex("AddressId");
 
-                    b.HasIndex("UserId");
-
                     b.ToTable("Offices");
                 });
 
@@ -162,36 +160,6 @@ namespace Reservations.Infrastructure.Migrations
                     b.HasIndex("OfficeId");
 
                     b.ToTable("Rooms");
-                });
-
-            modelBuilder.Entity("Reservations.Core.Domain.UserDesk", b =>
-                {
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("DeskId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("UserId", "DeskId");
-
-                    b.HasIndex("DeskId");
-
-                    b.ToTable("UserDesk");
-                });
-
-            modelBuilder.Entity("Reservations.Core.Domain.UserRoom", b =>
-                {
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("RoomId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.HasKey("UserId", "RoomId");
-
-                    b.HasIndex("RoomId");
-
-                    b.ToTable("UserRoom");
                 });
 
             modelBuilder.Entity("ProjectCalculator.Core.Domain.Token", b =>
@@ -217,12 +185,6 @@ namespace Reservations.Infrastructure.Migrations
                     b.HasOne("Reservations.Core.Domain.Address", "Address")
                         .WithMany()
                         .HasForeignKey("AddressId");
-
-                    b.HasOne("ProjectCalculator.Core.Domain.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Reservations.Core.Domain.Room", b =>
@@ -230,36 +192,6 @@ namespace Reservations.Infrastructure.Migrations
                     b.HasOne("Reservations.Core.Domain.Office", null)
                         .WithMany("Rooms")
                         .HasForeignKey("OfficeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Reservations.Core.Domain.UserDesk", b =>
-                {
-                    b.HasOne("Reservations.Core.Domain.Desk", "Desk")
-                        .WithMany()
-                        .HasForeignKey("DeskId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ProjectCalculator.Core.Domain.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Reservations.Core.Domain.UserRoom", b =>
-                {
-                    b.HasOne("Reservations.Core.Domain.Room", "Room")
-                        .WithMany()
-                        .HasForeignKey("RoomId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ProjectCalculator.Core.Domain.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

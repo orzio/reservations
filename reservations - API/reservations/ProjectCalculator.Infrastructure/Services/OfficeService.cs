@@ -20,21 +20,10 @@ namespace Reservations.Infrastructure.Services
             _mapper = mapper;
         }
 
-        public async Task CreateAsync(Guid officeId, Guid userId, string name,Address address)
+        public async Task CreateAsync(Guid userId, string name,Address address)
         {
-            var office = new Office(officeId, userId,address,name);
+            var office = new Office(userId,address,name);
             await _officeRepository.AddAsync(office);
-        }
-
-        public async Task DeleteOffice(Guid officeId)
-        {
-            await _officeRepository.DeleteAsync(officeId);
-        }
-
-        public async Task UpdateOffice(Guid officeId,Guid userId, Address address, string name)
-        {
-            var office = new Office(officeId, userId, address, name);
-            await _officeRepository.UpdateAsync(office);
         }
 
 
