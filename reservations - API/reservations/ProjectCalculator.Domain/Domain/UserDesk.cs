@@ -7,6 +7,7 @@ namespace Reservations.Core.Domain
 {
    public class UserDesk
     {
+        public Guid Id { get; set; }
         public Guid UserId { get; set; }
         public Guid DeskId { get; set; }
 

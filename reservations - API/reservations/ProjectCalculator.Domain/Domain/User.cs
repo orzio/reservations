@@ -23,7 +23,6 @@ namespace ProjectCalculator.Core.Domain
         public DateTime CreatedAt { get;  set; }
         public DateTime UpdatedAt { get;  set; }
 
-        List<Office> Offices { get; set; }
         List<UserDesk> UserDesks { get; set; }
         List<UserRoom> UserRooms { get; set; }
 
@@ -45,7 +44,6 @@ namespace ProjectCalculator.Core.Domain
             CreatedAt = DateTime.UtcNow;
             UserRooms = new List<UserRoom>();
             UserDesks = new List<UserDesk>();
-            Offices = new List<Office>();
         }
 
         public void SetFirstName(string firstName)
