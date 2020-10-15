@@ -19,7 +19,7 @@ namespace Reservations.Infrastructure.Repositories.Revervations.Desk
 
         public async Task AddAsync(Guid reservationId, Guid userId, Guid deskId, DateTime startTime, DateTime endTime)
         {
-            var join = new UserDesk()
+            var join = new DeskReservations()
             {
                 Id = reservationId,
                 UserId = userId,

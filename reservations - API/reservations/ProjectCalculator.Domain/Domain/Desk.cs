@@ -9,12 +9,12 @@ namespace Reservations.Core.Domain
 
         public Desk()
         {
-            UserDesks = new List<UserDesk>();
+            UserDesks = new List<DeskReservations>();
         }
         public string Name { get;  set; }
         public Guid Id { get;  set; }
         public Guid OfficeId { get;  set; }
         public int Seats { get; set; }
-        List<UserDesk> UserDesks { get; set; }
+        List<DeskReservations> UserDesks { get; set; }
     }
 }

@@ -26,8 +26,8 @@ namespace ProjectCalculator.Infrastructure.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //ef knows that these Id's are foreign Keys
-            modelBuilder.Entity<UserDesk>().HasKey(x => new { x.UserId, x.DeskId });
-            modelBuilder.Entity<UserRoom>().HasKey(x => new { x.UserId, x.RoomId });
+            modelBuilder.Entity<DeskReservations>().HasKey(x => new { x.UserId, x.DeskId });
+            modelBuilder.Entity<RoomReservations>().HasKey(x => new { x.UserId, x.RoomId });
             modelBuilder.Entity<Address>().ToTable("Addresses");
         }
 

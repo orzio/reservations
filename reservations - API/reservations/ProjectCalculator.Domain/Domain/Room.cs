@@ -8,7 +8,7 @@ namespace Reservations.Core.Domain
     {
         public Room()
         {
-            UserRooms = new List<UserRoom>();
+            UserRooms = new List<RoomReservations>();
         }
         public string Name { get; set; }
         public Guid Id { get; set; }
@@ -19,6 +19,6 @@ namespace Reservations.Core.Domain
         public bool HasWhiteBoard { get; set; }
         public bool HasProjector { get; set; }
 
-        List<UserRoom> UserRooms { get; set; }
+        List<RoomReservations> UserRooms { get; set; }
     }
 }
