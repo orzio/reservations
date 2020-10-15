@@ -36,7 +36,7 @@ namespace Reservations.Infrastructure.Services
             return _mapper.Map<Room, RoomDto>(room);
         }
 
-        public async Task CreateRoom(Guid officeId, Guid deskId, string name)
+        public async Task CreateRoom(Guid officeId, Guid roomId, string description, bool hasTV, bool hasWhiteBoard, bool hasProjector, int seats, string name)
         {
             var room = await _roomRepository.GetAsync(name);
             if (room != null)
@@ -46,8 +46,13 @@ namespace Reservations.Infrastructure.Services
 
             room = new Room()
             {
-                Id = deskId,
+                Id = roomId,
                 OfficeId = officeId,
+                Description = description,
+                Seats = seats,
+                HasTV = hasTV,
+                HasProjector = hasProjector,
+                HasWhiteBoard = hasWhiteBoard,
                 Name = name
             };
 
@@ -57,7 +62,15 @@ namespace Reservations.Infrastructure.Services
         public Task RemoveRoom(Guid deskId)
             => _roomRepository.DeleteAsync(deskId);
     
+        public async Task UpdateRoom(Guid roomId, string Name, string description, string seats, bool hasTV, bool hasWhiteBoard, bool hasProjector)
+        {
+            var room = await _roomRepository.GetAsync(roomId);
+            if(room == null)
+            {
+                throw new Exception($"room with Name: {Name} does not exists!");
+            }
 
+        }
 
     }
 }

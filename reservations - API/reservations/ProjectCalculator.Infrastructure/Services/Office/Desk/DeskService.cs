@@ -28,7 +28,7 @@ namespace Reservations.Infrastructure.Services
             return _mapper.Map<IEnumerable<Desk>, IEnumerable<DeskDto>>(desks);
         }
 
-        public async Task CreateDesk(Guid officeId, Guid deskId, string name)
+        public async Task CreateDesk(Guid officeId, Guid deskId, string name, int seats)
         {
             var desk = await _deskRepository.GetAsync(name);
             if (desk != null)
@@ -39,7 +39,8 @@ namespace Reservations.Infrastructure.Services
             {
                 Name = name,
                 OfficeId = officeId,
-                Id = Guid.NewGuid()
+                Id = deskId,
+                Seats = seats
             };
             await _deskRepository.AddAsync(desk);
         }
