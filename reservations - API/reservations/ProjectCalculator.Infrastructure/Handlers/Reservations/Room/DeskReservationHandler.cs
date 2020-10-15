@@ -12,7 +12,7 @@ namespace Reservations.Infrastructure.Handlers.Reservations.Room
 
         public Task HandleAsync(CreateDeskReservation command)
         {
-            
+            return null;
         }
     }
 }

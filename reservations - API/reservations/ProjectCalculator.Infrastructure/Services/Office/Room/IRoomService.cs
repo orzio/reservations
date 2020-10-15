@@ -11,7 +11,7 @@ namespace Reservations.Infrastructure.Services
     {
         Task<RoomDto> GetAsync(Guid id);
         Task<IEnumerable<RoomDto>> BrowseAsync();
-        Task CreateRoom(Guid officeId, Guid deskId, string name);
-        Task RemoveRoom(Guid deskId);
+        Task CreateRoom(Guid officeId, Guid roomId, string description, bool hasTV, bool hasWhiteBoard, bool hasProjector, int seats, string name);
+        Task RemoveRoom(Guid roomId);
     }
 }

@@ -35,6 +35,7 @@ Relational:TableName: Offices" Category="EntityType" Group="Expanded" />
 <Node Id = "Desk.Id" Label="Id" Name="Id" Category="Property Primary" Type="Guid" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="TypeMapping: Microsoft.EntityFrameworkCore.Storage.GuidTypeMapping" IsPrimaryKey="True" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="ValueGenerated.OnAdd" />
 <Node Id = "Desk.Name" Label="Name" Name="Name" Category="Property Optional" Type="string" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="TypeMapping: Microsoft.EntityFrameworkCore.SqlServer.Storage.Internal.SqlServerStringTypeMapping" IsPrimaryKey="False" IsForeignKey="False" IsRequired="False" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
 <Node Id = "Desk.OfficeId" Label="OfficeId" Name="OfficeId" Category="Property Foreign" Type="Guid" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="TypeMapping: Microsoft.EntityFrameworkCore.Storage.GuidTypeMapping" IsPrimaryKey="False" IsForeignKey="True" IsRequired="True" IsIndexed="True" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "Desk.Seats" Label="Seats" Name="Seats" Category="Property Required" Type="int" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="TypeMapping: Microsoft.EntityFrameworkCore.Storage.IntTypeMapping" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
 <Node Id = "Room" Label="Room" Name="Room" BaseClass="" IsAbstract="False" ChangeTrackingStrategy="ChangeTrackingStrategy.Snapshot"  Annotations="ConstructorBinding: Microsoft.EntityFrameworkCore.Metadata.ConstructorBinding
 Relational:TableName: Rooms" Category="EntityType" Group="Expanded" />
 <Node Id = "Office.Id" Label="Id" Name="Id" Category="Property Primary" Type="Guid" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="TypeMapping: Microsoft.EntityFrameworkCore.Storage.GuidTypeMapping" IsPrimaryKey="True" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="ValueGenerated.OnAdd" />
@@ -53,11 +54,13 @@ Relational:TableName: Rooms" Category="EntityType" Group="Expanded" />
 <Node Id = "UserDesk.Desk" Label="Desk (1)" Name="Desk" Category="Navigation Property" Type="Desk"  Field="" Dependent="" Principal="Desk" Inverse="" PropertyAccessMode="PropertyAccessMode.Default" />
 <Node Id = "UserDesk.User" Label="User (1)" Name="User" Category="Navigation Property" Type="User"  Field="" Dependent="" Principal="User" Inverse="" PropertyAccessMode="PropertyAccessMode.Default" />
 <Node Id = "UserDesk.DeskId" Label="DeskId" Name="DeskId" Category="Property Primary" Type="Guid" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="TypeMapping: Microsoft.EntityFrameworkCore.Storage.GuidTypeMapping" IsPrimaryKey="True" IsForeignKey="True" IsRequired="True" IsIndexed="True" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "UserDesk.Id" Label="Id" Name="Id" Category="Property Required" Type="Guid" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="TypeMapping: Microsoft.EntityFrameworkCore.Storage.GuidTypeMapping" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
 <Node Id = "UserRoom" Label="UserRoom" Name="UserRoom" BaseClass="" IsAbstract="False" ChangeTrackingStrategy="ChangeTrackingStrategy.Snapshot"  Annotations="" Category="EntityType" Group="Expanded" />
 <Node Id = "UserRoom.UserId" Label="UserId" Name="UserId" Category="Property Primary" Type="Guid" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="TypeMapping: Microsoft.EntityFrameworkCore.Storage.GuidTypeMapping" IsPrimaryKey="True" IsForeignKey="True" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
 <Node Id = "UserRoom.Room" Label="Room (1)" Name="Room" Category="Navigation Property" Type="Room"  Field="" Dependent="" Principal="Room" Inverse="" PropertyAccessMode="PropertyAccessMode.Default" />
 <Node Id = "UserRoom.User" Label="User (1)" Name="User" Category="Navigation Property" Type="User"  Field="" Dependent="" Principal="User" Inverse="" PropertyAccessMode="PropertyAccessMode.Default" />
 <Node Id = "UserRoom.RoomId" Label="RoomId" Name="RoomId" Category="Property Primary" Type="Guid" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="TypeMapping: Microsoft.EntityFrameworkCore.Storage.GuidTypeMapping" IsPrimaryKey="True" IsForeignKey="True" IsRequired="True" IsIndexed="True" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
+<Node Id = "UserRoom.Id" Label="Id" Name="Id" Category="Property Required" Type="Guid" MaxLength="None" Field="" PropertyAccessMode="PropertyAccessMode.Default" BeforeSaveBehavior="PropertySaveBehavior.Save" AfterSaveBehavior="PropertySaveBehavior.Save" Annotations="TypeMapping: Microsoft.EntityFrameworkCore.Storage.GuidTypeMapping" IsPrimaryKey="False" IsForeignKey="False" IsRequired="True" IsIndexed="False" IsShadow="False" IsAlternateKey="False" IsConcurrencyToken="False" IsUnicode="True" ValueGenerated="None" />
   </Nodes>
   <Links>
 <Link Source = "IModel" Target="Token" Category="Contains" />
@@ -89,6 +92,7 @@ Relational:TableName: Rooms" Category="EntityType" Group="Expanded" />
 <Link Source="Desk" Target="Office" From="Desk.OfficeId" To="Office.Id" Name="Desk -> Office" Annotations="" IsUnique="False" Label="1:*" Category="Foreign Key" />
 <Link Source = "Desk" Target="Desk.Name" Category="Contains" />
 <Link Source = "Desk" Target="Desk.OfficeId" Category="Contains" />
+<Link Source = "Desk" Target="Desk.Seats" Category="Contains" />
 <Link Source = "IModel" Target="Room" Category="Contains" />
 <Link Source = "Office" Target="Office.Address" Category="Contains" />
 <Link Source = "Office" Target="Office.Desks" Category="Contains" />
@@ -110,6 +114,7 @@ Relational:TableName: Rooms" Category="EntityType" Group="Expanded" />
 <Link Source="UserDesk" Target="Desk" From="UserDesk.DeskId" To="Desk.Id" Name="UserDesk -> Desk" Annotations="" IsUnique="False" Label="1:*" Category="Foreign Key" />
 <Link Source="UserDesk" Target="User" From="UserDesk.UserId" To="User.Id" Name="UserDesk -> User" Annotations="" IsUnique="False" Label="1:*" Category="Foreign Key" />
 <Link Source = "UserDesk" Target="UserDesk.DeskId" Category="Contains" />
+<Link Source = "UserDesk" Target="UserDesk.Id" Category="Contains" />
 <Link Source = "IModel" Target="UserRoom" Category="Contains" />
 <Link Source = "UserRoom" Target="UserRoom.Room" Category="Contains" />
 <Link Source = "UserRoom" Target="UserRoom.User" Category="Contains" />
@@ -117,6 +122,7 @@ Relational:TableName: Rooms" Category="EntityType" Group="Expanded" />
 <Link Source="UserRoom" Target="Room" From="UserRoom.RoomId" To="Room.Id" Name="UserRoom -> Room" Annotations="" IsUnique="False" Label="1:*" Category="Foreign Key" />
 <Link Source="UserRoom" Target="User" From="UserRoom.UserId" To="User.Id" Name="UserRoom -> User" Annotations="" IsUnique="False" Label="1:*" Category="Foreign Key" />
 <Link Source = "UserRoom" Target="UserRoom.RoomId" Category="Contains" />
+<Link Source = "UserRoom" Target="UserRoom.Id" Category="Contains" />
   </Links>
   <Styles>
     <Style TargetType="Node" GroupLabel="EntityType" ValueLabel="True">
