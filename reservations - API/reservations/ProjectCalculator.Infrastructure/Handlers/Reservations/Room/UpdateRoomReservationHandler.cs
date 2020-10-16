@@ -19,7 +19,7 @@ namespace Reservations.Infrastructure.Handlers.Reservations.Room
 
         public async Task HandleAsync(UpdateRoomReservation command)
         {
-            //await _roomReservationService.
+            await _roomReservationService.UpdateReservation(command.Id, command.StartDate, command.EndDate);
         }
     }
 }

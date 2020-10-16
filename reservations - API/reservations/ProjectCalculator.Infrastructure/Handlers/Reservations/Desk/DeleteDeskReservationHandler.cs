@@ -19,7 +19,7 @@ namespace Reservations.Infrastructure.Handlers.Reservations.Desk
 
         public async Task HandleAsync(DeleteDeskReservation command)
         {
-            //await _deskReservationService.
+            await _deskReservationService.RemoveReservation(command.Id);
         }
     }
 }

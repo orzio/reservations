@@ -19,7 +19,7 @@ namespace Reservations.Infrastructure.Handlers.Reservations.Desk
 
         public async Task HandleAsync(UpdateDeskReservation command)
         {
-            //await _deskReservationService
+            await _deskReservationService.UpdateReservation(command.Id, command.StartDate, command.EndDate);
         }
     }
 }
