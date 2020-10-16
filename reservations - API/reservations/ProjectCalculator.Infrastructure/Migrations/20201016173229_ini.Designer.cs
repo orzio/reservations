@@ -10,8 +10,8 @@ using ProjectCalculator.Infrastructure.Data;
 namespace Reservations.Infrastructure.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20201014173447_desk")]
-    partial class desk
+    [Migration("20201016173229_ini")]
+    partial class ini
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -124,6 +124,33 @@ namespace Reservations.Infrastructure.Migrations
                     b.ToTable("Desks");
                 });
 
+            modelBuilder.Entity("Reservations.Core.Domain.DeskReservation", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("DeskId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DeskId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("DeskReservations");
+                });
+
             modelBuilder.Entity("Reservations.Core.Domain.Office", b =>
                 {
                     b.Property<Guid>("Id")
@@ -152,11 +179,26 @@ namespace Reservations.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("HasProjector")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("HasTV")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("HasWhiteBoard")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("OfficeId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<int>("Seats")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -165,40 +207,31 @@ namespace Reservations.Infrastructure.Migrations
                     b.ToTable("Rooms");
                 });
 
-            modelBuilder.Entity("Reservations.Core.Domain.UserDesk", b =>
+            modelBuilder.Entity("Reservations.Core.Domain.RoomReservation", b =>
                 {
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("DeskId")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("UserId", "DeskId");
-
-                    b.HasIndex("DeskId");
-
-                    b.ToTable("UserDesk");
-                });
-
-            modelBuilder.Entity("Reservations.Core.Domain.UserRoom", b =>
-                {
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<Guid>("RoomId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("Id")
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("UserId", "RoomId");
+                    b.HasKey("Id");
 
                     b.HasIndex("RoomId");
 
-                    b.ToTable("UserRoom");
+                    b.HasIndex("UserId");
+
+                    b.ToTable("RoomReservations");
                 });
 
             modelBuilder.Entity("ProjectCalculator.Core.Domain.Token", b =>
@@ -219,6 +252,21 @@ namespace Reservations.Infrastructure.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Reservations.Core.Domain.DeskReservation", b =>
+                {
+                    b.HasOne("Reservations.Core.Domain.Desk", "Desk")
+                        .WithMany()
+                        .HasForeignKey("DeskId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("ProjectCalculator.Core.Domain.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Reservations.Core.Domain.Office", b =>
                 {
                     b.HasOne("Reservations.Core.Domain.Address", "Address")
@@ -235,22 +283,7 @@ namespace Reservations.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Reservations.Core.Domain.UserDesk", b =>
-                {
-                    b.HasOne("Reservations.Core.Domain.Desk", "Desk")
-                        .WithMany()
-                        .HasForeignKey("DeskId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("ProjectCalculator.Core.Domain.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Reservations.Core.Domain.UserRoom", b =>
+            modelBuilder.Entity("Reservations.Core.Domain.RoomReservation", b =>
                 {
                     b.HasOne("Reservations.Core.Domain.Room", "Room")
                         .WithMany()

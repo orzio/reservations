@@ -11,6 +11,12 @@ namespace Reservations.Infrastructure.Handlers.Desk
     public class DeleteDeskCommandHandler : ICommandHandler<RemoveDesk>
     {
         private readonly IDeskService _deskService;
+
+        public DeleteDeskCommandHandler(IDeskService deskService)
+        {
+            _deskService = deskService;
+        }
+
         public async Task HandleAsync(RemoveDesk command)
         {
             await _deskService.RemoveDesk(command.DeskId);

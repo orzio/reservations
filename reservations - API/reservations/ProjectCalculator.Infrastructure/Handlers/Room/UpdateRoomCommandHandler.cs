@@ -12,6 +12,11 @@ namespace Reservations.Infrastructure.Handlers.Room
     {
         private readonly IRoomService _roomService;
 
+        public UpdateRoomCommandHandler(IRoomService roomService)
+        {
+            _roomService = roomService;
+        }
+
         public Task HandleAsync(UpdateRoom command)
         {
             throw new NotImplementedException();
