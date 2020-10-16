@@ -12,6 +12,11 @@ namespace Reservations.Infrastructure.Handlers
     {
         private readonly IDeskService _deskService;
 
+        public CreateDeskHandler(IDeskService deskService)
+        {
+            _deskService = deskService;
+        }
+
         public async Task HandleAsync(CreateDesk command)
         {
             await _deskService.CreateDesk(command.OfficeId, Guid.NewGuid(), command.Name, command.Seats);

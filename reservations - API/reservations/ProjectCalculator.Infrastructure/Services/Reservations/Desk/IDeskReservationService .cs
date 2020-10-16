@@ -8,6 +8,6 @@ namespace Reservations.Infrastructure.Services
 {
     public interface IDeskReservationService :IService
     {
-        Task ReserveDesk(Guid reservationId, Guid userId, Guid deskId, DateTime startTime, DateTime endTime);
+        Task ReserveDesk(Guid reservationId,Guid userId, Guid deskId, DateTime startTime, DateTime endTime);
     }
 }

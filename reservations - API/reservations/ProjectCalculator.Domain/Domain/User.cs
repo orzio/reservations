@@ -23,8 +23,8 @@ namespace ProjectCalculator.Core.Domain
         public DateTime CreatedAt { get;  set; }
         public DateTime UpdatedAt { get;  set; }
 
-        List<DeskReservations> UserDesks { get; set; }
-        List<RoomReservations> UserRooms { get; set; }
+        List<DeskReservation> UserDesks { get; set; }
+        List<RoomReservation> UserRooms { get; set; }
 
         public Token Token { get; set; }
         protected User()
@@ -42,8 +42,8 @@ namespace ProjectCalculator.Core.Domain
             SetRole(role);
             SetPassword(password, salt);
             CreatedAt = DateTime.UtcNow;
-            UserRooms = new List<RoomReservations>();
-            UserDesks = new List<DeskReservations>();
+            UserRooms = new List<RoomReservation>();
+            UserDesks = new List<DeskReservation>();
         }
 
         public void SetFirstName(string firstName)

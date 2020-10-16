@@ -12,6 +12,11 @@ namespace Reservations.Infrastructure.Handlers.Room
     {
         private readonly IRoomService _roomService;
 
+        public DeleteRoomCommandHandler(IRoomService roomService)
+        {
+            _roomService = roomService;
+        }
+
         public async Task HandleAsync(DeleteRoom command)
         {
             await _roomService.RemoveRoom(command.Id);

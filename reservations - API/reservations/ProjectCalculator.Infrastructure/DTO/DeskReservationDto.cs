@@ -1,19 +1,15 @@
-﻿using ProjectCalculator.Core.Domain;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Reservations.Core.Domain
+namespace Reservations.Infrastructure.DTO
 {
-   public class DeskReservations
+    public class DeskReservationDto
     {
-        public Guid Id { get; set; }
+        public Guid Id;
         public Guid UserId { get; set; }
         public Guid DeskId { get; set; }
-
-        public User User { get; set; }
-        public Desk Desk { get; set; }
-
+        public Guid OfficeId { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
     }

@@ -11,29 +11,29 @@ namespace Reservations.Api.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class RoomsController:ControllerBase
+    public class DesksController:ControllerBase
     {
         private readonly ICommandDispatcher _commandDispatcher;
-        private readonly IRoomService _roomService;
+        private readonly IDeskService _deskService;
 
-        public RoomsController(ICommandDispatcher commandDispatcher, IRoomService roomService)
+        public DesksController(ICommandDispatcher commandDispatcher, IDeskService deskService)
         {
             _commandDispatcher = commandDispatcher;
-            _roomService = roomService;
+            _deskService = deskService;
         }
 
         [HttpPost]
-        public async Task<IActionResult>Post([FromBody] CreateRoom command)
+        public async Task<IActionResult> Post(CreateDesk command)
         {
             await _commandDispatcher.DispatchAsync(command);
-            return Created($"rooms/{command}", null);
+            return Created($"desks/{command}", null);
         }
 
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var rooms = await _roomService.BrowseAsync();
-            return Ok(rooms);
+            var desks = await _deskService.BrowseAsync();
+            return Ok(desks);
         }
 
     }

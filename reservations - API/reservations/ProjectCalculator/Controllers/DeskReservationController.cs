@@ -18,11 +18,13 @@ namespace Reservations.Api.Controllers
             _commandDispatcher = commandDispatcher;
         }
 
-        public async Task<IActionResult> Post(CreateDeskReservation command)
+        public async Task<IActionResult> Post([FromBody]CreateDeskReservation command)
         {
             await _commandDispatcher.DispatchAsync(command);
 
             return Created($"deskreservations/{command.UserId}", null);
         }
+
+
     }
 }

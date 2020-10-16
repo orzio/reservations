@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Reservations.Infrastructure.Migrations
 {
-    public partial class init : Migration
+    public partial class ini : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -86,7 +86,8 @@ namespace Reservations.Infrastructure.Migrations
                 {
                     Id = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(nullable: true),
-                    OfficeId = table.Column<Guid>(nullable: false)
+                    OfficeId = table.Column<Guid>(nullable: false),
+                    Seats = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -105,7 +106,12 @@ namespace Reservations.Infrastructure.Migrations
                 {
                     Id = table.Column<Guid>(nullable: false),
                     Name = table.Column<string>(nullable: true),
-                    OfficeId = table.Column<Guid>(nullable: false)
+                    OfficeId = table.Column<Guid>(nullable: false),
+                    Description = table.Column<string>(nullable: true),
+                    Seats = table.Column<int>(nullable: false),
+                    HasTV = table.Column<bool>(nullable: false),
+                    HasWhiteBoard = table.Column<bool>(nullable: false),
+                    HasProjector = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -119,23 +125,26 @@ namespace Reservations.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserDesk",
+                name: "DeskReservations",
                 columns: table => new
                 {
+                    Id = table.Column<Guid>(nullable: false),
                     UserId = table.Column<Guid>(nullable: false),
-                    DeskId = table.Column<Guid>(nullable: false)
+                    DeskId = table.Column<Guid>(nullable: false),
+                    StartDate = table.Column<DateTime>(nullable: false),
+                    EndDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserDesk", x => new { x.UserId, x.DeskId });
+                    table.PrimaryKey("PK_DeskReservations", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UserDesk_Desks_DeskId",
+                        name: "FK_DeskReservations_Desks_DeskId",
                         column: x => x.DeskId,
                         principalTable: "Desks",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UserDesk_Users_UserId",
+                        name: "FK_DeskReservations_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -143,28 +152,41 @@ namespace Reservations.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserRoom",
+                name: "RoomReservations",
                 columns: table => new
                 {
+                    Id = table.Column<Guid>(nullable: false),
                     UserId = table.Column<Guid>(nullable: false),
-                    RoomId = table.Column<Guid>(nullable: false)
+                    RoomId = table.Column<Guid>(nullable: false),
+                    StartDate = table.Column<DateTime>(nullable: false),
+                    EndDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserRoom", x => new { x.UserId, x.RoomId });
+                    table.PrimaryKey("PK_RoomReservations", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UserRoom_Rooms_RoomId",
+                        name: "FK_RoomReservations_Rooms_RoomId",
                         column: x => x.RoomId,
                         principalTable: "Rooms",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UserRoom_Users_UserId",
+                        name: "FK_RoomReservations_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DeskReservations_DeskId",
+                table: "DeskReservations",
+                column: "DeskId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_DeskReservations_UserId",
+                table: "DeskReservations",
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Desks_OfficeId",
@@ -177,6 +199,16 @@ namespace Reservations.Infrastructure.Migrations
                 column: "AddressId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_RoomReservations_RoomId",
+                table: "RoomReservations",
+                column: "RoomId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RoomReservations_UserId",
+                table: "RoomReservations",
+                column: "UserId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Rooms_OfficeId",
                 table: "Rooms",
                 column: "OfficeId");
@@ -186,28 +218,18 @@ namespace Reservations.Infrastructure.Migrations
                 table: "Tokens",
                 column: "UserId",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserDesk_DeskId",
-                table: "UserDesk",
-                column: "DeskId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UserRoom_RoomId",
-                table: "UserRoom",
-                column: "RoomId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "DeskReservations");
+
+            migrationBuilder.DropTable(
+                name: "RoomReservations");
+
+            migrationBuilder.DropTable(
                 name: "Tokens");
-
-            migrationBuilder.DropTable(
-                name: "UserDesk");
-
-            migrationBuilder.DropTable(
-                name: "UserRoom");
 
             migrationBuilder.DropTable(
                 name: "Desks");

@@ -10,8 +10,8 @@ using ProjectCalculator.Infrastructure.Data;
 namespace Reservations.Infrastructure.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20201015203118_rename-join-tables")]
-    partial class renamejointables
+    [Migration("20201016173229_ini")]
+    partial class ini
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -124,9 +124,10 @@ namespace Reservations.Infrastructure.Migrations
                     b.ToTable("Desks");
                 });
 
-            modelBuilder.Entity("Reservations.Core.Domain.DeskReservations", b =>
+            modelBuilder.Entity("Reservations.Core.Domain.DeskReservation", b =>
                 {
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<Guid>("DeskId")
@@ -135,15 +136,17 @@ namespace Reservations.Infrastructure.Migrations
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("Id")
-                        .HasColumnType("uniqueidentifier");
-
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("UserId", "DeskId");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("DeskId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("DeskReservations");
                 });
@@ -204,26 +207,29 @@ namespace Reservations.Infrastructure.Migrations
                     b.ToTable("Rooms");
                 });
 
-            modelBuilder.Entity("Reservations.Core.Domain.RoomReservations", b =>
+            modelBuilder.Entity("Reservations.Core.Domain.RoomReservation", b =>
                 {
-                    b.Property<Guid>("UserId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid>("RoomId")
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<Guid>("Id")
+                    b.Property<Guid>("RoomId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("UserId", "RoomId");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
 
                     b.HasIndex("RoomId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("RoomReservations");
                 });
@@ -246,7 +252,7 @@ namespace Reservations.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Reservations.Core.Domain.DeskReservations", b =>
+            modelBuilder.Entity("Reservations.Core.Domain.DeskReservation", b =>
                 {
                     b.HasOne("Reservations.Core.Domain.Desk", "Desk")
                         .WithMany()
@@ -277,7 +283,7 @@ namespace Reservations.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Reservations.Core.Domain.RoomReservations", b =>
+            modelBuilder.Entity("Reservations.Core.Domain.RoomReservation", b =>
                 {
                     b.HasOne("Reservations.Core.Domain.Room", "Room")
                         .WithMany()
