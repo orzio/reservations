@@ -45,7 +45,7 @@ namespace Reservations.Infrastructure.Repositories.Revervations.Room
             await _context.SaveChangesAsync();
         }
 
-        public async Task GetAllAsync()
+        public async Task<IEnumerable<RoomReservation>> GetAllAsync()
         => await _context.RoomReservations.ToListAsync();
 
         public async Task<RoomReservation> GetAsync(Guid id)

@@ -12,7 +12,7 @@ namespace Reservations.Core.Repositories
         Task AddAsync(Guid reservationId, Guid userId, Guid deskId, DateTime startTime, DateTime endTime);
         Task DeleteAsync(Guid reservationId);
         Task UpdateAsync(Guid reservationId, DateTime startTime, DateTime endTime);
-        Task GetAllAsync();
+        Task<IEnumerable<DeskReservation>> GetAllAsync();
         Task<DeskReservation> GetAsync(Guid id);
     }
 }

@@ -6,20 +6,20 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Reservations.Infrastructure.Handlers.Reservations.Room
+namespace Reservations.Infrastructure.Handlers.Reservations.Desk
 {
-    public class DeskReservationHandler : ICommandHandler<CreateDeskReservation>
+    public class UpdateDeskReservationHandler : ICommandHandler<UpdateDeskReservation>
     {
         private readonly IDeskReservationService _deskReservationService;
 
-        public DeskReservationHandler(IDeskReservationService deskReservationService)
+        public UpdateDeskReservationHandler(IDeskReservationService deskReservationService)
         {
             _deskReservationService = deskReservationService;
         }
 
-        public async Task HandleAsync(CreateDeskReservation command)
+        public async Task HandleAsync(UpdateDeskReservation command)
         {
-            await _deskReservationService.ReserveDesk(Guid.NewGuid(), command.UserId, command.DeskId, command.StartDate, command.EndDate);
+            //await _deskReservationService
         }
     }
 }

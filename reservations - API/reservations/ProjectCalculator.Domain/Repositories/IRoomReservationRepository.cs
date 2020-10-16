@@ -11,7 +11,7 @@ namespace Reservations.Core.Repositories
         Task AddAsync(Guid reservationId,Guid userId, Guid roomId, DateTime startTime, DateTime endTime);
         Task DeleteAsync(Guid reservationId);
         Task UpdateAsync(Guid reservationId,DateTime startTime, DateTime endTime);
-        Task GetAllAsync();
+        Task<IEnumerable<RoomReservation>> GetAllAsync();
         Task<RoomReservation> GetAsync(Guid id);
     }
 }

@@ -47,7 +47,7 @@ namespace Reservations.Infrastructure.Repositories.Revervations.Desk
             await _context.SaveChangesAsync();
         }
 
-        public async Task GetAllAsync()
+        public async Task<IEnumerable<DeskReservation>> GetAllAsync()
             => await _context.DeskReservations.ToListAsync();
 
 
@@ -62,7 +62,5 @@ namespace Reservations.Infrastructure.Repositories.Revervations.Desk
 
             await _context.SaveChangesAsync();
         }
-
-
     }
 }
