@@ -2,6 +2,7 @@
 using ProjectCalculator.Api.Repositories;
 using Reservations.Core.Domain;
 using Reservations.Core.Repositories;
+using Reservations.Infrastructure.DTO;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -35,6 +36,12 @@ namespace Reservations.Infrastructure.Services
         {
             var office = new Office(officeId, userId, address, name);
             await _officeRepository.UpdateAsync(office);
+        }
+
+        public async Task<IEnumerable<OfficeDto>> BrowseAsync()
+        {
+            var offices = await _officeRepository.GetAllAsync();
+            return _mapper.Map<IEnumerable<Office>, IEnumerable<OfficeDto>>(offices);
         }
 
 

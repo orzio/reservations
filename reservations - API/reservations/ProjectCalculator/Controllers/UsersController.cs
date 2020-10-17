@@ -37,10 +37,13 @@ namespace ProjectCalculator.Api.Controllers
         }
 
         // GET api/<UsersController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpGet("{email}")]
+        public async Task<IActionResult> Get(string email)
         {
-            return "value";
+            var user = await _userService.GetAsync(email);
+            if (user == null)
+                return NotFound();
+            return Ok(user);
         }
 
         // POST api/<UsersController>
@@ -62,5 +65,7 @@ namespace ProjectCalculator.Api.Controllers
         public void Delete(int id)
         {
         }
+
+        
     }
 }

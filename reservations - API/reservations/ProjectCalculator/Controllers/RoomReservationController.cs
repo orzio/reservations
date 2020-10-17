@@ -17,7 +17,7 @@ namespace Reservations.Api.Controllers
         {
             _commandDispatcher = commandDispatcher;
         }
-
+        [HttpPost]
         public async Task<IActionResult> Post(CreateRoomReservation command)
         {
             await _commandDispatcher.DispatchAsync(command);
