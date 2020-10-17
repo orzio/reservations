@@ -20,12 +20,18 @@ namespace Reservations.Api.Controllers
             _officeService = officeService;
             _commandDispatcher = commandDispatcher;
         }
-
+        [HttpPost]
         public async Task<IActionResult> Post(CreateOffice command)
         {
            await _commandDispatcher.DispatchAsync(command);
 
             return Created($"offices/{command.UserId}",null);
+        }
+        [HttpGet]
+        public async Task<IActionResult> Get()
+        {
+            var offices = await _officeService.BrowseAsync();
+            return Ok(offices);
         }
     }
 }

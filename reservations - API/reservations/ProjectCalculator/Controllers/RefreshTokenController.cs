@@ -20,7 +20,7 @@ namespace ProjectCalculator.Api.Controllers
             _commandDispatcher = commandDispatcher;
             _refreshService = refreshService;
         }
-
+        [HttpPost]
         public async Task<IActionResult> RefreshToken(RefreshToken refreshTokenCommand)
         {
             await _commandDispatcher.DispatchAsync(refreshTokenCommand);
