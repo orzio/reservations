@@ -1,0 +1,17 @@
+<div class="row">
+   <div class="col-xs-12">
+       <h1>{{office.officeName}}</h1>
+       <br>
+       <h4>Adres:</h4>
+       <p>{{office.officeStreet}}, {{office.officeCity}} {{office.officeZipCode}}</p>
+       <br>
+       <h4>Opis:</h4>
+       <p>{{office.officeDescription}}</p>
+   </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-3">
+        <button class="btn btn-danger" (click)="onDelete()" type="button">Usuń</button>
+    </div>
+</div>

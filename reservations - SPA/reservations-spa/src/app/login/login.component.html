@@ -1,15 +1,17 @@
-<div class="container d-flex justify-content-center align-items-center mt-5 mb-5" style ="height: 50vh; border:gray 1px solid; border-radius: 5px;">
-<form (submit) = "login()">
+<div class="container d-flex justify-content-center align-items-center mt-5 mb-5" style ="height: 50vh">
+<form (ngSubmit) = "login()" #f="ngForm">
         <div class="row ">
             <div class ="col-12">
                 <div class="row">
                     <div class="col-12">
-                        <input type="text" class="form-control" name="username"  placeholder="Email" [(ngModel)]="model.email">
+                        <span class="help-block" *ngIf="!email.valid && email.touched">Please enter valid email</span>
+                        <input type="text" class="form-control" name="username"  placeholder="Email" [(ngModel)]="model.email" email #email="ngModel" required>
                     </div>
                 </div>
                 <div class="row mt-2">
                     <div class="col-12">
-                        <input type="text" class="form-control" name="password" placeholder="Password" type="password" [(ngModel)]="model.password">
+                        <span class="help-block" *ngIf="!password.valid && password.touched">Please enter your password</span>
+                        <input type="text" class="form-control" name="password" placeholder="Password" type="password" #password="ngModel" [(ngModel)]="model.password" required>
                     </div>
                 </div>
                 <div class="row mt-2">

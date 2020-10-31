@@ -1,0 +1,7 @@
+.optionLink{
+    cursor: pointer;
+}
+
+.optionLink:hover{
+    text-decoration: underline;
+}

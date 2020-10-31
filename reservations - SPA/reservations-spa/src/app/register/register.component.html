@@ -1,30 +1,34 @@
-<div class="container d-flex justify-content-center align-items-center mt-5 mb-5" style ="height: 50vh; border:gray 1px solid;border-radius: 5px;">
-    <form (submit) = "register()">
+<div class="container d-flex justify-content-center align-items-center mt-5 mb-5" style ="height: 50vh; ">
+    <form (ngSubmit) = "register()" #f="ngForm">
             <div class="row ">
                 <div class ="col-12">
                     <div class="row">
                         <div class="col-12">
-                            <input type="text" class="form-control" name="firstname" placeholder="First name" [(ngModel)]="model.firstname">
+                          <span *ngIf="!firstName.valid && firstName.touched" class="help-block">Podaj imię</span>
+                            <input type="text" class="form-control" name="firstname" placeholder="First name" [(ngModel)]="model.firstname" #firstName="ngModel" required>
                         </div>
                     </div>
 
                     <div class="row mt-2">
                         <div class="col-12">
-                            <input type="text" class="form-control" name="lastname" placeholder="Last name" [(ngModel)]="model.lastname">
+                          <span *ngIf="!lastName.valid && lastName.touched" class="help-block">Podaj nazwisko</span>
+                            <input type="text" class="form-control" name="lastname" placeholder="Last name" [(ngModel)]="model.lastname" #lastName="ngModel" required>
                         </div>
                     </div>
 
                     
                     <div class="row mt-2">
                       <div class="col-12">
-                          <input type="text" class="form-control" name="email" placeholder="E-mail" [(ngModel)]="model.email">
+                        <span *ngIf="!email.valid && email.touched" class="help-block"> Podam e-mail</span>
+                          <input type="text" class="form-control" name="email" placeholder="E-mail" [(ngModel)]="model.email" email #email="ngModel" required>
                       </div>
                   </div>
 
 
                     <div class="row mt-2">
                       <div class="col-12">
-                          <input type="text" class="form-control" name="password" placeholder="Password" type="password" [(ngModel)]="model.password">
+                        <span *ngIf="!password.valid && password.touched" class="help-block">Podaj hasło</span>
+                          <input type="text" class="form-control" name="password" placeholder="Password" type="password" #password="ngModel" [(ngModel)]="model.password" required>
                       </div>
                   </div>
 

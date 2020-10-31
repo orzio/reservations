@@ -13,5 +13,6 @@ namespace Reservations.Infrastructure.DTO
         public bool HasTV { get; set; }
         public bool HasWhiteBoard { get; set; }
         public bool HasProjector { get; set; }
+        public string OtherEquipment { get; set; }
     }
 }

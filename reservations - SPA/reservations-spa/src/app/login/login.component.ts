@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -7,7 +8,7 @@ import { AuthService } from '../_services/auth.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+@ViewChild('f') loginForm :NgForm;
   model:any={};
   constructor(private authService:AuthService) { }
 
@@ -15,6 +16,7 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
+    console.log(this.loginForm);
     console.log("jestem w login");
     this.authService.login(this.model).subscribe(next =>{
       console.log(this.model);
