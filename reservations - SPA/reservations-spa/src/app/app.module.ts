@@ -10,8 +10,23 @@ import { LoginComponent } from './login/login.component';
 import {appRoutes} from './app.routing';
 import { RouterModule } from '@angular/router';
 import { FotterComponent } from './fotter/fotter.component';
-import { FormsModule } from '@angular/forms'; 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'; 
 import {HttpClientModule} from '@angular/common/http';
+import { OfficeListComponent } from './offices/office-list/office-list.component';
+import { OfficesComponent } from './offices/offices.component';
+import { OfficeItemComponent } from './offices/office-list/office-item/office-item.component';
+import { OfficeDetailComponent } from './offices/office-detail/office-detail.component';
+import { OfficeService } from './_services/office.service';
+import { OfficeEditComponent } from './offices/office-edit/office-edit.component';
+import { RoomsComponent } from './offices/rooms/rooms.component';
+import { DesksComponent } from './desks/desks.component';
+import { RoomListComponent } from './offices/rooms/room-list/room-list.component';
+import { RoomDetailComponent } from './offices/rooms/room-detail/room-detail.component';
+import { RoomEditComponent } from './offices/rooms/room-edit/room-edit.component';
+import { DeskListComponent } from './desks/desk-list/desk-list.component';
+import { DeskItemComponent } from './desks/desk-list/desk-item/desk-item.component';
+import { DeskDetailComponent } from './desks/desk-detail/desk-detail.component';
+import { DeskEditComponent } from './desks/desk-edit/desk-edit.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,6 +35,20 @@ import {HttpClientModule} from '@angular/common/http';
     RegisterComponent,
     LoginComponent,
     FotterComponent,
+    OfficeListComponent,
+    OfficesComponent,
+    OfficeItemComponent,
+    OfficeDetailComponent,
+    OfficeEditComponent,
+    RoomsComponent,
+    DesksComponent,
+    RoomListComponent,
+    RoomDetailComponent,
+    RoomEditComponent,
+    DeskListComponent,
+    DeskItemComponent,
+    DeskDetailComponent,
+    DeskEditComponent,
 
   ],
   imports: [
@@ -29,8 +58,10 @@ import {HttpClientModule} from '@angular/common/http';
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
     FormsModule, 
+    ReactiveFormsModule
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [OfficeService],
+  bootstrap: [AppComponent],
+  
 })
 export class AppModule { }

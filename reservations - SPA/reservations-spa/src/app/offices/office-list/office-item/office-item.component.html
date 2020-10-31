@@ -1,0 +1,24 @@
+<div style="display: flex; flex-direction: row; justify-content: space-between;" class="list-group-item" >
+    <a style="cursor: pointer; border:none;" class="list-group-item"
+    [routerLink]="[index]">
+        <div class="pull-left">
+            <h4 class="list-group-item-heading">{{office.officeName}}, {{office.officeCity}}</h4>
+            <p class="list-group-item-text">{{office.officeDescription}}</p>
+        </div> 
+    </a>
+    <div>
+        <div class="optionLink">
+            <a (click)="onEditOffice()">Edit</a>
+        </div>
+
+        <div class="optionLink">
+            <a (click)="onDisplayRooms()">Rooms</a>
+        </div>
+
+        <div class="optionLink">
+            <a (click)="onDisplayDesks()">Desks</a>
+        </div>
+    </div>
+</div>
+
+
