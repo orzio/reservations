@@ -18,6 +18,7 @@ namespace ProjectCalculator.Infrastructure.Mappers
                 cfg.CreateMap<Token, TokenDto>();
                 cfg.CreateMap<Desk, DeskDto>();
                 cfg.CreateMap<Room, RoomDto>();
+                cfg.CreateMap<Office, OfficeDto>();
             }).CreateMapper();
     }
 }

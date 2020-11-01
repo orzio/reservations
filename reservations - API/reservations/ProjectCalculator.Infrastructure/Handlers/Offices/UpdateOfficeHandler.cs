@@ -17,7 +17,7 @@ namespace Reservations.Infrastructure.Handlers
         }
         public async Task HandleAsync(UpdateOffice command)
         {
-            await _officeService.UpdateOffice(command.OfficeId, command.UserId, command.Address, command.Name);
+            await _officeService.UpdateOffice(command.OfficeId, command.UserId, command.Address, command.Name, command.Description);
         }
     }
 }

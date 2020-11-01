@@ -3,6 +3,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
 import { OfficeService } from 'src/app/_services/office.service';
 import { Office } from 'src/app/_models/Office';
+import { DataStorageService } from 'src/app/_repositories/offices-storage.service';
 
 @Component({
   selector: 'app-office-edit',
@@ -11,12 +12,13 @@ import { Office } from 'src/app/_models/Office';
 })
 export class OfficeEditComponent implements OnInit {
 
+  officeId:string;
   id:number;
   editMode:boolean = false;
 
   officeForm:FormGroup;
   constructor(private activatedRoute: ActivatedRoute, private officeService:OfficeService,
-    private router: Router) { 
+    private router: Router, private dataStorageService:DataStorageService ) { 
     console.log(activatedRoute);
   }
 
@@ -34,34 +36,44 @@ export class OfficeEditComponent implements OnInit {
 
   onSubmit(){
     if(this.editMode){
-      this.officeService.updateOffice(this.id, this.officeForm.value);
+     let updatedOffice:Office = this.officeForm.value;
+      updatedOffice.id = this.officeId;
+      this.officeService.updateOffice(this.id,updatedOffice);
     } else{
+
       this.officeService.addOffice(this.officeForm.value);
+      this.dataStorageService.addSingleOffice();
     }
     this.onCancel();
   }
   private initForm(){
-    let officeName ='';
-    let officeCity ='';
-    let officeStreet='';
-    let officeZipCode='';
-    let officeDescription='';
+    let name ='';
+    let city ='';
+    let street='';
+    let zipCode='';
+    let description='';
 
     if(this.editMode){
-      officeName = this.officeService.getOfficeById(this.id).officeName;
-      officeCity = this.officeService.getOfficeById(this.id).officeCity;
-      officeStreet = this.officeService.getOfficeById(this.id).officeStreet;
-      officeZipCode = this.officeService.getOfficeById(this.id).officeZipCode;
-      officeDescription = this.officeService.getOfficeById(this.id).officeDescription;
+      name = this.officeService.getOfficeById(this.id).name;
+      city = this.officeService.getOfficeById(this.id).address.city;
+      street = this.officeService.getOfficeById(this.id).address.street;
+      zipCode = this.officeService.getOfficeById(this.id).address.zipCode;
+      description = this.officeService.getOfficeById(this.id).description;
+      this.officeId = this.officeService.getOfficeById(this.id).id;
     }
 
     this.officeForm = new FormGroup({
-      'officeName': new FormControl(officeName, Validators.required),
-      'officeCity':new FormControl(officeCity, Validators.required),
-      'officeStreet':new FormControl(officeStreet, Validators.required),
-      'officeZipCode':new FormControl(officeZipCode, [Validators.pattern(/[0-9]{2}\-[0-9]{3}/), Validators.required]),
-      'officeDescription': new FormControl(officeDescription, Validators.required)
+      'name': new FormControl(name, Validators.required),
+      'description': new FormControl(description, Validators.required),
+
+      'address':new FormGroup({
+        'city':new FormControl(city, Validators.required),
+        'street':new FormControl(street, Validators.required),
+        'zipCode':new FormControl(zipCode, [Validators.pattern(/[0-9]{2}\-[0-9]{3}/), Validators.required])
+      })
     })
+
+
   }
 
   onCancel(){

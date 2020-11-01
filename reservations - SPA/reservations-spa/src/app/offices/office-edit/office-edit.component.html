@@ -13,7 +13,7 @@
                         <label for="name">Name</label>
                         <input 
                         type="text"
-                        formControlName="officeName"
+                        formControlName="name"
                         required
                         class="form-control">
                     </div>
@@ -21,12 +21,13 @@
             </div>
             
 
+            <div formGroupName="address">
             <div class="row">
                 <div class="col-xs-12">
                     <div class="form-group">
                         <label for="city">Miasto</label>
                         <input type="text"
-                        formControlName="officeCity"
+                        formControlName="city"
                         required
                         class="form-control">
                     </div>
@@ -38,7 +39,7 @@
                         <div class="form-group">
                             <label for="street">Ulica</label>
                             <input type="text"
-                            formControlName="officeStreet"
+                            formControlName="street"
                             required
                             class="form-control">
                         </div>
@@ -47,18 +48,19 @@
                         <div class="form-group">
                             <label for="zipCode">Zip-Code</label>
                             <input type="text"
-                            formControlName="officeZipCode"
+                            formControlName="zipCode"
                             class="form-control"
                             >
                         </div>
                     </div>
-            </div>     
+            </div> 
+        </div>    
             
             <div class="row">
                 <div class="col-xs-12">
                     <div class="form-group">
                         <label for="description">Description</label>
-                        <textarea formControlName="officeDescription" class="form-control" name="description" rows="3"></textarea>
+                        <textarea formControlName="description" class="form-control" name="description" rows="3"></textarea>
                     </div>
                 </div>
             </div>
@@ -70,7 +72,9 @@
                 
             </div>
 
-
+        </form>
+    </div>
+</div>
             <!-- <div class="row mt-3">
                 <div class="row col-xs-12">
                     <div class="mb-3 col-md-3">
@@ -122,6 +126,3 @@
                 <div class="row"></div>
                 <div class="row"></div>
             </div> -->
-        </form>
-    </div>
-</div>
