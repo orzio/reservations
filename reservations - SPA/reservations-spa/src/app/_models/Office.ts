@@ -1,15 +1,20 @@
-export class Office{
-    public officeName: string;
-    public officeCity: string;
-    public officeStreet: string;
-    public officeZipCode: string;
-    public officeDescription: string;
+import { Address } from './Address';
+import { Desk } from './desk';
+import { Room } from './room';
 
-    constructor(name:string,street:string, city:string,zipcode:string,description:string){
-        this.officeName = name;
-        this.officeCity = city;
-        this.officeStreet = street;
-        this.officeZipCode = zipcode;
-        this.officeDescription = description;
+export class Office{
+    public id:string;
+    public name: string;
+    public address:Address;
+    public rooms:Room[];
+    public desks:Desk[];
+    public description:string;
+
+    constructor(name:string,address:Address,rooms:Room[],desks:Desk[],description:string){
+        this.name = name;
+        this.address = address;
+        this.rooms = rooms;
+        this.desks = desks;
+        this.description = description;
     }
 }

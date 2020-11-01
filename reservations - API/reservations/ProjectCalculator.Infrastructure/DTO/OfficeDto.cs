@@ -7,9 +7,12 @@ namespace Reservations.Infrastructure.DTO
 {
    public class OfficeDto
     {
-        public Guid Id { get; protected set; }
-        public Guid UserId { get; protected set; }
-        public Address Address { get; protected set; }
-        public string Name { get; protected set; }
+        public Guid Id { get;  set; }
+        public Guid UserId { get;  set; }
+        public Address Address { get;  set; }
+        public string Name { get;  set; }
+        public string Description { get; set; }
+        public List<Room> Rooms { get;  set; }
+        public List<Desk> Desks { get;  set; }
     }
 }

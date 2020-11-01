@@ -3,6 +3,7 @@ import { Office } from 'src/app/_models/Office';
 import { OfficeService } from 'src/app/_services/office.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { DataStorageService } from 'src/app/_repositories/offices-storage.service';
 
 @Component({
   selector: 'app-office-list',
@@ -18,8 +19,9 @@ subscription :Subscription;
     private router:Router) { }
     
     ngOnInit(): void {
-      this.offices = this.officeService.getOffices();
-    this.subscription = this.officeService.officesChanges
+    this.offices = this.officeService.getOffices();
+    console.log(`officeList :${this.offices}`);
+    this.subscription = this.officeService.officesChanged
     .subscribe(
       (offices:Office[])=>{
         this.offices=offices;
@@ -30,7 +32,6 @@ subscription :Subscription;
   onAddOffice(){
     this.router.navigate(['new'],{relativeTo: this.activeRoute});
   }
-
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }

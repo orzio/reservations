@@ -120,6 +120,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "reservations-spa"
+    }
+  },
+  "defaultProject": "reservations-spa",
+  "cli": {
+    "analytics": false
+  }
 }

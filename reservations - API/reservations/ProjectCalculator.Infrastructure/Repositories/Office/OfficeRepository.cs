@@ -32,7 +32,11 @@ namespace Reservations.Infrastructure.Repositories
         }
 
         public async Task<IEnumerable<Office>> GetAllAsync()
-       => await _context.Offices.ToListAsync();
+       => await _context.Offices
+            .Include(c => c.Address)
+            .Include(x => x.Rooms)
+            .Include(x => x.Desks)
+            .ToListAsync();
 
         public async Task<Office> GetAsync(Guid officeId)
         => await _context.Offices.SingleOrDefaultAsync(x => x.Id == officeId);
