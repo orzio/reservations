@@ -11,7 +11,7 @@ import {appRoutes} from './app.routing';
 import { RouterModule } from '@angular/router';
 import { FotterComponent } from './fotter/fotter.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'; 
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import { OfficeListComponent } from './offices/office-list/office-list.component';
 import { OfficesComponent } from './offices/offices.component';
 import { OfficeItemComponent } from './offices/office-list/office-item/office-item.component';
@@ -31,6 +31,8 @@ import { RoomService } from './_services/room.service';
 import { RoomItemComponent } from './offices/rooms/room-list/room-item/room-item.component';
 import { DeskService } from './_services/desk.service';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
+import { AuthInterceptor } from './_services/auth-interceptor.service';
+import { AuthGuard } from './_services/auth-guard';
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,7 +66,7 @@ import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinne
     FormsModule, 
     ReactiveFormsModule
   ],
-  providers: [OfficeService,CommunicationService,RoomService, DeskService],
+  providers: [OfficeService,CommunicationService,RoomService, DeskService, {provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true},AuthGuard],
   bootstrap: [AppComponent],
   
 })

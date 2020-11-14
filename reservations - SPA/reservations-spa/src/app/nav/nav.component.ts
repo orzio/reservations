@@ -19,6 +19,10 @@ export class NavComponent implements OnInit, OnDestroy {
       this.isLoggedIn = !!user;
     })
     }
+
+    logout(){
+      this.authService.logOut();
+    }
           ngOnDestroy(): void {
             this.userSubscription.unsubscribe();
           }

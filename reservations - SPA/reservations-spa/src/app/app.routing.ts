@@ -13,6 +13,7 @@ import { RoomEditComponent } from './offices/rooms/room-edit/room-edit.component
 import { RoomDetailComponent } from './offices/rooms/room-detail/room-detail.component'
 import { DeskEditComponent } from './offices/desks/desk-edit/desk-edit.component'
 import { DeskResolverService } from './offices/desks/desk-resolver.service'
+import { AuthGuard } from './_services/auth-guard'
 
 export const appRoutes: Routes = [
     
@@ -20,6 +21,7 @@ export const appRoutes: Routes = [
         {path: 'login', component: LoginComponent},
         {path: 'register', component: RegisterComponent},
         {path: 'offices', component: OfficesComponent,resolve: [OfficeResolverService],
+        canActivate:[AuthGuard],
         children:[
             {path:'new', component:OfficeEditComponent},
             {path:':id/edit', component:OfficeEditComponent},

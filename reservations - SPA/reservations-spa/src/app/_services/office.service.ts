@@ -1,15 +1,16 @@
 import { Injectable, EventEmitter } from '@angular/core';
 import { Office } from '../_models/Office';
 import { Subject, Subscription, Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
-import { map, tap } from 'rxjs/operators';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { map, tap, take, exhaustMap } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Room } from '../_models/room';
+import { AuthService } from './auth.service';
 
 @Injectable()
 export class OfficeService{
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService:AuthService) {}
   private readonly API_URL:string = 'https://localhost:44310/offices';
 
   officesChanged = new Subject<Office[]>();
@@ -69,26 +70,26 @@ export class OfficeService{
       }
 
       fetchOffices(){
-        return this.http
+       
+          return this.http
         .get<Office[]>(
-            this.API_URL
-        ).pipe(
-            map(offices => {
-                return offices.map(office =>{
-                    console.log(office);
-                    return {
-                    ...office,
-                    rooms:office.rooms ? office.rooms : [],
-                    desks:office.desks ? office.desks : []
-                    };
-                });
-            }),
-            tap(offices =>{
-                this.setOffices(offices);
+            this.API_URL)
+            .pipe(
+        map(offices => {
+          return offices.map(office =>{
+              console.log(office);
+              return {
+              ...office,
+              rooms:office.rooms ? office.rooms : [],
+              desks:office.desks ? office.desks : []
+              };
+          });
+      }),
+      tap(offices =>{
+          this.setOffices(offices);
 
-                console.log("w tap ustawiam office")
-            })
-        )
+          console.log("w tap ustawiam office")
+      }))
     }
 
 }
