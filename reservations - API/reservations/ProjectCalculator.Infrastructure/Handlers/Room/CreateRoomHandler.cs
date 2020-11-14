@@ -19,7 +19,7 @@ namespace Reservations.Infrastructure.Handlers.Room
 
         public async Task HandleAsync(CreateRoom command)
         {
-            await _roomService.CreateRoom(command.OfficeId, Guid.NewGuid(), command.Description, command.HasTV, command.HasWhiteBoard, command.HasProjector, command.Seats, command.Name);
+            await _roomService.CreateRoom(command.OfficeId, Guid.NewGuid(), command.Description, command.HasTV, command.HasWhiteBoard, command.HasProjector, command.Seats, command.Name,command.OtherEquipment);
         }
     }
 }

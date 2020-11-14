@@ -18,6 +18,7 @@ namespace Reservations.Core.Domain
         public bool HasTV { get; set; }
         public bool HasWhiteBoard { get; set; }
         public bool HasProjector { get; set; }
+        public string OtherEquipment { get; set; }
 
         List<RoomReservation> UserRooms { get; set; }
     }

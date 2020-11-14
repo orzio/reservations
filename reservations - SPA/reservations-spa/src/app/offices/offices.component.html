@@ -1,11 +1,9 @@
 <div class="container">
     <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-5" [ngClass]='{hide:isRoomsTabOpen}'>
             <app-office-list></app-office-list>
         </div>
-        <div class="col-md-7">
+        <div [ngClass]="{'col-xs-12': isRoomsTabOpen, 'col-md-7':!isRoomsTabOpen}">
             <router-outlet></router-outlet>
-        <!--     <app-office-detail [office] = "selectedOffice"></app-office-detail> -->
         </div> 
     </div>
-</div>

@@ -19,14 +19,18 @@ import { OfficeDetailComponent } from './offices/office-detail/office-detail.com
 import { OfficeService } from './_services/office.service';
 import { OfficeEditComponent } from './offices/office-edit/office-edit.component';
 import { RoomsComponent } from './offices/rooms/rooms.component';
-import { DesksComponent } from './desks/desks.component';
+import { DesksComponent } from './offices/desks/desks.component';
 import { RoomListComponent } from './offices/rooms/room-list/room-list.component';
 import { RoomDetailComponent } from './offices/rooms/room-detail/room-detail.component';
 import { RoomEditComponent } from './offices/rooms/room-edit/room-edit.component';
-import { DeskListComponent } from './desks/desk-list/desk-list.component';
-import { DeskItemComponent } from './desks/desk-list/desk-item/desk-item.component';
-import { DeskDetailComponent } from './desks/desk-detail/desk-detail.component';
-import { DeskEditComponent } from './desks/desk-edit/desk-edit.component';
+import { DeskListComponent } from './offices/desks/desk-list/desk-list.component';
+import { DeskItemComponent } from './offices/desks/desk-list/desk-item/desk-item.component';
+import { DeskEditComponent } from './offices/desks/desk-edit/desk-edit.component';
+import { CommunicationService } from './_services/communcation.service';
+import { RoomService } from './_services/room.service';
+import { RoomItemComponent } from './offices/rooms/room-list/room-item/room-item.component';
+import { DeskService } from './_services/desk.service';
+import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,15 +45,15 @@ import { DeskEditComponent } from './desks/desk-edit/desk-edit.component';
     OfficeDetailComponent,
     OfficeEditComponent,
     RoomsComponent,
-    DesksComponent,
     RoomListComponent,
     RoomDetailComponent,
     RoomEditComponent,
+    RoomItemComponent,
+    DesksComponent,
     DeskListComponent,
     DeskItemComponent,
-    DeskDetailComponent,
     DeskEditComponent,
-
+    LoadingSpinnerComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +64,7 @@ import { DeskEditComponent } from './desks/desk-edit/desk-edit.component';
     FormsModule, 
     ReactiveFormsModule
   ],
-  providers: [OfficeService],
+  providers: [OfficeService,CommunicationService,RoomService, DeskService],
   bootstrap: [AppComponent],
   
 })

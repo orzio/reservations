@@ -1,6 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Office } from 'src/app/_models/Office';
 import { ActivatedRoute, Router } from '@angular/router';
+import { OfficeService } from 'src/app/_services/office.service';
+
 
 @Component({
   selector: 'app-office-item',
@@ -19,6 +21,7 @@ export class OfficeItemComponent implements OnInit {
   }
 
   onEditOffice(){
+
 this.router.navigate([this.index,'edit'],{relativeTo:this.activeRoute});
   }
 

@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Reservations.Api.Controllers
 {
-    [Route("[controller]")]
+    [Route("offices/[controller]")]
     [ApiController]
-    public class DesksController:ControllerBase
+    public class DesksController : ControllerBase
     {
         private readonly ICommandDispatcher _commandDispatcher;
         private readonly IDeskService _deskService;
@@ -29,6 +29,14 @@ namespace Reservations.Api.Controllers
             return Created($"desks/{command}", null);
         }
 
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(Guid id)
+        {
+            var desks = await _deskService.GetDesksByOfficeIdAsync(id);
+            return Ok(desks);
+        }
+
+
         [HttpGet]
         public async Task<IActionResult> Get()
         {
@@ -36,5 +44,13 @@ namespace Reservations.Api.Controllers
             return Ok(desks);
         }
 
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            await _deskService.RemoveDesk(id);
+            return NoContent();
+        }
+
     }
 }
+

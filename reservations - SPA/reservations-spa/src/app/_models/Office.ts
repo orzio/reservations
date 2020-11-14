@@ -4,6 +4,7 @@ import { Room } from './room';
 
 export class Office{
     public id:string;
+    public userId:string;
     public name: string;
     public address:Address;
     public rooms:Room[];

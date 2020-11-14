@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProjectCalculator.Infrastructure.Commands;
 using Reservations.Infrastructure.Commands;
+using Reservations.Infrastructure.Commands.Room;
 using Reservations.Infrastructure.Services;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Reservations.Api.Controllers
 {
-    [Route("[controller]")]
+    [Route("offices/[controller]")]
     [ApiController]
     public class RoomsController:ControllerBase
     {
@@ -34,6 +35,25 @@ namespace Reservations.Api.Controllers
         {
             var rooms = await _roomService.BrowseAsync();
             return Ok(rooms);
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult>Get(Guid id)
+        {
+            var rooms = await _roomService.GetRoomsByOfficeIdAsync(id);
+            return Ok(rooms);
+        }
+        [HttpPut]
+        public async Task<IActionResult> Put(UpdateRoom command) {
+            await _commandDispatcher.DispatchAsync(command);
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            await _roomService.RemoveRoom(id);
+            return NoContent();
         }
 
     }

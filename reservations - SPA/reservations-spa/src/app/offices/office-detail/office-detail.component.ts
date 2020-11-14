@@ -10,21 +10,30 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 })
 export class OfficeDetailComponent implements OnInit {
 office:Office;
-id:number;
+index:number;
 
   constructor(private officeService: OfficeService,
     private activatedRoute:ActivatedRoute, private router:Router) { }
 
   ngOnInit(): void {
       this.activatedRoute.params.subscribe((params:Params)=>{
-      this.id=+params['id'];
-      this.office = this.officeService.getOfficeById(this.id);
+      this.index=+params['id'];
+      this.office = this.officeService.getOfficeById(this.index);
     });
+    this.officeService.officeUpdated.subscribe((resp:Office)=>{
+      this.office = resp
+    })
   }
 
   onDelete(){
-    this.officeService.deleteOffice(this.id);
-    this.router.navigate(['../'],{relativeTo:this.activatedRoute});
+    this.officeService.deleteOffice(this.index).subscribe(response =>{
+      this.officeService.fetchOffices().subscribe(response =>{
+        this.officeService.officesChanged.next(response);
+        this.router.navigate(['../'],{relativeTo:this.activatedRoute});
+      });
+
+    })
   }
 
 }
+

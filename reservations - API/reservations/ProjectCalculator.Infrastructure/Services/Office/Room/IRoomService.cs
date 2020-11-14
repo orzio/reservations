@@ -11,7 +11,9 @@ namespace Reservations.Infrastructure.Services
     {
         Task<RoomDto> GetAsync(Guid id);
         Task<IEnumerable<RoomDto>> BrowseAsync();
-        Task CreateRoom(Guid officeId, Guid roomId, string description, bool hasTV, bool hasWhiteBoard, bool hasProjector, int seats, string name);
+        Task CreateRoom(Guid officeId, Guid roomId, string description, bool hasTV, bool hasWhiteBoard, bool hasProjector, int seats, string name, string otherEquipment);
         Task RemoveRoom(Guid roomId);
+        Task UpdateRoom(Guid roomId, string name, string description, int seats, bool hasTV, bool hasWhiteBoard, bool hasProjector, string otherEquipment);
+        Task<IEnumerable<RoomDto>> GetRoomsByOfficeIdAsync(Guid officeId);
     }
 }

@@ -1,5 +1,12 @@
 <div class="container d-flex justify-content-center align-items-center mt-5 mb-5" style ="height: 50vh">
-<form (ngSubmit) = "login()" #f="ngForm">
+    <div>
+        <div class=" row alert alert-danger" *ngIf="error">
+            <p>{{error}}</p>
+        </div>
+        <div *ngIf="isLoading">
+            <app-loading-spinner></app-loading-spinner>
+    </div>
+    <form (ngSubmit) = "login()" #f="ngForm" *ngIf="!isLoading">
         <div class="row ">
             <div class ="col-12">
                 <div class="row">
@@ -18,9 +25,10 @@
                     <a href="http://">Zapomnialem hasła</a>
                 </div>
                 <div class="row mt-2">
-                    <button class="btn btn-primary" type="submit">Zaloguj</button>
+                    <button class="btn btn-primary" (click)="onSwitchMode()" type="submit">Zaloguj</button>
                 </div>
             </div>
         </div>  
     </form>
+</div>
 </div>

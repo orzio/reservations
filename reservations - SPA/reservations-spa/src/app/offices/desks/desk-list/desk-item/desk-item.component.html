@@ -1,0 +1,15 @@
+<div style="display: flex; flex-direction: row; justify-content: space-between;" class="list-group-item" >
+    <a style="border:none;" class="list-group-item">
+        <div class="pull-left">
+            <h4 class="list-group-item-heading">{{desk.name}}</h4>
+            <p>Miejsca siedzące: {{desk.seats}}</p>
+        </div> 
+    </a>
+    <div>
+        <div class="optionLink">
+            <a (click)="onDeleteDesk()">Usuń</a>
+        </div>
+    </div>
+</div>
+
+

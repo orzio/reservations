@@ -1,1 +1,25 @@
-<p>room-list works!</p>
+<div class="col-xs-12">
+    <button (click)="goToPrevious()" class="btn btn-danger">Wróć</button>
+    
+</div>
+<div class="row">
+    <div class="col-xs-12">
+        <h1>Twoje sale:</h1>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-12">
+        <app-room-item
+        *ngFor="let room of rooms; let i=index;"
+        [room]="room"
+        [index]="i">
+        </app-room-item>
+    </div>
+</div>
+
+<div class="row mt-2 mb-2">
+    <div class="col-xs-12">
+        <button class="btn btn-success" (click)="onAddRoom()">Dodaj Sale</button>
+    </div>
+</div>

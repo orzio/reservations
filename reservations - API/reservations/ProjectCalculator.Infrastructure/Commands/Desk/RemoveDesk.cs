@@ -5,8 +5,8 @@ using System.Text;
 
 namespace Reservations.Infrastructure.Commands.Desk
 {
-    public class RemoveDesk:ICommand
+   public class RemoveDesk:ICommand
     {
-        public Guid DeskId { get; set; }
+        public Guid Id { get; set; }
     }
 }

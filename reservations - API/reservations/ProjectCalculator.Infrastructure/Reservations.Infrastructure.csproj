@@ -16,6 +16,8 @@
   <ItemGroup>
     <Compile Remove="Migrations\20201101101502_officeDesck.cs" />
     <Compile Remove="Migrations\20201101101502_officeDesck.Designer.cs" />
+    <Compile Remove="Migrations\20201107132313_OtherEquipment.cs" />
+    <Compile Remove="Migrations\20201107132313_OtherEquipment.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

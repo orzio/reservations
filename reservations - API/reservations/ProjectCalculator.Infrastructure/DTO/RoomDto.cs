@@ -6,8 +6,9 @@ namespace Reservations.Infrastructure.DTO
 {
    public class RoomDto
     {
-        public string Name { get; set; }
+        public Guid Id { get; set; }
         public Guid OfficeId { get; set; }
+        public string Name { get; set; }
         public string Description { get; set; }
         public int Seats { get; set; }
         public bool HasTV { get; set; }

@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
+import { OfficeService } from 'src/app/_services/office.service';
+import { Office } from 'src/app/_models/Office';
 
 @Component({
   selector: 'app-rooms',
@@ -7,9 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RoomsComponent implements OnInit {
 
-  constructor() { }
+
+  currentOffice:Office;
+  constructor(private activatedRoute:ActivatedRoute, private officeService:OfficeService) { }
 
   ngOnInit(): void {
+    this.activatedRoute.params.subscribe((param:Params)=>{
+      this.currentOffice = this.officeService.getOfficeById(param['id']);
+    })
   }
 
 }

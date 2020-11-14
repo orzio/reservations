@@ -17,9 +17,9 @@ namespace Reservations.Infrastructure.Handlers.Room
             _roomService = roomService;
         }
 
-        public Task HandleAsync(UpdateRoom command)
+        public async Task HandleAsync(UpdateRoom command)
         {
-            throw new NotImplementedException();
+            await _roomService.UpdateRoom(command.Id, command.Name, command.Description, command.Seats, command.HasTV, command.HasWhiteBoard, command.HasProjector, command.OtherEquipment);
         }
     }
 }

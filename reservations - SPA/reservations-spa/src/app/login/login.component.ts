@@ -9,22 +9,36 @@ import { NgForm } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 @ViewChild('f') loginForm :NgForm;
-  model:any={};
+  
+isLoggedIn:boolean = false;
+isLoading:boolean = false;
+error:string =null;
+
+model:any={};
   constructor(private authService:AuthService) { }
 
   ngOnInit(): void {
   }
 
   login(){
-    console.log(this.loginForm);
-    console.log("jestem w login");
+    this.error = null;
+    this.isLoading = true;
     this.authService.login(this.model).subscribe(next =>{
-      console.log(this.model);
+      console.log(next);
+      this.isLoading=false;
+    },
+    errorMessage =>{
+      this.error = errorMessage;
+      this.isLoading=false; 
     });
-
-    
   }
 
+
+  onSwitchMode(){
+    this.isLoggedIn =!this.isLoggedIn;
+  }
+  
+  
   logout(){
 
   }

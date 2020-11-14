@@ -13,6 +13,6 @@ namespace Reservations.Infrastructure.Services
         Task<IEnumerable<DeskDto>> BrowseAsync();
         Task CreateDesk(Guid officeId, Guid deskId, string name, int seats);
         Task RemoveDesk(Guid deskId);
-
+        Task<IEnumerable<DeskDto>> GetDesksByOfficeIdAsync(Guid officeId);
     }
 }

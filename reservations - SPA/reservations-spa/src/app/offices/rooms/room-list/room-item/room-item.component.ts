@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Room } from 'src/app/_models/room';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-room-item',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RoomItemComponent implements OnInit {
 
-  constructor() { }
+  @Input() room:Room;
+  @Input() index:number;
+
+  constructor(private router:Router, private activeRoute:ActivatedRoute) { }
 
   ngOnInit(): void {
   }
 
+  onEditRoom(){
+    this.router.navigate([this.index,'edit'],{relativeTo:this.activeRoute});
+  };
 }

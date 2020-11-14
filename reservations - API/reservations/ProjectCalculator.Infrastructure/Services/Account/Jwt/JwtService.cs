@@ -36,7 +36,8 @@ namespace ProjectCalculator.Infrastructure.Services
             var jwt = new JwtSecurityToken(
                 claims: claims,
                 expires: expires,
-                signingCredentials: signingCredentials);
+                signingCredentials: signingCredentials
+                );
 
             var token = new JwtSecurityTokenHandler().WriteToken(jwt);
 

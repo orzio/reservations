@@ -44,6 +44,11 @@ namespace Reservations.Infrastructure.Services
             return _mapper.Map<IEnumerable<Office>, IEnumerable<OfficeDto>>(offices);
         }
 
+        public async Task<OfficeDto> GetOffice(Guid officeId)
+        {
+        var office =  await _officeRepository.GetAsync(officeId);
+            return _mapper.Map<Office, OfficeDto>(office);
+        }
 
     }
 }

@@ -4,6 +4,7 @@ using Reservations.Core.Repositories;
 using Reservations.Infrastructure.DTO;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -30,7 +31,9 @@ namespace Reservations.Infrastructure.Services
 
         public async Task CreateDesk(Guid officeId, Guid deskId, string name, int seats)
         {
-            var desk = await _deskRepository.GetAsync(name);
+            var desks = await GetDesksFromOfficeAsync(officeId);
+            var desk = desks.SingleOrDefault(x => x.Name == name);
+
             if (desk != null)
             {
                 throw new Exception($"Desk: '{name}' already exists.");
@@ -53,6 +56,20 @@ namespace Reservations.Infrastructure.Services
 
         public async Task RemoveDesk(Guid deskId)
         => await _deskRepository.DeleteAsync(deskId);
+
+
+        public async Task<IEnumerable<DeskDto>> GetDesksByOfficeIdAsync(Guid officeId)
+        {
+            var desks = await GetDesksFromOfficeAsync(officeId);
+            return _mapper.Map<IEnumerable<Desk>, IEnumerable<DeskDto>>(desks);
+        }
+
+
+        private async Task<IEnumerable<Desk>> GetDesksFromOfficeAsync(Guid officeId)
+        {
+            var office = await _officeRepository.GetAsync(officeId);
+            return office.Desks;
+        }
 
     }
 }

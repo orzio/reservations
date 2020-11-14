@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ProjectCalculator.Infrastructure.Commands;
 using Reservations.Infrastructure.Commands;
+using Reservations.Infrastructure.Commands.OfficeCommands;
 using Reservations.Infrastructure.Services;
 using System;
 using System.Collections.Generic;
@@ -23,15 +24,33 @@ namespace Reservations.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(CreateOffice command)
         {
-           await _commandDispatcher.DispatchAsync(command);
+            await _commandDispatcher.DispatchAsync(command);
 
-            return Created($"offices/{command.UserId}",null);
+            return Created($"offices/{command.UserId}", null);
         }
         [HttpGet]
         public async Task<IActionResult> Get()
         {
             var offices = await _officeService.BrowseAsync();
             return Ok(offices);
+        }
+
+
+
+
+        [HttpPut]
+        public async Task<IActionResult> Put([FromBody] UpdateOffice command)
+        {
+            await _commandDispatcher.DispatchAsync(command);
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            await _officeService.DeleteOffice(id);
+            //await _commandDispatcher.DispatchAsync(command);
+            return NoContent();
         }
     }
 }

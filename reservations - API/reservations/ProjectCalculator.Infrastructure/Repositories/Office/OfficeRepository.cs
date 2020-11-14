@@ -39,7 +39,10 @@ namespace Reservations.Infrastructure.Repositories
             .ToListAsync();
 
         public async Task<Office> GetAsync(Guid officeId)
-        => await _context.Offices.SingleOrDefaultAsync(x => x.Id == officeId);
+        => await _context.Offices
+            .Include(x => x.Rooms)
+            .Include(x => x.Desks)
+            .SingleOrDefaultAsync(x => x.Id == officeId);
 
         public async Task UpdateAsync(Office office)
         {

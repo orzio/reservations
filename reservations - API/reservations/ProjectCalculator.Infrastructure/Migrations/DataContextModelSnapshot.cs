@@ -195,6 +195,9 @@ namespace Reservations.Infrastructure.Migrations
                     b.Property<Guid>("OfficeId")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("OtherEquipment")
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("Seats")
                         .HasColumnType("INTEGER");
 
