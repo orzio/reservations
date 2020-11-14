@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ isLoading:boolean = false;
 error:string =null;
 
 model:any={};
-  constructor(private authService:AuthService) { }
+  constructor(private authService:AuthService, private router:Router) { }
 
   ngOnInit(): void {
   }
@@ -24,8 +25,8 @@ model:any={};
     this.error = null;
     this.isLoading = true;
     this.authService.login(this.model).subscribe(next =>{
-      console.log(next);
       this.isLoading=false;
+      this.router.navigate(['/']);
     },
     errorMessage =>{
       this.error = errorMessage;

@@ -5,7 +5,7 @@
         </div>
         <div *ngIf="isLoading">
             <app-loading-spinner></app-loading-spinner>
-    </div>
+        </div>
     <form (ngSubmit) = "login()" #f="ngForm" *ngIf="!isLoading">
         <div class="row ">
             <div class ="col-12">

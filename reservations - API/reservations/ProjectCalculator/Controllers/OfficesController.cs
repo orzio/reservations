@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ProjectCalculator.Infrastructure.Commands;
 using Reservations.Infrastructure.Commands;
 using Reservations.Infrastructure.Commands.OfficeCommands;
@@ -12,6 +13,7 @@ namespace Reservations.Api.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [Authorize]
     public class OfficesController : ControllerBase
     {
         private readonly IOfficeService _officeService;

@@ -9,14 +9,17 @@
                 
                 <div class="collapse navbar-collapse" [collapse]="isCollapsed">
                   <ul class="navbar-nav ml-auto">
-                      <li class="nav-item">
-                        <a class="nav-link" [routerLink]="['/offices']" routerLinkActive="router-link-active"  href="#">Oferta</a>
+                      <li class="nav-item" *ngIf="isLoggedIn">
+                        <a class="nav-link" [routerLink]="['/offices']" routerLinkActive="router-link-active" href="#">Twoje Biura</a>
                       </li>
-                      <li class="nav-item">
+                      <li class="nav-item"  *ngIf="!isLoggedIn">
                         <a class="nav-link" [routerLink]="['/register']" routerLinkActive="router-link-active"  href="#">Rejestracja</a>
                       </li>
-                      <li class="nav-item">
+                      <li class="nav-item"  *ngIf="!isLoggedIn">
                         <a class="nav-link" [routerLink]="['/login']" routerLinkActive="router-link-active"  href="#">Logowanie</a>
+                      </li>
+                      <li class="nav-item"  *ngIf="isLoggedIn">
+                        <a class="nav-link" [routerLink]="['/logout']" routerLinkActive="router-link-active"  href="#">Wyloguj </a>
                       </li>
                     </ul>
                   </div>
