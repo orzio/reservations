@@ -14,11 +14,16 @@ import { RoomDetailComponent } from './offices/rooms/room-detail/room-detail.com
 import { DeskEditComponent } from './offices/desks/desk-edit/desk-edit.component'
 import { DeskResolverService } from './offices/desks/desk-resolver.service'
 import { AuthGuard } from './_services/auth-guard'
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component'
+import { ResetPasswordComponent } from './forgot-password/reset-password/reset-password.component'
+
 
 export const appRoutes: Routes = [
     
     {path: '', component: HomeComponent,pathMatch:'full'},
         {path: 'login', component: LoginComponent},
+        {path:'forgotpassword',component:ForgotPasswordComponent},
+        {path:'forgotpassword/resetpassword',component:ResetPasswordComponent},
         {path: 'register', component: RegisterComponent},
         {path: 'offices', component: OfficesComponent,resolve: [OfficeResolverService],
         canActivate:[AuthGuard],
@@ -35,7 +40,7 @@ export const appRoutes: Routes = [
                 children:[
                 {path:'new', component:DeskEditComponent},
             ]},
-            {path:':id', component:OfficeDetailComponent}
+            {path:':id', component:OfficeDetailComponent,resolve: [OfficeResolverService]}
         ]},
     {path: '**',redirectTo:'/', pathMatch:'full'}
 ]

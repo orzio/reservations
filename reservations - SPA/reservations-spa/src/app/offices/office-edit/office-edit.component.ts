@@ -3,6 +3,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
 import { OfficeService } from 'src/app/_services/office.service';
 import { Office } from 'src/app/_models/Office';
+import { AuthService } from 'src/app/_services/auth.service';
 
 @Component({
   selector: 'app-office-edit',
@@ -17,7 +18,7 @@ export class OfficeEditComponent implements OnInit {
 
   officeForm:FormGroup;
   constructor(private activatedRoute: ActivatedRoute, private officeService:OfficeService,
-    private router: Router) { 
+    private router: Router, private authService:AuthService) { 
     console.log(activatedRoute);
   }
 
@@ -34,13 +35,13 @@ export class OfficeEditComponent implements OnInit {
   }
 
   onSubmit(){
+    let updatedOffice:Office = this.officeForm.value;
+    updatedOffice.userId= this.authService.user.value.id;
     if(this.editMode){
-     let updatedOffice:Office = this.officeForm.value;
       updatedOffice.id = this.officeId;
-      updatedOffice.userId= "00000000-0000-0000-0000-000000000000";
       this.officeService.updateOffice(this.id,updatedOffice);
     } else{
-      this.officeService.addOffice(this.officeForm.value);
+      this.officeService.addOffice(updatedOffice);
     }
     this.onCancel();
   }

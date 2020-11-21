@@ -6,6 +6,7 @@ import { User } from '../_models/user';
 import { Injectable } from '@angular/core';
 import { Observable, throwError, Subject, BehaviorSubject } from 'rxjs';
 import { Router } from '@angular/router';
+import { ResetPassword } from '../_models/ResetPassword';
 
 export interface LoginResponse{
     jwtToken:string;
@@ -17,6 +18,7 @@ export interface LoginResponse{
   })
 export class AuthService {
     user = new BehaviorSubject<User>(null);
+    
 
     private expTimer:any;
     baseUrl = `${environment.apiUrl}`;
@@ -100,4 +102,9 @@ export class AuthService {
         errorMsg = errResp.error;
         throwError(errorMsg);
     }
+
+
+
+
+
 } 

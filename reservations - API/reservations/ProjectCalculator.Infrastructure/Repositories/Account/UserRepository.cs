@@ -47,5 +47,8 @@ namespace ProjectCalculator.Infrastructure.Repositories
             _context.Users.Update(user);
             await _context.SaveChangesAsync();
         }
+
+        public async Task<User> GetUserByTokenAsync(string resetToken)
+            => await _context.Users.SingleOrDefaultAsync(x => x.ResetPasswordToken == resetToken);
     }
 }

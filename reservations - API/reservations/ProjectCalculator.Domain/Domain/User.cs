@@ -20,6 +20,9 @@ namespace ProjectCalculator.Core.Domain
         public string FirstName { get;  set; }
         public string LastName { get;  set; }
         public string Role { get;  set; }
+        public string ResetPasswordToken { get; set; }
+        public DateTime ResetPasswordTokenCreated { get; set; }
+
         public DateTime CreatedAt { get;  set; }
         public DateTime UpdatedAt { get;  set; }
 

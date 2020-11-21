@@ -18,18 +18,28 @@ export class OfficeService{
   officeUpdated = new Subject<Office>();
   roomsUpdated = new Subject<Room[]>();
 
+
   getRooms(index:number){
   const rooms = this.getOfficeById(index).rooms;
   this.roomsUpdated.next(rooms.slice());
 }
+
+getUserOffice(){
+  return this.offices.slice();
+}
+
+
 
       getOffices(){
           return this.offices.slice();
       }
 
       getOfficeById(index:number){
+        console.log("index: + "+index);
+        let off= this.offices[index];
+        console.log(off);
         console.log(`GetOfficeById :${this.offices[index].description}`);
-        return this.offices[index];
+        return off;
       }
 
       addOffice(office:Office){
@@ -37,7 +47,7 @@ export class OfficeService{
         .post<Office[]>(this.API_URL,office).subscribe(response =>{
          console.log("dodalem biuro");
          console.log(office)
-        this.fetchOffices().subscribe((response:Office[]) =>
+        this.fetchUserOffices().subscribe((response:Office[]) =>
             {
                 this.officesChanged.next(response.slice())
             });
@@ -49,7 +59,7 @@ export class OfficeService{
       updateOffice(index:number, updatedOffice:Office){
         this.http
         .put<Office>('https://localhost:44310/offices',updatedOffice).subscribe(response =>{
-            this.fetchOffices().subscribe((resp:Office[]) =>{
+            this.fetchUserOffices().subscribe((resp:Office[]) =>{
               this.officesChanged.next(resp.slice());
               this.officeUpdated.next(this.getOfficeById(index));
             })
@@ -70,7 +80,6 @@ export class OfficeService{
       }
 
       fetchOffices(){
-       
           return this.http
         .get<Office[]>(
             this.API_URL)
@@ -87,9 +96,32 @@ export class OfficeService{
       }),
       tap(offices =>{
           this.setOffices(offices);
-
-          console.log("w tap ustawiam office")
       }))
     }
+    
+
+    fetchUserOffices(){
+      return this.http
+    .get<Office[]>(
+        `${this.API_URL}/user/${this.authService.user.value.id}`)
+        .pipe(
+    map(offices => {
+      return offices.map(office =>{
+          console.log(office);
+          return {
+          ...office,
+          rooms:office.rooms ? office.rooms : [],
+          desks:office.desks ? office.desks : []
+          };
+      });
+  }),
+  tap(offices =>{
+      this.setOffices(offices);
+  }))
+}
+
+
+
+
 
 }

@@ -33,6 +33,10 @@ import { DeskService } from './_services/desk.service';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 import { AuthInterceptor } from './_services/auth-interceptor.service';
 import { AuthGuard } from './_services/auth-guard';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { ResetPasswordComponent } from './forgot-password/reset-password/reset-password.component';
+import { ResetPasswordService } from './_services/resetPasswrod.service';
+import { SearchBarComponent } from './search-bar/search-bar.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -55,7 +59,10 @@ import { AuthGuard } from './_services/auth-guard';
     DeskListComponent,
     DeskItemComponent,
     DeskEditComponent,
-    LoadingSpinnerComponent
+    LoadingSpinnerComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent,
+    SearchBarComponent
   ],
   imports: [
     BrowserModule,
@@ -66,7 +73,7 @@ import { AuthGuard } from './_services/auth-guard';
     FormsModule, 
     ReactiveFormsModule
   ],
-  providers: [OfficeService,CommunicationService,RoomService, DeskService, {provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true},AuthGuard],
+  providers: [OfficeService,CommunicationService,RoomService,ResetPasswordService, DeskService, {provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true},AuthGuard],
   bootstrap: [AppComponent],
   
 })

@@ -4,6 +4,7 @@ using Reservations.Core.Domain;
 using Reservations.Core.Repositories;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -50,6 +51,12 @@ namespace Reservations.Infrastructure.Repositories
             await _context.SaveChangesAsync();
         }
 
+        public async Task<IEnumerable<Office>> GetUsersOfficeAsync(Guid userId)
+            => await _context.Offices.Where(x => x.UserId == userId)
+            .Include(x=> x.Address)
+            .Include(x => x.Rooms)
+            .Include(x => x.Desks).ToListAsync();
+    
 
     }
 }

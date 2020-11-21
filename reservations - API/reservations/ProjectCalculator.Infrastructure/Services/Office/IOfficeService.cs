@@ -15,5 +15,6 @@ namespace Reservations.Infrastructure.Services
         Task UpdateOffice(Guid officeId, Guid userId, Address address, string name, string description);
         Task<IEnumerable<OfficeDto>> BrowseAsync();
         Task<OfficeDto> GetOffice(Guid officeId);
+        Task<IEnumerable<OfficeDto>> GetOfficesByUserId(Guid userId);
     }
 }

@@ -14,5 +14,6 @@ namespace ProjectCalculator.Api.Repositories
         Task AddAsync(User user);
         Task UpdateAsync(User user);
         Task RemoveAsync(Guid id);
+        Task<User> GetUserByTokenAsync(string resetToken);
     }
 }

@@ -21,7 +21,7 @@ export class RoomResolverService implements Resolve<Room[]>{
         let rooms:Room[]=[];
         var office = this.officeService.getOfficeById(+route.params['id']);
 
-            this.officeService.fetchOffices().subscribe((resp) => {
+            this.officeService.fetchUserOffices().subscribe((resp) => {
                 office = this.officeService.getOfficeById(+route.params['id']);
                 rooms = office.rooms;
                 this.roomService.setRooms(rooms); 

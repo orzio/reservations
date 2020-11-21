@@ -39,6 +39,10 @@ model:any={};
     this.isLoggedIn =!this.isLoggedIn;
   }
   
+  onForgotPassword(){
+    this.router.navigate(['/forgotpassword']);
+  }
+
   
   logout(){
 

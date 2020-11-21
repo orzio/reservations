@@ -14,5 +14,6 @@ namespace Reservations.Core.Repositories
         Task UpdateAsync(Office office);
         Task<IEnumerable<Office>> GetAllAsync();
         Task<Office> GetAsync(Guid officeId);
+        Task<IEnumerable<Office>> GetUsersOfficeAsync(Guid userId);
     }
 }

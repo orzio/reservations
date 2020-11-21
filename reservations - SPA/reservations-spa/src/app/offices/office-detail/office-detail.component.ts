@@ -27,7 +27,7 @@ index:number;
 
   onDelete(){
     this.officeService.deleteOffice(this.index).subscribe(response =>{
-      this.officeService.fetchOffices().subscribe(response =>{
+      this.officeService.fetchUserOffices().subscribe(response =>{
         this.officeService.officesChanged.next(response);
         this.router.navigate(['../'],{relativeTo:this.activatedRoute});
       });

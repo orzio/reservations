@@ -12,16 +12,15 @@ export class OfficeResolverService implements Resolve<Office[]>{
     ){}
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        let offices = this.officeService.getOffices();
 
-        if(offices.length == 0){
-            this.officeService.fetchOffices().subscribe((response:Office[])=>{
+            let offices:Office[];
+            this.officeService.fetchUserOffices().subscribe((response:Office[])=>{
+                console.log(offices);
                 offices = response;
                 this.officeService.officesChanged.next(offices.slice());
-                return offices;
+                
             });
-        }
-           return offices;
+            return offices;
 
     }
 
