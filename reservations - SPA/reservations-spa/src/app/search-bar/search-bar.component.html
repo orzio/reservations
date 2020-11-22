@@ -5,22 +5,26 @@
         <h2 style="text-align: center;">Czego szukasz?</h2>
       </div>
           <div  class="col-md-2" style="padding: 0;">
-            <select  name="" id="" style="width: 100%; padding: .375rem .75rem; height:100%; border-radius: .25rem;">
-              <option value="" disabled selected>Biurko/Sala</option>
+            <select  [(ngModel)]="selectedPlace" name="" id="" style="width: 100%; padding: .375rem .75rem; height:100%; border-radius: .25rem;">
+              <option value="Biurko/Sala" disabled selected>Biurko/Sala</option>
               <option value="Biurko">Biurko</option>
               <option value="Sala">Sala</option>
             </select>
           </div>
           
           <div class="col-md-6" style="margin: 0; padding:0">
-              <select name="" id="" style="width: 100%; padding: .375rem .75rem; height:100%; border-radius: .25rem;">
-                <option value="" disabled selected>Wybierz Miasto</option>  
-                <option value="Biurko" style="border-radius: .25rem;">Biurko</option>
-                <option value="Sala">Sala</option>
+              <select name="" id="" [(ngModel)]="selectedCity" style="width: 100%; padding: .375rem .75rem; height:100%; border-radius: .25rem;">
+                <option value="Wybierz Miasto" disabled selected>{{initialCity}}</option>  
+                <option *ngFor="let city of cities" [ngValue]="city.name">{{city.name}}</option>
+                <!-- <option value="Biurko" style="border-radius: .25rem;">Biurko</option>
+                <option value="Sala">Sala</option> -->
               </select>
         </div>
         <div class="col-md-2" style="padding:0">
-          <button class="btn btn-success" style="width: 100%;">Szukaj</button>
+          <button class="btn btn-success" style="width: 100%;" (click)="onSubmit()"
+          [disabled]="selectedCity=='Wybierz Miasto' || selectedPlace=='Biurko/Sala'">Szukaj</button>
         </div>
       </div>
+
+      <p>{{selectedCity}}</p>
   </div>

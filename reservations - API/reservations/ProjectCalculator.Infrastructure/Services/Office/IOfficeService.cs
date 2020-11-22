@@ -16,5 +16,7 @@ namespace Reservations.Infrastructure.Services
         Task<IEnumerable<OfficeDto>> BrowseAsync();
         Task<OfficeDto> GetOffice(Guid officeId);
         Task<IEnumerable<OfficeDto>> GetOfficesByUserId(Guid userId);
+        Task<IEnumerable<OfficeDto>> GetOfficesWithDeskByCity(string city);
+        Task<IEnumerable<OfficeDto>> GetOfficesWithRoomsByCity(string city);
     }
 }

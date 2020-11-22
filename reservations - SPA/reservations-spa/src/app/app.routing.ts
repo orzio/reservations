@@ -16,11 +16,12 @@ import { DeskResolverService } from './offices/desks/desk-resolver.service'
 import { AuthGuard } from './_services/auth-guard'
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component'
 import { ResetPasswordComponent } from './forgot-password/reset-password/reset-password.component'
+import { CityResolverService } from './home/cities-resolver.service'
+import { DeskCityListComponent } from './desk-city/desk-city-list/desk-city-list.component'
 
 
 export const appRoutes: Routes = [
-    
-    {path: '', component: HomeComponent,pathMatch:'full'},
+    {path: '', component: HomeComponent,pathMatch:'full', resolve: [CityResolverService]},
         {path: 'login', component: LoginComponent},
         {path:'forgotpassword',component:ForgotPasswordComponent},
         {path:'forgotpassword/resetpassword',component:ResetPasswordComponent},
@@ -42,5 +43,24 @@ export const appRoutes: Routes = [
             ]},
             {path:':id', component:OfficeDetailComponent,resolve: [OfficeResolverService]}
         ]},
+
+        {path: 'offices/desks/city', component: DeskCityListComponent,
+        children:[
+            {path:'new', component:OfficeEditComponent},
+            {path:':id/edit', component:OfficeEditComponent},
+            {path:':id/rooms', component:RoomsComponent,resolve:[RoomResolverService],
+                children:[
+                    {path:'new', component:RoomEditComponent},
+                    {path:':roomId', component:RoomDetailComponent},
+                    {path:':roomId/edit', component:RoomEditComponent}
+                    ]},
+            {path:':id/desks', component:DesksComponent,resolve:[DeskResolverService],
+                children:[
+                {path:'new', component:DeskEditComponent},
+            ]},
+            {path:':id', component:OfficeDetailComponent,resolve: [OfficeResolverService]}
+        ]},
+
+
     {path: '**',redirectTo:'/', pathMatch:'full'}
 ]

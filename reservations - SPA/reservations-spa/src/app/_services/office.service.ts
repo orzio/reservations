@@ -6,6 +6,7 @@ import { map, tap, take, exhaustMap } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Room } from '../_models/room';
 import { AuthService } from './auth.service';
+import { City } from '../_models/City';
 
 @Injectable()
 export class OfficeService{
@@ -118,6 +119,49 @@ getUserOffice(){
   tap(offices =>{
       this.setOffices(offices);
   }))
+}
+
+fetchOfficesDesksInCity(city:string){
+  return this.http
+.get<Office[]>(
+    `${this.API_URL}/desks/city/${city}`)
+    .pipe(
+map(offices => {
+  return offices.map(office =>{
+      console.log(office);
+      return {
+      ...office,
+      rooms:office.rooms ? office.rooms : [],
+      desks:office.desks ? office.desks : []
+      };
+  });
+}),
+tap(offices =>{
+  this.setOffices(offices);
+}))
+}
+
+
+
+
+fetchOfficesRoomsInCity(city:string){
+  return this.http
+.get<Office[]>(
+    `${this.API_URL}/rooms/city/${city}`)
+    .pipe(
+map(offices => {
+  return offices.map(office =>{
+      console.log(office);
+      return {
+      ...office,
+      rooms:office.rooms ? office.rooms : [],
+      desks:office.desks ? office.desks : []
+      };
+  });
+}),
+tap(offices =>{
+  this.setOffices(offices);
+}))
 }
 
 

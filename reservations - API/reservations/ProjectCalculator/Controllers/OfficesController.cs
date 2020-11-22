@@ -49,7 +49,19 @@ namespace Reservations.Api.Controllers
             return Ok(offices);
         }
 
+        [HttpGet("desks/city/{name}")]
+        public async Task<IActionResult>GetOfficesWithDesksInCity(string name)
+        {
+            var offices = await _officeService.GetOfficesWithDeskByCity(name);
+            return Ok(offices);
+        }
 
+        [HttpGet("rooms/city/{name}")]
+        public async Task<IActionResult> GetOfficesWithRoomsInCity(string name)
+        {
+            var offices = await _officeService.GetOfficesWithRoomsByCity(name);
+            return Ok(offices);
+        }
 
 
 

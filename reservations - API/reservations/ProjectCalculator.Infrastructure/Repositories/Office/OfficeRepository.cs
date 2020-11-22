@@ -56,7 +56,31 @@ namespace Reservations.Infrastructure.Repositories
             .Include(x=> x.Address)
             .Include(x => x.Rooms)
             .Include(x => x.Desks).ToListAsync();
-    
+
+       public async Task<IEnumerable<Office>> GetOfficesWithDesksInCity(string city)
+        {
+            var offices = await _context.Offices
+                .Include(x => x.Address)
+                .Where(x => x.Address.City == city)
+                .Include(x => x.Desks)
+                .Where(x => x.Desks.Count >0)
+                .ToListAsync();
+
+            return offices;
+        }
+
+
+        public async Task<IEnumerable<Office>> GetOfficesWithRoomsInCity(string city)
+        {
+            var offices = await _context.Offices
+                .Include(x => x.Address)
+                .Where(x => x.Address.City == city)
+                .Include(x => x.Rooms)
+                .Where(x => x.Rooms.Count > 0)
+                .ToListAsync();
+
+            return offices;
+        }
 
     }
 }

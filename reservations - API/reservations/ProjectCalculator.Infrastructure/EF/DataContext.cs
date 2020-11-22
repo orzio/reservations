@@ -38,6 +38,7 @@ namespace ProjectCalculator.Infrastructure.Data
         public DbSet<Desk> Desks{ get; set; }
         public DbSet<DeskReservation> DeskReservations { get; set; }
         public DbSet<RoomReservation> RoomReservations { get; set; }
+        public DbSet<Address> Addresses { get; set; }
        
     }
 }

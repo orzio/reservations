@@ -1,0 +1,13 @@
+<p>lista</p>
+<div *ngFor="let office of offices">
+<app-desk-city-item 
+*ngFor="let desk of office.desks"
+[officeName] = "office.name"
+[officeAddress] = "office.address"
+[desk]="desk">
+</app-desk-city-item>
+
+
+
+  
+</div>

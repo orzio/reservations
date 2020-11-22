@@ -49,6 +49,7 @@ export class AuthService {
                 
                 const expDate = new Date(new Date().getTime() + +this.decodedToken['exp']).getTime();
                 const userId = this.decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
+                console.log("curr user id" + userId);
                 const userRole = this.decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
                 const currentUser = new User(userId,response.jwtToken,expDate,response.refreshToken);
                 

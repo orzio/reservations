@@ -1,0 +1,22 @@
+<!-- <div>
+    <p>Biurko: {{desk.seats}}-osobowe</p>
+    <p>{{officeName}}, {{officeAddress.street}}</p>
+</div> -->
+
+
+<div style="display: flex; flex-direction: row; justify-content: space-between;" class="list-group-item" >
+    <a style="cursor: pointer; border:none;" class="list-group-item"
+    [routerLink]="[index]">
+        <div class="pull-left">
+            <h2 class="list-group-item-heading">Biurko: {{desk.seats}}-osobowe</h2>
+        </div> 
+        <div class="pull-left">
+            <h3 class="list-group-item-heading">{{officeName}}, {{officeAddress.city}}, {{officeAddress.street}}</h3>
+        </div> 
+    </a>
+    <div>
+        <div class="center">
+            <button class="btn btn-primary">Zarezerwuj</button>
+        </div>
+    </div>
+</div>

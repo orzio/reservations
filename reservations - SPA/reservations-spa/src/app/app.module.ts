@@ -37,6 +37,13 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { ResetPasswordComponent } from './forgot-password/reset-password/reset-password.component';
 import { ResetPasswordService } from './_services/resetPasswrod.service';
 import { SearchBarComponent } from './search-bar/search-bar.component';
+import { AddressService } from './_services/address.service';
+import { DeskCityComponent } from './desk-city/desk-city.component';
+import { DeskCityListComponent } from './desk-city/desk-city-list/desk-city-list.component';
+import { DeskCityItemComponent } from './desk-city/desk-city-list/desk-city-item/desk-city-item.component';
+import { RoomCityComponent } from './room-city/room-city.component';
+import { RoomCityListComponent } from './room-city/room-city-list/room-city-list.component';
+import { RoomCityItemComponent } from './room-city/room-city-list/room-city-item/room-city-item.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,7 +69,13 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
     LoadingSpinnerComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
-    SearchBarComponent
+    SearchBarComponent,
+    DeskCityComponent,
+    DeskCityListComponent,
+    DeskCityItemComponent,
+    RoomCityComponent,
+    RoomCityListComponent,
+    RoomCityItemComponent
   ],
   imports: [
     BrowserModule,
@@ -73,7 +86,7 @@ import { SearchBarComponent } from './search-bar/search-bar.component';
     FormsModule, 
     ReactiveFormsModule
   ],
-  providers: [OfficeService,CommunicationService,RoomService,ResetPasswordService, DeskService, {provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true},AuthGuard],
+  providers: [OfficeService,CommunicationService,AddressService,RoomService,ResetPasswordService, DeskService, {provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true},AuthGuard],
   bootstrap: [AppComponent],
   
 })

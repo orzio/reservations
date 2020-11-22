@@ -55,5 +55,18 @@ namespace Reservations.Infrastructure.Services
             return _mapper.Map<IEnumerable<Office>, IEnumerable<OfficeDto>>(offices);
         }
 
+        public async Task<IEnumerable<OfficeDto>>GetOfficesWithDeskByCity(string city)
+        {
+            var offices = await _officeRepository.GetOfficesWithDesksInCity(city);
+            return _mapper.Map<IEnumerable<Office>, IEnumerable<OfficeDto>>(offices);
+        }
+
+
+        public async Task<IEnumerable<OfficeDto>> GetOfficesWithRoomsByCity(string city)
+        {
+            var offices = await _officeRepository.GetOfficesWithRoomsInCity(city);
+            return _mapper.Map<IEnumerable<Office>, IEnumerable<OfficeDto>>(offices);
+        }
+
     }
 }
