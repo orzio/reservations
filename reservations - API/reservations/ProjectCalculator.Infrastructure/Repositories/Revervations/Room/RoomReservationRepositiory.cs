@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ProjectCalculator.Api.Repositories;
-using ProjectCalculator.Infrastructure.Data;
+using Reservations.Api.Repositories;
+using Reservations.Infrastructure.Data;
 using Reservations.Core.Domain;
 using Reservations.Core.Repositories;
 using System;

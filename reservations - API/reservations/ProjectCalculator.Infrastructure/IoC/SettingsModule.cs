@@ -1,13 +1,13 @@
 ﻿using Autofac;
 using Microsoft.Extensions.Configuration;
-using ProjectCalculator.Infrastructure.EF;
-using ProjectCalculator.Infrastructure.Extensions;
-using ProjectCalculator.Infrastructure.Settings;
+using Reservations.Infrastructure.EF;
+using Reservations.Infrastructure.Extensions;
+using Reservations.Infrastructure.Settings;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ProjectCalculator.Infrastructure.IoC
+namespace Reservations.Infrastructure.IoC
 {
     public class SettingsModule : Autofac.Module
     {

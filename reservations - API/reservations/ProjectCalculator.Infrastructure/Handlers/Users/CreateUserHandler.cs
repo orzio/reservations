@@ -1,12 +1,12 @@
-﻿using ProjectCalculator.Infrastructure.Commands;
-using ProjectCalculator.Infrastructure.Commands.AccountCommands;
-using ProjectCalculator.Infrastructure.Services;
+﻿using Reservations.Infrastructure.Commands;
+using Reservations.Infrastructure.Commands.AccountCommands;
+using Reservations.Infrastructure.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectCalculator.Infrastructure.Handlers
+namespace Reservations.Infrastructure.Handlers
 {
     public class CreateUserHandler:ICommandHandler<CreateUser>
     {

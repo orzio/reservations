@@ -1,14 +1,14 @@
 ﻿using Microsoft.IdentityModel.Tokens;
-using ProjectCalculator.Infrastructure.DTO;
-using ProjectCalculator.Infrastructure.Extensions;
-using ProjectCalculator.Infrastructure.Settings;
+using Reservations.Infrastructure.DTO;
+using Reservations.Infrastructure.Extensions;
+using Reservations.Infrastructure.Settings;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace ProjectCalculator.Infrastructure.Services
+namespace Reservations.Infrastructure.Services
 {
     public class JwtService : IJwtService
     {

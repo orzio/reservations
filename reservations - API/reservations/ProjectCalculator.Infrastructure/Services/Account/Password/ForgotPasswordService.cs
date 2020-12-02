@@ -1,5 +1,5 @@
-﻿using ProjectCalculator.Api.Repositories;
-using ProjectCalculator.Infrastructure.Services;
+﻿using Reservations.Api.Repositories;
+using Reservations.Infrastructure.Services;
 using Reservations.Infrastructure.Services.Email;
 using System;
 using System.Security.Cryptography;

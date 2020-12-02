@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ProjectCalculator.Infrastructure.Services
+namespace Reservations.Infrastructure.Services
 {
     public class Encrypter : IEncrypter
     {

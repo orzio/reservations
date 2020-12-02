@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ProjectCalculator.Core.Domain
+namespace Reservations.Core.Domain
 {
     public class Token
     {

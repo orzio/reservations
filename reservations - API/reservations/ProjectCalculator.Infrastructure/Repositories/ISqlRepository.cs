@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ProjectCalculator.Infrastructure.Repositories
+namespace Reservations.Infrastructure.Repositories
 {
     public interface ISqlRepository
     {

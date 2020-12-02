@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ProjectCalculator.Api.Repositories
+namespace Reservations.Api.Repositories
 {
    public interface IRepository
     {

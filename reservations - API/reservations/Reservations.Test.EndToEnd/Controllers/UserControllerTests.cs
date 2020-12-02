@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
 using Microsoft.AspNetCore.Mvc.Testing;
-using ProjectCalculator;
+using Reservations;
 using System;
 using System.Collections.Generic;
 using System.Net;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ProjectCalculator.Infrastructure.DTO
+namespace Reservations.Infrastructure.DTO
 {
    public class JwtDto
     {

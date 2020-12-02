@@ -4,17 +4,17 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using ProjectCalculator.Infrastructure.IoC;
+using Reservations.Infrastructure.IoC;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.SqlServer;
 using Microsoft.IdentityModel.Tokens;
-using ProjectCalculator.Infrastructure.Data;
-using ProjectCalculator.Infrastructure.Settings;
+using Reservations.Infrastructure.Data;
+using Reservations.Infrastructure.Settings;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Text;
-using ProjectCalculator.Infrastructure.Extensions;
+using Reservations.Infrastructure.Extensions;
 
-namespace ProjectCalculator
+namespace Reservations
 {
     public class Startup
     {
@@ -45,9 +45,9 @@ namespace ProjectCalculator
             services.AddAuthorization(x => x.AddPolicy("admin", p => p.RequireRole("admin")));
             services.AddAuthorization(x => x.AddPolicy("user", p => p.RequireRole("user")));
             services.AddDbContext<DataContext>(options =>
-            //            options.UseSqlServer(Configuration["sql:connectionString"]));
-                        options.UseSqlite(Configuration
-                        .GetConnectionString("DefaultConnection")));
+                        options.UseSqlServer(Configuration["sql:connectionString"]));
+                        //options.UseSqlite(Configuration
+                        //.GetConnectionString("DefaultConnection")));
             services.AddControllers();
             services.AddMemoryCache();
 

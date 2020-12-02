@@ -1,13 +1,13 @@
 ﻿using AutoMapper;
-using ProjectCalculator.Core.Domain;
-using ProjectCalculator.Infrastructure.DTO;
+using Reservations.Core.Domain;
+using Reservations.Infrastructure.DTO;
 using Reservations.Core.Domain;
 using Reservations.Infrastructure.DTO;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ProjectCalculator.Infrastructure.Mappers
+namespace Reservations.Infrastructure.Mappers
 {
    public static class AutoMapperConfig
     {

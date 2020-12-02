@@ -1,13 +1,13 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ProjectCalculator.Infrastructure.Commands;
-using ProjectCalculator.Infrastructure.Commands.AccountCommands;
-using ProjectCalculator.Infrastructure.Services;
+using Reservations.Infrastructure.Commands;
+using Reservations.Infrastructure.Commands.AccountCommands;
+using Reservations.Infrastructure.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ProjectCalculator.Api.Controllers
+namespace Reservations.Api.Controllers
 {
     [Route("[controller]")]
     [ApiController]

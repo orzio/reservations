@@ -1,11 +1,11 @@
-﻿using ProjectCalculator.Api.Repositories;
-using ProjectCalculator.Core.Domain;
+﻿using Reservations.Api.Repositories;
+using Reservations.Core.Domain;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectCalculator.Core.Repositories
+namespace Reservations.Core.Repositories
 {
    public interface ITokenRepository:IRepository
     {

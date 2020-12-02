@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using ProjectCalculator.Api.Repositories;
+using Reservations.Api.Repositories;
 using Reservations.Core.Domain;
 using Reservations.Core.Repositories;
 using Reservations.Infrastructure.DTO;

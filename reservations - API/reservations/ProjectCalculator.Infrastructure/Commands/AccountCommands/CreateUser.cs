@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ProjectCalculator.Infrastructure.Commands.AccountCommands
+namespace Reservations.Infrastructure.Commands.AccountCommands
 {
     public class CreateUser:ICommand
     {

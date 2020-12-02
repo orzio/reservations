@@ -1,16 +1,16 @@
 ﻿using AutoMapper;
-using ProjectCalculator.Api.Repositories;
-using ProjectCalculator.Core.Domain;
-using ProjectCalculator.Core.Repositories;
-using ProjectCalculator.Infrastructure.Data;
-using ProjectCalculator.Infrastructure.DTO;
+using Reservations.Api.Repositories;
+using Reservations.Core.Domain;
+using Reservations.Core.Repositories;
+using Reservations.Infrastructure.Data;
+using Reservations.Infrastructure.DTO;
 using System;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectCalculator.Infrastructure.Services
+namespace Reservations.Infrastructure.Services
 {
     public class RefreshService : IRefreshService
     {

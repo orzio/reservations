@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Design;
-using ProjectCalculator.Infrastructure.Data;
+using Reservations.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 namespace Reservations.Infrastructure
 {

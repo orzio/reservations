@@ -1,13 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ProjectCalculator.Core.Domain;
-using ProjectCalculator.Infrastructure.EF;
+using Reservations.Core.Domain;
+using Reservations.Infrastructure.EF;
 using Reservations.Core.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace ProjectCalculator.Infrastructure.Data
+namespace Reservations.Infrastructure.Data
 {
     public class DataContext:DbContext
     {
@@ -28,7 +28,7 @@ namespace ProjectCalculator.Infrastructure.Data
             //ef knows that these Id's are foreign Keys
             //modelBuilder.Entity<DeskReservations>().HasKey(x => new { x.UserId, x.DeskId });
             //modelBuilder.Entity<RoomReservations>().HasKey(x => new { x.UserId, x.RoomId });
-            modelBuilder.Entity<Address>().ToTable("Addresses");
+            //modelBuilder.Entity<Address>().ToTable("Addresses");
         }
 
         public DbSet<User> Users { get; set; }

@@ -2,12 +2,12 @@
 using Autofac.Core;
 using Autofac.Core.Registration;
 using Microsoft.Extensions.Configuration;
-using ProjectCalculator.Infrastructure.Mappers;
+using Reservations.Infrastructure.Mappers;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ProjectCalculator.Infrastructure.IoC
+namespace Reservations.Infrastructure.IoC
 {
     public class ContainerModule : Autofac.Module
     {

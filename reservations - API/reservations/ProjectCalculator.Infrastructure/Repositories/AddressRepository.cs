@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ProjectCalculator.Infrastructure.Data;
+using Reservations.Infrastructure.Data;
 using Reservations.Core.Domain;
 using Reservations.Core.Repositories;
 using System;
@@ -19,7 +19,11 @@ namespace Reservations.Infrastructure.Repositories
         }
 
         public async Task<IEnumerable<Address>> GetAllAsync()
-        => await _context.Addresses.ToListAsync();
+        {
+
+        //=> await _context.Addresses.ToListAsync();
+        return null;
+        }
 
     }
 }

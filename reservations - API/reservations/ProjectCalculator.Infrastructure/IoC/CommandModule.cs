@@ -1,8 +1,8 @@
 ﻿using Autofac;
-using ProjectCalculator.Infrastructure.Commands;
+using Reservations.Infrastructure.Commands;
 using System;
 
-namespace ProjectCalculator.Infrastructure.IoC
+namespace Reservations.Infrastructure.IoC
 {
     public class CommandModule : Autofac.Module
     {

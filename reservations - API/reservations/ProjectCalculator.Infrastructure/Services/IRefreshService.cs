@@ -1,11 +1,11 @@
-﻿using ProjectCalculator.Core.Domain;
-using ProjectCalculator.Infrastructure.DTO;
+﻿using Reservations.Core.Domain;
+using Reservations.Infrastructure.DTO;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectCalculator.Infrastructure.Services
+namespace Reservations.Infrastructure.Services
 {
     public interface IRefreshService:IService
     {

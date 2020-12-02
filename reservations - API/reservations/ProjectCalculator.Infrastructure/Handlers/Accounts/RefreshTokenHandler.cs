@@ -1,11 +1,11 @@
-﻿using ProjectCalculator.Infrastructure.Commands;
-using ProjectCalculator.Infrastructure.Commands.AccountCommands;
+﻿using Reservations.Infrastructure.Commands;
+using Reservations.Infrastructure.Commands.AccountCommands;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectCalculator.Infrastructure.Services
+namespace Reservations.Infrastructure.Services
 {
     public class RefreshTokenHandler : ICommandHandler<RefreshToken>
     {

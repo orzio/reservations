@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
-using ProjectCalculator.Api.Repositories;
-using ProjectCalculator.Infrastructure.Commands;
-using ProjectCalculator.Infrastructure.Commands.AccountCommands;
-using ProjectCalculator.Infrastructure.Extensions;
-using ProjectCalculator.Infrastructure.Services;
+using Reservations.Api.Repositories;
+using Reservations.Infrastructure.Commands;
+using Reservations.Infrastructure.Commands.AccountCommands;
+using Reservations.Infrastructure.Extensions;
+using Reservations.Infrastructure.Services;
 
-namespace ProjectCalculator.Api.Controllers
+namespace Reservations.Api.Controllers
 {
     [Route("[controller]")]
     [ApiController]

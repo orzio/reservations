@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ProjectCalculator.Infrastructure.Data;
+using Reservations.Infrastructure.Data;
 using Reservations.Core.Domain;
 using Reservations.Core.Repositories;
 using System;

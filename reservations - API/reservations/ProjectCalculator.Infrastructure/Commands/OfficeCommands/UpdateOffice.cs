@@ -1,4 +1,4 @@
-﻿using ProjectCalculator.Infrastructure.Commands;
+﻿using Reservations.Infrastructure.Commands;
 using Reservations.Core.Domain;
 using System;
 using System.Collections.Generic;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ProjectCalculator.Infrastructure.EF
+namespace Reservations.Infrastructure.EF
 {
    public class SqlSettings
     {

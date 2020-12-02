@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ProjectCalculator.Infrastructure.Commands
+namespace Reservations.Infrastructure.Commands
 {
     public interface ICommand
     {

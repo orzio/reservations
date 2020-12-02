@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ProjectCalculator.Infrastructure
+namespace Reservations.Infrastructure
 {
     public interface IService
     {

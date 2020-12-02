@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace ProjectCalculator.Core.Domain
+namespace Reservations.Core.Domain
 {
     public class User
     {

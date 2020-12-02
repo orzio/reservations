@@ -1,11 +1,11 @@
 ﻿using Autofac;
-using ProjectCalculator.Infrastructure.Services;
+using Reservations.Infrastructure.Services;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 
-namespace ProjectCalculator.Infrastructure.IoC
+namespace Reservations.Infrastructure.IoC
 {
     public class ServiceModule:Autofac.Module
     {

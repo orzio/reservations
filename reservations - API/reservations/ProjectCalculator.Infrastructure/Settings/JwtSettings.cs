@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ProjectCalculator.Infrastructure.Settings
+namespace Reservations.Infrastructure.Settings
 {
    public class JwtSettings
     {

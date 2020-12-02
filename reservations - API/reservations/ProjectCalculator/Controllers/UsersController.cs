@@ -5,14 +5,14 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using ProjectCalculator.Api.Repositories;
-using ProjectCalculator.Infrastructure.Commands;
-using ProjectCalculator.Infrastructure.Commands.AccountCommands;
-using ProjectCalculator.Infrastructure.Services;
+using Reservations.Api.Repositories;
+using Reservations.Infrastructure.Commands;
+using Reservations.Infrastructure.Commands.AccountCommands;
+using Reservations.Infrastructure.Services;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace ProjectCalculator.Api.Controllers
+namespace Reservations.Api.Controllers
 {
     [Route("[controller]")]
     [ApiController]

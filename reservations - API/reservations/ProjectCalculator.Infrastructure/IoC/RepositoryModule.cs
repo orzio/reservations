@@ -1,13 +1,13 @@
 ﻿using Autofac;
 using Autofac.Core;
 using Autofac.Core.Registration;
-using ProjectCalculator.Api.Repositories;
+using Reservations.Api.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 
-namespace ProjectCalculator.Infrastructure.IoC
+namespace Reservations.Infrastructure.IoC
 {
     public class RepositoryModule : Autofac.Module
     {

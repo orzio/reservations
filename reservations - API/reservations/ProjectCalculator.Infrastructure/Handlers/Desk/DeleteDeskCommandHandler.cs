@@ -1,4 +1,4 @@
-﻿using ProjectCalculator.Infrastructure.Commands;
+﻿using Reservations.Infrastructure.Commands;
 using Reservations.Infrastructure.Commands.Desk;
 using Reservations.Infrastructure.Services;
 using System;

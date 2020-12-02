@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ProjectCalculator.Infrastructure.Commands;
+using Reservations.Infrastructure.Commands;
 using Reservations.Infrastructure.DTO;
 using Reservations.Infrastructure.Services;
 using System;

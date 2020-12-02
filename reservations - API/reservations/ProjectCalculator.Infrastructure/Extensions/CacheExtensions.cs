@@ -1,10 +1,10 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
-using ProjectCalculator.Infrastructure.DTO;
+using Reservations.Infrastructure.DTO;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ProjectCalculator.Infrastructure.Extensions
+namespace Reservations.Infrastructure.Extensions
 {
    public static class CacheExtensions
     {

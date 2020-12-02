@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ProjectCalculator.Infrastructure.Extensions
+namespace Reservations.Infrastructure.Extensions
 {
     public static class DateTimeExtensions
     {

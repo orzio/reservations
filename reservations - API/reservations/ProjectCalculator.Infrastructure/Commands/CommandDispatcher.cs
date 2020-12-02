@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectCalculator.Infrastructure.Commands
+namespace Reservations.Infrastructure.Commands
 {
     public class CommandDispatcher:ICommandDispatcher
     {

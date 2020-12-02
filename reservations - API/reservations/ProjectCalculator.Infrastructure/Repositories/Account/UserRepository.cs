@@ -1,15 +1,15 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
-using ProjectCalculator.Api.Repositories;
-using ProjectCalculator.Core.Domain;
-using ProjectCalculator.Infrastructure.Data;
+using Reservations.Api.Repositories;
+using Reservations.Core.Domain;
+using Reservations.Infrastructure.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectCalculator.Infrastructure.Repositories
+namespace Reservations.Infrastructure.Repositories
 {
     public class UserRepository : IUserRepository, ISqlRepository
     {

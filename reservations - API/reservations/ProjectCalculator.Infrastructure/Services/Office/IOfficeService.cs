@@ -1,4 +1,4 @@
-﻿using ProjectCalculator.Infrastructure;
+﻿using Reservations.Infrastructure;
 using Reservations.Core.Domain;
 using Reservations.Infrastructure.DTO;
 using System;

@@ -1,13 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ProjectCalculator.Core.Domain;
-using ProjectCalculator.Core.Repositories;
-using ProjectCalculator.Infrastructure.Data;
+using Reservations.Core.Domain;
+using Reservations.Core.Repositories;
+using Reservations.Infrastructure.Data;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectCalculator.Infrastructure.Repositories
+namespace Reservations.Infrastructure.Repositories
 {
     public class TokenRepository : ITokenRepository
     {

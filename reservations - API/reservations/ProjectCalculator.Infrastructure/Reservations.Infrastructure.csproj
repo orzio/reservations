@@ -14,10 +14,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Migrations\20201101101502_officeDesck.cs" />
-    <Compile Remove="Migrations\20201101101502_officeDesck.Designer.cs" />
-    <Compile Remove="Migrations\20201107132313_OtherEquipment.cs" />
-    <Compile Remove="Migrations\20201107132313_OtherEquipment.Designer.cs" />
+    <Compile Remove="Data\Migrations\20201126183033_CreateIdentitySchemat.cs" />
+    <Compile Remove="Data\Migrations\20201126183033_CreateIdentitySchemat.Designer.cs" />
+    <Compile Remove="Data\Migrations\20201126183134_CreateIdentitySchema.cs" />
+    <Compile Remove="Data\Migrations\20201126183134_CreateIdentitySchema.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -43,6 +43,11 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ProjectCalculator.Domain\Reservations.Core.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\Migrations\" />
+    <Folder Include="EF\Seed\" />
   </ItemGroup>
 
 </Project>

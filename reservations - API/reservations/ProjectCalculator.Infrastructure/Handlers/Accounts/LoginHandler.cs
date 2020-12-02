@@ -1,12 +1,12 @@
 ﻿using Microsoft.Extensions.Caching.Memory;
-using ProjectCalculator.Infrastructure.Extensions;
-using ProjectCalculator.Infrastructure.Services;
+using Reservations.Infrastructure.Extensions;
+using Reservations.Infrastructure.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ProjectCalculator.Infrastructure.Commands.AccountCommands
+namespace Reservations.Infrastructure.Commands.AccountCommands
 {
     public class LoginHandler : ICommandHandler<LoginCommand>
     {
