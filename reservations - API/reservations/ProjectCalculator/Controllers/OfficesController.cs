@@ -1,13 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Reservations.Infrastructure.Commands;
+﻿using Microsoft.AspNetCore.Mvc;
 using Reservations.Infrastructure.Commands;
 using Reservations.Infrastructure.Commands.OfficeCommands;
 using Reservations.Infrastructure.Services;
 using Reservations.Infrastructure.Services.Email;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Reservations.Api.Controllers
