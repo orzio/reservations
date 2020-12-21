@@ -44,6 +44,8 @@ import { DeskCityItemComponent } from './desk-city/desk-city-list/desk-city-item
 import { RoomCityComponent } from './room-city/room-city.component';
 import { RoomCityListComponent } from './room-city/room-city-list/room-city-list.component';
 import { RoomCityItemComponent } from './room-city/room-city-list/room-city-item/room-city-item.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 @NgModule({
   declarations: [
     AppComponent,
@@ -84,7 +86,7 @@ import { RoomCityItemComponent } from './room-city/room-city-list/room-city-item
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
     FormsModule, 
-    ReactiveFormsModule
+    ReactiveFormsModule, CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
   ],
   providers: [OfficeService,CommunicationService,AddressService,RoomService,ResetPasswordService, DeskService, {provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true},AuthGuard],
   bootstrap: [AppComponent],
