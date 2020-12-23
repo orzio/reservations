@@ -20,6 +20,7 @@ namespace Reservations.Infrastructure.Mappers
                 cfg.CreateMap<Room, RoomDto>();
                 cfg.CreateMap<Office, OfficeDto>();
                 cfg.CreateMap<Address, CityDto>();
+                cfg.CreateMap<DeskReservation, DeskReservationDto>();
             }).CreateMapper();
     }
 }

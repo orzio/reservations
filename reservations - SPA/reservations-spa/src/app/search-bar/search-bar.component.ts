@@ -28,7 +28,6 @@ export class SearchBarComponent implements OnInit {
 
 
   onSubmit(){
-
     this.officeService.fetchOfficesDesksInCity(this.selectedCity).subscribe(()=>{
       console.log("szukaj - searchbar");
       console.log(this.officeService.getOffices());

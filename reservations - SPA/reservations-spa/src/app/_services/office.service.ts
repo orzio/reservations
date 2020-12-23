@@ -102,9 +102,15 @@ getUserOffice(){
     
 
     fetchUserOffices(){
+
+      let userId;
+       this.authService.user.subscribe(user => {
+        userId = user.id;
+      })
+      
       return this.http
     .get<Office[]>(
-        `${this.API_URL}/user/${this.authService.user.value.id}`)
+        `${this.API_URL}/user/${userId}`)
         .pipe(
     map(offices => {
       return offices.map(office =>{

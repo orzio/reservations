@@ -25,7 +25,7 @@ namespace Reservations.Infrastructure.Commands.AccountCommands
         {
             await _userService.LoginAsync(command.Email, command.Password);
             var user = await _userService.GetAsync(command.Email);
-            var jwt = _jwtService.CreateToken(user.Id, user.Role);
+            var jwt = _jwtService.CreateToken(user.Id,$"{user.FirstName} {user.LastName}", user.Role);
             var refreshToken = _refreshService.GenerateRefreshToken();
             await _refreshService.UpdateTokenAsync(user.Id, jwt.Token, refreshToken);
         }

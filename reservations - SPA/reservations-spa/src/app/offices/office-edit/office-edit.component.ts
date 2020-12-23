@@ -36,7 +36,12 @@ export class OfficeEditComponent implements OnInit {
 
   onSubmit(){
     let updatedOffice:Office = this.officeForm.value;
-    updatedOffice.userId= this.authService.user.value.id;
+    let userId;
+    this.authService.user.subscribe(user => {
+      userId = user.id;
+    })
+
+    updatedOffice.userId= userId;
     if(this.editMode){
       updatedOffice.id = this.officeId;
       this.officeService.updateOffice(this.id,updatedOffice);

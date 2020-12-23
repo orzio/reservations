@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Reservations.Infrastructure.Commands;
 using Reservations.Infrastructure.Commands.ReservationCommands.Desk;
+using Reservations.Infrastructure.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,18 +14,24 @@ namespace Reservations.Api.Controllers
     public class DeskReservationsController : ControllerBase
     {
         private readonly ICommandDispatcher _commandDispatcher;
-        public DeskReservationsController(ICommandDispatcher commandDispatcher)
+        private readonly IDeskReservationService _deskReservationService;
+        public DeskReservationsController(ICommandDispatcher commandDispatcher, IDeskReservationService deskReservationService)
         {
             _commandDispatcher = commandDispatcher;
+            _deskReservationService = deskReservationService;
         }
 
         [HttpPost]
-        public async Task<IActionResult> Post([FromBody]CreateDeskReservation command)
+        public async Task<IActionResult> Post([FromBody] CreateDeskReservation command)
         {
             await _commandDispatcher.DispatchAsync(command);
 
             return Created($"deskreservations/{command.UserId}", null);
         }
+
+        [HttpGet("{deskId}")]
+        public async Task<IActionResult> Get(Guid deskId)
+        => Ok(await _deskReservationService.GetDeskReservationsAsync(deskId));
 
 
     }

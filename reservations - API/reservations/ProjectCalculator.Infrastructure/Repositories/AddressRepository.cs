@@ -19,11 +19,9 @@ namespace Reservations.Infrastructure.Repositories
         }
 
         public async Task<IEnumerable<Address>> GetAllAsync()
-        {
-
-        //=> await _context.Addresses.ToListAsync();
-        return null;
-        }
+        => await _context.Addresses.ToListAsync();
+        //return null;
+        
 
     }
 }

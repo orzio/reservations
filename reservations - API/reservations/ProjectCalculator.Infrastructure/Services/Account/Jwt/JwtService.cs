@@ -20,12 +20,13 @@ namespace Reservations.Infrastructure.Services
             _jwtSettings = settings;
             _userService = userService;
         }
-        public JwtDto CreateToken(Guid userId, string role)
+        public JwtDto CreateToken(Guid userId,string name,  string role)
         {
             var now = DateTime.UtcNow;
             var claims = new Claim[]
             {
                 new Claim(ClaimTypes.NameIdentifier, userId.ToString()),
+                new Claim(ClaimTypes.Name, name),
                 new Claim(ClaimTypes.Role, role)
             };
 

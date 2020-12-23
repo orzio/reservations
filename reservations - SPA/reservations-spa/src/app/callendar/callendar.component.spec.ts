@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DeskCityListComponent } from './desk-city-list.component';
+import { CallendarComponent } from './callendar.component';
 
-describe('DeskCityListComponent', () => {
-  let component: DeskCityListComponent;
-  let fixture: ComponentFixture<DeskCityListComponent>;
+describe('CallendarComponent', () => {
+  let component: CallendarComponent;
+  let fixture: ComponentFixture<CallendarComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ DeskCityListComponent ]
+      declarations: [ CallendarComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DeskCityListComponent);
+    fixture = TestBed.createComponent(CallendarComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

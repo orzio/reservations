@@ -14,5 +14,6 @@ namespace Reservations.Infrastructure.Services
         Task<DeskReservationDto> GetAsync(Guid reservationId);
         Task RemoveReservation(Guid reservationId);
         Task UpdateReservation(Guid reservationId, DateTime start, DateTime end);
+        Task<IEnumerable<DeskReservationDto>> GetDeskReservationsAsync(Guid deskId);
     }
 }

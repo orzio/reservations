@@ -21,7 +21,11 @@ subscription :Subscription;
     private router:Router) { }
     
     ngOnInit(): void {
-      let userId = this.authService.user.value.id;
+     
+      let userId;
+      this.authService.user.subscribe(user => {
+        userId = user.id;
+      })
       console.log("userId"+userId);
 
     this.offices = this.officeService.getUserOffice();

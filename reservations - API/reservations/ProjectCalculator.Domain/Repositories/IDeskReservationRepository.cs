@@ -14,5 +14,6 @@ namespace Reservations.Core.Repositories
         Task UpdateAsync(Guid reservationId, DateTime startTime, DateTime endTime);
         Task<IEnumerable<DeskReservation>> GetAllAsync();
         Task<DeskReservation> GetAsync(Guid id);
+        Task<IEnumerable<DeskReservation>> GetReservationByDeskIdAsync(Guid deskId);
     }
 }

@@ -10,11 +10,14 @@ export class CityResolverService implements Resolve<City[]>{
     ){}
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
         let cities: City[];
+        console.log("city resolver");
         this.addressService.fetchCities().subscribe((response:City[]) =>{
-            console.log("city resolver");
-            cities = response;
-            cities.forEach(x =>console.log(x.name));
-            cities.forEach(x =>console.log(x));
+            try{
+                cities = response;
+            } catch(e){
+                cities =[];
+
+            }
         })
         return cities;
     }

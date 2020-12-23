@@ -46,6 +46,19 @@ import { RoomCityListComponent } from './room-city/room-city-list/room-city-list
 import { RoomCityItemComponent } from './room-city/room-city-list/room-city-item/room-city-item.component';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { FullCalendarModule } from '@fullcalendar/angular'; // the main connector. must go first
+import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin
+import interactionPlugin from '@fullcalendar/interaction'; // a plugin
+import { CallendarComponent } from './callendar/callendar.component';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import { ReservationService } from './_services/reservation.service';
+
+FullCalendarModule.registerPlugins([ // register FullCalendar plugins
+  dayGridPlugin,
+  interactionPlugin,
+  timeGridPlugin
+]);
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -77,7 +90,8 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
     DeskCityItemComponent,
     RoomCityComponent,
     RoomCityListComponent,
-    RoomCityItemComponent
+    RoomCityItemComponent,
+    CallendarComponent
   ],
   imports: [
     BrowserModule,
@@ -86,9 +100,10 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
     HttpClientModule,
     RouterModule.forRoot(appRoutes),
     FormsModule, 
+    FullCalendarModule, // register FullCalendar with you app
     ReactiveFormsModule, CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
   ],
-  providers: [OfficeService,CommunicationService,AddressService,RoomService,ResetPasswordService, DeskService, {provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true},AuthGuard],
+  providers: [OfficeService,CommunicationService,AddressService,ReservationService,RoomService,ResetPasswordService, DeskService, {provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true},AuthGuard],
   bootstrap: [AppComponent],
   
 })

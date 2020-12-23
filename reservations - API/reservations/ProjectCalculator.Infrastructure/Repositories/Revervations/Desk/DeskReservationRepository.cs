@@ -40,6 +40,9 @@ namespace Reservations.Infrastructure.Repositories.Revervations.Desk
             await _context.SaveChangesAsync();
         }
 
+        public async Task<IEnumerable<DeskReservation>> GetReservationByDeskIdAsync(Guid deskId)
+            => await _context.DeskReservations.Where(x => x.DeskId == deskId).ToListAsync();
+
         public async Task DeleteAsync(Guid reservationId)
         {
             var reservation = await _context.DeskReservations.SingleOrDefaultAsync(x => x.Id == reservationId);

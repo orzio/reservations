@@ -22,8 +22,10 @@ namespace Reservations.Infrastructure.Services
 
         public async Task HandleAsync(RefreshToken command)
         {
-            var role = (await _userService.GetAsync(command.UserId)).Role;
-            _jwtService.CreateToken(command.UserId, role);
+            var userDto = (await _userService.GetAsync(command.UserId));
+            var role = userDto.Role;
+            var userName = $"{userDto.FirstName} {userDto.LastName}";
+            _jwtService.CreateToken(command.UserId, userName, role);
            await _refreshService.UpdateTokenAsync(command.UserId, command.ExpiredToken, command.Refresh);
         }
     }
