@@ -34,5 +34,20 @@ namespace Reservations.Api.Controllers
         => Ok(await _deskReservationService.GetDeskReservationsAsync(deskId));
 
 
+        [HttpPut]
+        public async Task<IActionResult> Put(UpdateDeskReservation command)
+        {
+            await _commandDispatcher.DispatchAsync(command);
+            return Ok();
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            await _deskReservationService.RemoveReservation(id);
+            return NoContent();
+        }
+
+
     }
 }

@@ -19,6 +19,7 @@ import { ResetPasswordComponent } from './forgot-password/reset-password/reset-p
 import { CityResolverService } from './home/cities-resolver.service'
 import { DeskCityListComponent } from './desk-city/desk-city-list/desk-city-list.component'
 import { CallendarComponent } from './callendar/callendar.component'
+import { EventsResolverService } from './callendar/events-resolver.service'
 
 
 export const appRoutes: Routes = [
@@ -28,7 +29,7 @@ export const appRoutes: Routes = [
         {path:'forgotpassword/resetpassword',component:ResetPasswordComponent},
         {path: 'register', component: RegisterComponent},
         // {path:'callendar', component:CallendarComponent},
-        {path:'callendar/:deskId', component:CallendarComponent},
+        {path:'callendar/:deskId', component:CallendarComponent, resolve:[EventsResolverService]},
         {path: 'offices', component: OfficesComponent,resolve: [OfficeResolverService],
         canActivate:[AuthGuard],
         children:[

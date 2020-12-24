@@ -10,6 +10,7 @@ import { Reservation } from '../_models/Reservation';
 import { ActionSequence } from 'protractor';
 import { ActivatedRoute, Params } from '@angular/router';
 import { ReservationDto } from '../_models/ReservationDto';
+import { reduce } from 'rxjs/operators';
 
 @Component({
   selector: 'app-callendar',
@@ -18,6 +19,12 @@ import { ReservationDto } from '../_models/ReservationDto';
 })
 export class CallendarComponent implements OnInit {
 
+  private resizeStared:EventClickArg;
+  private resizeStopped:EventClickArg;
+  private dragStarted:EventClickArg;
+  private dragEnded:EventClickArg;
+
+  private readonly RESERVED_EVENT_STRING:string ="Zarezerwowane";
   private user:User;
   private eventTitle:string="";
   private deskId:string="";
@@ -28,7 +35,6 @@ export class CallendarComponent implements OnInit {
     initialView: 'timeGridWeek',
     weekends:false,
     dateClick: this.handleDateClick.bind(this), // bind is important!
-    editable: true,
     slotMinTime:"08:00:00",
     slotMaxTime:"18:00:00",
     selectable: true,
@@ -36,13 +42,9 @@ export class CallendarComponent implements OnInit {
     eventClick: this.handleEventClick.bind(this),
     eventsSet: this.handleEvents.bind(this),
     eventOverlap:false,
-    eventResizeStart:this.handleResizeStart.bind(this),
-    eventResizeStop:this.handleResizeStop.bind(this),
-    eventDragStart:this.handleDragStart.bind(this),
-    eventDragStop:this.handleDragStop.bind(this),
-    eventMouseEnter:this.handleMouseEnter.bind(this),
-    eventMouseLeave:this.handleMouseLeave.bind(this),
-    events:this.reservations
+    events:this.reservations,
+    eventChange:this.handleEventChanged.bind(this),
+    eventRemove:this.handleEventDeleted.bind(this)
   };
   currentEvents: any[];
 
@@ -51,14 +53,23 @@ export class CallendarComponent implements OnInit {
     }
 
 
-    handleDragStart(clickInfo: EventClickArg){
-console.log("Dr-starded");
-    }
+    handleEventChanged(changeInfo){
+      
+      var uptadedReservation =  new Reservation(changeInfo.event.id, this.user.id, 
+        this.deskId,
+        new Date(changeInfo.event.start),
+        new Date(changeInfo.event.end))
+      
+        this.reservationService.updateReservation(uptadedReservation)
+        .subscribe((data)=>{
 
-    handleDragStop(clickInfo: EventClickArg){
-      console.log("Dr-ended");
-    }
+        },
+        error => {
+          console.log(error.error.error);
+          changeInfo.revert();
+        })
 
+    }
 
   constructor(private authService:AuthService, private activatedRoute: ActivatedRoute, 
     private reservationService: ReservationService) {
@@ -70,34 +81,30 @@ console.log("Dr-starded");
     this.eventTitle = user.name;
     })
 
-    this.activatedRoute.params.subscribe((params:Params) =>{
-      this.deskId = params['deskId'];
 
-    })
 
-    this.reservationService.fetchDeskReservations(this.deskId).subscribe(
+    this.reservationService.deskReservationsChanged.subscribe(
       (data:ReservationDto[])=>{
         let reservations=[];
         data.forEach(reservation => {
-        reservation.title= "test";
-
-          reservations.push({
+          let editable=reservation.userId == this.user.id ? true:false;
+          let bgColor=reservation.userId == this.user.id ? "#3788d8":"#999999"
+          let eventTitle = reservation.userId == this.user.id ?  this.eventTitle : this.RESERVED_EVENT_STRING
+            reservations.push({
             id:reservation.id,
-            title:"test",
+            title: eventTitle,
             start:reservation.startDate,
-            end:reservation.endDate
+            end:reservation.endDate,
+            editable: editable,
+            backgroundColor: bgColor,
+            borderColor:"white"
           });
-
-          console.log(reservations);
-
-          }
-          );
-        console.log("eventy");
+          });
         this.calendarOptions.events=reservations;
-        console.log(this.calendarOptions.events); 
       }
     )
   }
+
 
   handleDateSelect(selectInfo: DateSelectArg) {
     const title =this.eventTitle;
@@ -105,11 +112,7 @@ console.log("Dr-starded");
 
     calendarApi.unselect(); // clear date selection
     let result = title;
-    console.log();
-    
 
-      console.log("user-callendar");
-      console.log(this.user);
       let eventId = createEventId();
       let event = new Reservation(eventId,this.user.id,this.deskId, new Date(selectInfo.startStr),new Date(selectInfo.endStr));
 
@@ -122,59 +125,35 @@ console.log("Dr-starded");
             start: selectInfo.startStr,
             end: selectInfo.endStr,
           });
-
-        console.log("w subsctibe");
-        console.log(data);
       };
-
-
-
-
     },
     error=>{
-alert("Nie mozna dodac rezerwacji");
-
+      alert("Nie mozna dodac rezerwacji");
     }
     );
-
-
-
   }
 
   handleEventClick(clickInfo: EventClickArg) {
-    alert(`${clickInfo.event.id},${clickInfo.event.title},${clickInfo.event.start},${clickInfo.event.end}` );
-    // if (confirm(`Napewno chesz odwołać rezerwację? '${clickInfo.event.title}'`)) {
-    //   // clickInfo.event.remove();
-      
-    //   console.log(clickInfo);
-    // }
+    if(clickInfo.event.title == this.RESERVED_EVENT_STRING)
+    return;
+
+     if (confirm(`${clickInfo.event.title}, napewno chesz odwołać rezerwację?`)) 
+       clickInfo.event.remove();
   }
 
+  handleEventDeleted(removeInfo){
+    this.reservationService.deleteReservation(removeInfo.event.id).subscribe(
+      (data)=>{
 
+      },
+      error => {
+        removeInfo.revert();
+      }
 
-  handleResizeStop(clickInfo: EventClickArg) {
-    console.log("Resizing ended");
-}
-
-handleResizeStart(clickInfo: EventClickArg) {
-  console.log("Resizing started");
-}
-
+    )
+  }
 
   handleEvents(events: EventApi[]) {
     this.currentEvents = events;
   }
-
-
-
-  
-  handleMouseLeave(mouseLeaveInfo:EventHoveringArg){
-    console.log("Mouse Leaved");
-  }
-   handleMouseEnter(mouseLeaveInfo :EventHoveringArg){
-
-    console.log("Mouse entered");
-     
-   }
-
 }
