@@ -1,1 +1,8 @@
-<p>room-city-list works!</p>
+<div *ngFor="let office of offices">
+    <app-room-city-item 
+        *ngFor="let room of office.rooms"
+        [officeName] = "office.name"
+        [officeAddress] = "office.address"
+        [room]="room">
+    </app-room-city-item>
+</div>

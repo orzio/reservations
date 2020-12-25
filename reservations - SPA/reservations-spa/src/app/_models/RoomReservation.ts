@@ -1,8 +1,8 @@
-export class Reservation{
+export class RoomReservation{
     constructor( 
       public id:string, 
       public userId: string,
-      public deskId:string,
+      public roomId:string,
       private startDate:Date,
       private endDate:Date
     ){}

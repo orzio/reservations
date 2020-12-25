@@ -4,13 +4,13 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ResetPassword } from '../_models/ResetPassword';
 import { throwError, Observable, Subject } from 'rxjs';
 import { catchError } from 'rxjs/operators';
-import { Reservation } from '../_models/Reservation';
+import { DeskReservation } from '../_models/DeskReservation';
 import { ReservationDto } from '../_models/ReservationDto';
 
 @Injectable({
     providedIn: 'root'
   })
-export class ReservationService {
+export class DeskReservationService {
     baseUrl = 'https://localhost:44310/deskReservations';
 
     desksReservations:ReservationDto[];
@@ -19,10 +19,10 @@ export class ReservationService {
 
     constructor(private http:HttpClient){}
 
-    addReservation(reservation:Reservation):Observable<Object>{
+    addReservation(reservation:DeskReservation):Observable<Object>{
         console.log("reservationService");
         console.log(reservation);
-        return this.http.post<Reservation>(`${this.baseUrl}`,reservation)
+        return this.http.post<DeskReservation>(`${this.baseUrl}`,reservation)
         .pipe(
             catchError(this.handleError)
             );
@@ -42,7 +42,7 @@ export class ReservationService {
         return throwError(errorMsg);  
 }
  
-    updateReservation(reservation: Reservation){
+    updateReservation(reservation: DeskReservation){
             return this.http.put(`${this.baseUrl}`,reservation);
     }
 

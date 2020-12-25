@@ -1,1 +1,16 @@
-<p>room-city-item works!</p>
+<div style="display: flex; flex-direction: row; justify-content: space-between;" class="list-group-item" >
+    <a style="cursor: pointer; border:none;" class="list-group-item"
+   >
+        <div class="pull-left">
+            <h2 class="list-group-item-heading">Sala: {{room.seats}}-osobowa</h2>
+        </div> 
+        <div class="pull-left">
+            <h3 class="list-group-item-heading">{{officeName}}, {{officeAddress.city}}, {{officeAddress.street}}</h3>
+        </div> 
+    </a>
+    <div>
+        <div class="center">
+            <button class="btn btn-primary" (click)="reserveRoom()">Zarezerwuj</button>
+        </div>
+    </div>
+</div>

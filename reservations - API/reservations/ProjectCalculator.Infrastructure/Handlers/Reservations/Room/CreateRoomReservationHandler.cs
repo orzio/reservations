@@ -19,7 +19,7 @@ namespace Reservations.Infrastructure.Handlers.Reservations.Desk
 
         public async Task HandleAsync(CreateRoomReservation command)
         {
-            await _roomReservationService.ReserveRoom(Guid.NewGuid(), command.UserId, command.RoomId, command.StartDate, command.EndDate);
+            await _roomReservationService.ReserveRoom(command.Id, command.UserId, command.RoomId, command.StartDate, command.EndDate);
         }
     }
 }

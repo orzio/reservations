@@ -2,22 +2,24 @@ import { Component, OnInit } from '@angular/core';
 import { Calendar, EventSourceInput, EventHoveringArg } from '@fullcalendar/core';
 import { CalendarOptions, DateSelectArg, EventClickArg, EventApi } from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid';
-import { createEventId } from './event-utils';
 import { AuthService } from '../_services/auth.service';
 import { User } from '../_models/user';
-import { ReservationService } from '../_services/reservation.service';
-import { Reservation } from '../_models/Reservation';
+import { DeskReservationService } from '../_services/deskReservation.service';
+import { DeskReservation } from '../_models/DeskReservation';
 import { ActionSequence } from 'protractor';
 import { ActivatedRoute, Params } from '@angular/router';
 import { ReservationDto } from '../_models/ReservationDto';
 import { reduce } from 'rxjs/operators';
+import { RoomReservation } from '../_models/RoomReservation';
+import { RoomReservationService } from '../_services/roomReservation.Service';
+import { createEventId } from '../desk-callendar/event-utils';
 
 @Component({
   selector: 'app-callendar',
-  templateUrl: './callendar.component.html',
-  styleUrls: ['./callendar.component.css']
+  templateUrl: './room-callendar.component.html',
+  styleUrls: ['./room-callendar.component.css']
 })
-export class CallendarComponent implements OnInit {
+export class RoomCallendarComponent implements OnInit {
 
   private resizeStared:EventClickArg;
   private resizeStopped:EventClickArg;
@@ -27,7 +29,7 @@ export class CallendarComponent implements OnInit {
   private readonly RESERVED_EVENT_STRING:string ="Zarezerwowane";
   private user:User;
   private eventTitle:string="";
-  private deskId:string="";
+  private roomId:string="";
   reservations:ReservationDto[]=[];
 
   calendarOptions: CalendarOptions = {
@@ -55,8 +57,8 @@ export class CallendarComponent implements OnInit {
 
     handleEventChanged(changeInfo){
       
-      var uptadedReservation =  new Reservation(changeInfo.event.id, this.user.id, 
-        this.deskId,
+      var uptadedReservation =  new RoomReservation(changeInfo.event.id, this.user.id, 
+        this.roomId,
         new Date(changeInfo.event.start),
         new Date(changeInfo.event.end))
       
@@ -72,22 +74,26 @@ export class CallendarComponent implements OnInit {
     }
 
   constructor(private authService:AuthService, private activatedRoute: ActivatedRoute, 
-    private reservationService: ReservationService) {
+    private reservationService: RoomReservationService) {
      }
 
   ngOnInit(): void {
     this.authService.user.subscribe((user:User)=>{
     this.user = user;
     this.eventTitle = user.name;
+    this.reservationService.currentRoomIdChanged.subscribe((roomId:string)=>{
+      this.roomId = roomId;
+    });
     })
 
 
 
-    this.reservationService.deskReservationsChanged.subscribe(
+    this.reservationService.roomReservationsChanged.subscribe(
       (data:ReservationDto[])=>{
         let reservations=[];
         data.forEach(reservation => {
           let editable=reservation.userId == this.user.id ? true:false;
+          console.log("-=-=-=-=-="+reservation.userId == this.user.id);
           let bgColor=reservation.userId == this.user.id ? "#3788d8":"#999999"
           let eventTitle = reservation.userId == this.user.id ?  this.eventTitle : this.RESERVED_EVENT_STRING
             reservations.push({
@@ -114,7 +120,8 @@ export class CallendarComponent implements OnInit {
     let result = title;
 
       let eventId = createEventId();
-      let event = new Reservation(eventId,this.user.id,this.deskId, new Date(selectInfo.startStr),new Date(selectInfo.endStr));
+      console.log("::::"+eventId);
+      let event = new RoomReservation(eventId,this.user.id,this.roomId, new Date(selectInfo.startStr),new Date(selectInfo.endStr));
 
       this.reservationService.addReservation(event).subscribe((data)=> {
         
@@ -124,6 +131,7 @@ export class CallendarComponent implements OnInit {
             title,
             start: selectInfo.startStr,
             end: selectInfo.endStr,
+            editable:true
           });
       };
     },

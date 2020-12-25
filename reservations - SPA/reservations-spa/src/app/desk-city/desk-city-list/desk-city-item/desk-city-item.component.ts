@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Desk } from 'src/app/_models/desk';
 import { Address } from 'src/app/_models/Address';
 import { Router } from '@angular/router';
-import { ReservationService } from 'src/app/_services/reservation.service';
+import { DeskReservationService } from 'src/app/_services/deskReservation.service';
 
 @Component({
   selector: 'app-desk-city-item',
@@ -16,7 +16,7 @@ export class DeskCityItemComponent implements OnInit {
   @Input() officeAddress:Address;
   @Input() desk:Desk;
 
-  constructor(private router:Router, private reservationService:ReservationService) { }
+  constructor(private router:Router, private reservationService:DeskReservationService) { }
 
   ngOnInit(): void {
   }
@@ -24,8 +24,8 @@ export class DeskCityItemComponent implements OnInit {
 
   reserveDesk(){
     this.reservationService.currentDeskIdChanged.next(this.desk.id); 
-    console.log('/callendar/'+this.desk.id);
-    this.router.navigate(['/callendar/'+this.desk.id]);
+    console.log('/callendar/desk/'+this.desk.id);
+    this.router.navigate(['/callendar/desk/'+this.desk.id]);
   }
 
 }

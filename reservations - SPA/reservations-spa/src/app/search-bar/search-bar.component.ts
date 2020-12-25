@@ -28,11 +28,19 @@ export class SearchBarComponent implements OnInit {
 
 
   onSubmit(){
-    this.officeService.fetchOfficesDesksInCity(this.selectedCity).subscribe(()=>{
-      console.log("szukaj - searchbar");
-      console.log(this.officeService.getOffices());
-      this.router.navigate(['/offices/desks/city']);
-    })
+
+    if(this.selectedPlace == "Biurko"){
+      this.officeService.fetchOfficesDesksInCity(this.selectedCity).subscribe(()=>{
+        console.log("szukaj - searchbar");
+        console.log(this.officeService.getOffices());
+        this.router.navigate(['/offices/desks/city']);
+      })
+    }
+    else if(this.selectedPlace == "Sala"){
+      this.officeService.fetchOfficesRoomsInCity(this.selectedCity).subscribe(() =>{
+        this.router.navigate(['/offices/rooms/city']);
+      })
+    }
   }
   
 

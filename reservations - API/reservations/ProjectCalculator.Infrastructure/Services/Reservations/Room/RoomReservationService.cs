@@ -47,6 +47,10 @@ namespace Reservations.Infrastructure.Services.Reservations.Room
             await _roomReservationRepository.UpdateAsync(reservationId, start, end);
         }
 
-
+        public async Task<IEnumerable<RoomReservationDto>> GetRoomReservationsAsync(Guid roomId)
+        {
+            var reservations = await _roomReservationRepository.GetReservationByRoomIdAsync(roomId);
+            return _mapper.Map<IEnumerable<RoomReservation>, IEnumerable<RoomReservationDto>>(reservations);
+        }
     }
 }

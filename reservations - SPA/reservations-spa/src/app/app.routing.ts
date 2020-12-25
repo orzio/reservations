@@ -18,8 +18,11 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
 import { ResetPasswordComponent } from './forgot-password/reset-password/reset-password.component'
 import { CityResolverService } from './home/cities-resolver.service'
 import { DeskCityListComponent } from './desk-city/desk-city-list/desk-city-list.component'
-import { CallendarComponent } from './callendar/callendar.component'
-import { EventsResolverService } from './callendar/events-resolver.service'
+import { DeskEventsResolverService } from './desk-callendar/desk-events-resolver.service'
+import { RoomCityListComponent } from './room-city/room-city-list/room-city-list.component'
+import { DeskCallendarComponent } from './desk-callendar/desk-callendar.component'
+import { RoomCallendarComponent } from './room-callendar/room-callendar.component'
+import { RoomEventsResolverService } from './room-callendar/room-events-resolver.service'
 
 
 export const appRoutes: Routes = [
@@ -29,7 +32,8 @@ export const appRoutes: Routes = [
         {path:'forgotpassword/resetpassword',component:ResetPasswordComponent},
         {path: 'register', component: RegisterComponent},
         // {path:'callendar', component:CallendarComponent},
-        {path:'callendar/:deskId', component:CallendarComponent, resolve:[EventsResolverService]},
+        {path:'callendar/desk/:deskId', component:DeskCallendarComponent, resolve:[DeskEventsResolverService]},
+        {path:'callendar/room/:roomId', component:RoomCallendarComponent, resolve:[RoomEventsResolverService]},
         {path: 'offices', component: OfficesComponent,resolve: [OfficeResolverService],
         canActivate:[AuthGuard],
         children:[
@@ -64,6 +68,9 @@ export const appRoutes: Routes = [
             ]},
             {path:':id', component:OfficeDetailComponent,resolve: [OfficeResolverService]}
         ]},
+        {path:'offices/rooms/city', component:RoomCityListComponent},
+
+
 
 
     {path: '**',redirectTo:'/', pathMatch:'full'}

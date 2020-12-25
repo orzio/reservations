@@ -58,5 +58,8 @@ namespace Reservations.Infrastructure.Repositories.Revervations.Room
             reservation.EndDate = endTime;
             await _context.SaveChangesAsync();
         }
+        public async Task<IEnumerable<RoomReservation>> GetReservationByRoomIdAsync(Guid roomId)
+    => await _context.RoomReservations.Where(x => x.RoomId == roomId).ToListAsync();
+
     }
 }
