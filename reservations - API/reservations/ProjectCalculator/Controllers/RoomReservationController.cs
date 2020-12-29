@@ -46,5 +46,10 @@ namespace Reservations.Api.Controllers
             return NoContent();
         }
 
+        [HttpGet("user/{userId}")]
+        public async Task<IActionResult> GetUserReservations(Guid userId)
+            => Ok(await _roomReservationService.GetRoomWithOfficeReservationsAsync(userId));
+
+
     }
 }

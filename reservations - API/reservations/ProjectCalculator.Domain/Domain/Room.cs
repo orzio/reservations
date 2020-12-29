@@ -21,5 +21,6 @@ namespace Reservations.Core.Domain
         public string OtherEquipment { get; set; }
 
         List<RoomReservation> UserRooms { get; set; }
+        public Office Office { get; set; }
     }
 }

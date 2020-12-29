@@ -16,5 +16,6 @@ namespace Reservations.Core.Domain
         public Guid OfficeId { get;  set; }
         public int Seats { get; set; }
         List<DeskReservation> UserDesks { get; set; }
+        public Office Office { get; set; }
     }
 }

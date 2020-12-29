@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommunicationService } from '../_services/communcation.service';
 
 @Component({
   selector: 'app-room-city',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RoomCityComponent implements OnInit {
 
-  constructor() { }
+  label:string="Wstecz";
+  showDetails = false;
+  constructor(private communicationService: CommunicationService) { }
 
   ngOnInit(): void {
+    this.communicationService.roomDetailsClicked.subscribe((data:boolean)=>{
+    this.showDetails = data;
+    })
   }
+
+
 
 }

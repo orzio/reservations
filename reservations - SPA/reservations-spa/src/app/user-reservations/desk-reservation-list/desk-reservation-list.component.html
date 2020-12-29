@@ -1,0 +1,5 @@
+<h1>Biurka:</h1>
+<app-desk-reservation-item *ngFor="let res of desksReservations"
+[reservation]="res"
+></app-desk-reservation-item>
+<app-office-details-popup *ngIf="showDetails"></app-office-details-popup>

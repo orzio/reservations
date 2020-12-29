@@ -7,7 +7,7 @@ import { User } from '../_models/user';
 import { DeskReservationService } from '../_services/deskReservation.service';
 import { DeskReservation } from '../_models/DeskReservation';
 import { ActionSequence } from 'protractor';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { ReservationDto } from '../_models/ReservationDto';
 import { reduce } from 'rxjs/operators';
 import { RoomReservation } from '../_models/RoomReservation';
@@ -25,6 +25,7 @@ export class RoomCallendarComponent implements OnInit {
   private resizeStopped:EventClickArg;
   private dragStarted:EventClickArg;
   private dragEnded:EventClickArg;
+  label:string="Koniec";
 
   private readonly RESERVED_EVENT_STRING:string ="Zarezerwowane";
   private user:User;
@@ -74,6 +75,7 @@ export class RoomCallendarComponent implements OnInit {
     }
 
   constructor(private authService:AuthService, private activatedRoute: ActivatedRoute, 
+    private router:Router,
     private reservationService: RoomReservationService) {
      }
 
@@ -164,4 +166,7 @@ export class RoomCallendarComponent implements OnInit {
   handleEvents(events: EventApi[]) {
     this.currentEvents = events;
   }
+
+
+
 }

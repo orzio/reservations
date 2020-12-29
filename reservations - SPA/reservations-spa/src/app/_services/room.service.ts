@@ -1,8 +1,9 @@
 import { Room } from '../_models/room';
-import { Subject } from 'rxjs';
+import { Subject, ReplaySubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
+import { RoomOffice } from '../_models/RoomOffice';
 
 @Injectable()
 export class RoomService{
@@ -12,6 +13,7 @@ export class RoomService{
     
     roomsChanged = new Subject<Room[]>();
     roomUpdated = new Subject<Room>();
+    roomInfoChanged = new ReplaySubject<RoomOffice>();
     private rooms:Room[] = [];
 
     getRooms():Room[]{

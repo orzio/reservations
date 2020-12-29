@@ -54,6 +54,14 @@ import { DeskReservationService } from './_services/deskReservation.service';
 import { RoomReservationService } from './_services/roomReservation.Service';
 import { RoomCallendarComponent } from './room-callendar/room-callendar.component';
 import { DeskCallendarComponent } from './desk-callendar/desk-callendar.component';
+import { BackButtonComponent } from './back-button/back-button.component';
+import { OfficeDetailsPopupComponent } from './office-details-popup/office-details-popup.component';
+import { RoomOfficeDetailsComponent } from './room-office-details/room-office-details.component';
+import { UserReservationsComponent } from './user-reservations/user-reservations.component';
+import { RoomReservationListComponent } from './user-reservations/room-reservation-list/room-reservation-list.component';
+import { RoomReservationItemComponent } from './user-reservations/room-reservation-list/room-reservation-item/room-reservation-item.component';
+import { DeskReservationListComponent } from './user-reservations/desk-reservation-list/desk-reservation-list.component';
+import { DeskReservationItemComponent } from './user-reservations/desk-reservation-list/desk-reservation-item/desk-reservation-item.component';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -94,7 +102,15 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     RoomCityListComponent,
     RoomCityItemComponent,
     DeskCallendarComponent,
-    RoomCallendarComponent
+    RoomCallendarComponent,
+    BackButtonComponent,
+    OfficeDetailsPopupComponent,
+    RoomOfficeDetailsComponent,
+    UserReservationsComponent,
+    RoomReservationListComponent,
+    RoomReservationItemComponent,
+    DeskReservationListComponent,
+    DeskReservationItemComponent
   ],
   imports: [
     BrowserModule,

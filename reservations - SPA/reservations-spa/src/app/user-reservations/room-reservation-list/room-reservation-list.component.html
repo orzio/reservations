@@ -1,0 +1,5 @@
+<h1>Sale:</h1>
+<app-room-reservation-item *ngFor="let res of roomsReservations"
+[reservation]="res"
+></app-room-reservation-item>
+<app-room-office-details *ngIf="showDetails"></app-room-office-details>

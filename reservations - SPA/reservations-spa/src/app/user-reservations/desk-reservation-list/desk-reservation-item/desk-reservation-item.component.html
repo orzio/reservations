@@ -1,0 +1,22 @@
+<div style="display: flex; flex-direction: row; justify-content: space-between; margin:10px;" class="list-group-item" >
+    <a style="cursor: pointer; border:none;" class="list-group-item" (click)="showOfficeInfo()">
+        <div class="pull-left">
+            <h2 class="list-group-item-heading">{{reservation.deskDto.name}}, {{reservation.deskDto.seats}}-osobowe</h2>
+        </div> 
+
+        <div class="pull-left" *ngIf="reservationStartDay!=reservationEndDay">
+            <h6 class="list-group-item-heading">od {{reservationStartDay}} do {{reservationEndDay}} </h6>
+        </div> 
+        <div class="pull-left" *ngIf="reservationStartDay==reservationEndDay">
+            <h6 class="list-group-item-heading">{{reservationStartDay}}</h6>
+        </div> 
+        <div class="pull-left">
+            <h6 class="list-group-item-heading">od {{reservationStartHour}} do {{reservationEndHour}} </h6>
+        </div> 
+    </a>
+    <div>
+        <div class="center">
+            <button class="btn btn-primary" (click)="cancelReservation()">Odwołaj</button>
+        </div>
+    </div>
+</div>

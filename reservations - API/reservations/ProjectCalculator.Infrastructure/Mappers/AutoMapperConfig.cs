@@ -21,7 +21,15 @@ namespace Reservations.Infrastructure.Mappers
                 cfg.CreateMap<Office, OfficeDto>();
                 cfg.CreateMap<Address, CityDto>();
                 cfg.CreateMap<DeskReservation, DeskReservationDto>();
+                cfg.CreateMap<DeskReservation, DeskOfficeReservationDto>()
+                    .ForMember(dest => dest.OfficeName, opt => opt.MapFrom(src => src.Desk.Office.Name))
+                    .ForMember(dest => dest.OfficeAddress, opt => opt.MapFrom(src => src.Desk.Office.Address))
+                    .ForMember(dest => dest.DeskDto, opt => opt.MapFrom(src => src.Desk));
                 cfg.CreateMap<RoomReservation, RoomReservationDto>();
+                cfg.CreateMap<RoomReservation, RoomOfficeReservationDto>()
+                    .ForMember(dest => dest.OfficeName, opt => opt.MapFrom(src => src.Room.Office.Name))
+                    .ForMember(dest => dest.OfficeAddress, opt => opt.MapFrom(src => src.Room.Office.Address))
+                    .ForMember(dest => dest.RoomDto, opt => opt.MapFrom(src => src.Room));
             }).CreateMapper();
     }
 }

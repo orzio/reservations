@@ -42,6 +42,13 @@ namespace Reservations.Infrastructure.Services.Reservations.Room
             await _roomReservationRepository.DeleteAsync(reservationId);
         }
 
+
+        public async Task<IEnumerable<RoomOfficeReservationDto>> GetRoomWithOfficeReservationsAsync(Guid userId)
+        {
+            var reservations = await _roomReservationRepository.GetReservationByUserIdAsync(userId);
+            return _mapper.Map<IEnumerable<RoomReservation>, IEnumerable<RoomOfficeReservationDto>>(reservations);
+        }
+
         public async Task UpdateReservation(Guid reservationId, DateTime start, DateTime end)
         {
             await _roomReservationRepository.UpdateAsync(reservationId, start, end);

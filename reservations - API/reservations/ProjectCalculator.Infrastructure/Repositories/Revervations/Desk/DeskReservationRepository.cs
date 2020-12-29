@@ -65,5 +65,12 @@ namespace Reservations.Infrastructure.Repositories.Revervations.Desk
 
             await _context.SaveChangesAsync();
         }
+
+
+        public async Task<IEnumerable<DeskReservation>> GetReservationByUserIdAsync(Guid userId)
+            => await _context.DeskReservations.Where(x => x.UserId == userId)
+            .Include(x => x.Desk)
+            .ThenInclude(x => x.Office).ThenInclude(x => x.Address)
+            .ToListAsync();
     }
 }

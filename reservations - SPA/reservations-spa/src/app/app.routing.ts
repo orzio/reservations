@@ -23,6 +23,9 @@ import { RoomCityListComponent } from './room-city/room-city-list/room-city-list
 import { DeskCallendarComponent } from './desk-callendar/desk-callendar.component'
 import { RoomCallendarComponent } from './room-callendar/room-callendar.component'
 import { RoomEventsResolverService } from './room-callendar/room-events-resolver.service'
+import { RoomCityComponent } from './room-city/room-city.component'
+import { DeskCityComponent } from './desk-city/desk-city.component'
+import { UserReservationsComponent } from './user-reservations/user-reservations.component'
 
 
 export const appRoutes: Routes = [
@@ -52,7 +55,7 @@ export const appRoutes: Routes = [
             {path:':id', component:OfficeDetailComponent,resolve: [OfficeResolverService]}
         ]},
 
-        {path: 'offices/desks/city', component: DeskCityListComponent,
+        {path: 'offices/desks/city', component: DeskCityComponent,
         children:[
             {path:'new', component:OfficeEditComponent},
             {path:':id/edit', component:OfficeEditComponent},
@@ -68,7 +71,8 @@ export const appRoutes: Routes = [
             ]},
             {path:':id', component:OfficeDetailComponent,resolve: [OfficeResolverService]}
         ]},
-        {path:'offices/rooms/city', component:RoomCityListComponent},
+        {path:'offices/rooms/city', component:RoomCityComponent},
+        {path: 'user/reservations', component:UserReservationsComponent},
 
 
 

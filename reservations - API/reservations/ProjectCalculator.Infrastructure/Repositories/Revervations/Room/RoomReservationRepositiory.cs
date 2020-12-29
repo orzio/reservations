@@ -59,7 +59,13 @@ namespace Reservations.Infrastructure.Repositories.Revervations.Room
             await _context.SaveChangesAsync();
         }
         public async Task<IEnumerable<RoomReservation>> GetReservationByRoomIdAsync(Guid roomId)
-    => await _context.RoomReservations.Where(x => x.RoomId == roomId).ToListAsync();
+            => await _context.RoomReservations.Where(x => x.RoomId == roomId).ToListAsync();
+
+        public async Task<IEnumerable<RoomReservation>> GetReservationByUserIdAsync(Guid userId)
+            => await _context.RoomReservations.Where(x => x.UserId == userId)
+            .Include(x => x.Room)
+            .ThenInclude(x => x.Office).ThenInclude(x => x.Address)
+            .ToListAsync();
 
     }
 }

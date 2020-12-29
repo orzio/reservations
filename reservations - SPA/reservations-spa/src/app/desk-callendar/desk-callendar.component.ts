@@ -23,7 +23,7 @@ export class DeskCallendarComponent implements OnInit {
   private resizeStopped:EventClickArg;
   private dragStarted:EventClickArg;
   private dragEnded:EventClickArg;
-
+  label:string="Koniec";
   private readonly RESERVED_EVENT_STRING:string ="Zarezerwowane";
   private user:User;
   private eventTitle:string="";

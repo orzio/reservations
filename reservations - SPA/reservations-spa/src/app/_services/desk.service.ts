@@ -1,9 +1,10 @@
 import { Room } from '../_models/room';
-import { Subject } from 'rxjs';
+import { Subject, ReplaySubject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { Desk } from '../_models/desk';
+import { DeskOffice } from '../_models/DeskOffice';
 
 @Injectable()
 export class DeskService{
@@ -12,6 +13,7 @@ export class DeskService{
     private readonly API_URL:string = 'https://localhost:44310/offices/desks/';
     
     desksChanged = new Subject<Desk[]>();
+    deskInfoChanged = new ReplaySubject<DeskOffice>();
     private desks:Desk[] = [];
 
     getDesks():Desk[]{

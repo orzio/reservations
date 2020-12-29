@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { OfficeService } from 'src/app/_services/office.service';
 import { Office } from 'src/app/_models/Office';
 import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-desk-city-list',
@@ -12,8 +13,9 @@ export class DeskCityListComponent implements OnInit, OnDestroy {
 
   offices:Office[]=[];
   subscription:Subscription;
-  
-  constructor(private officeService:OfficeService) { }
+    
+  constructor(private officeService:OfficeService, 
+    private router:Router) { }
 
   ngOnInit(): void {
     this.offices = this.officeService.getOffices();
@@ -25,6 +27,7 @@ export class DeskCityListComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
+
 
 
 }

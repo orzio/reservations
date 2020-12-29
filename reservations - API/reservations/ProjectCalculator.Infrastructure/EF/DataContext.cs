@@ -29,6 +29,10 @@ namespace Reservations.Infrastructure.Data
             //modelBuilder.Entity<DeskReservations>().HasKey(x => new { x.UserId, x.DeskId });
             //modelBuilder.Entity<RoomReservations>().HasKey(x => new { x.UserId, x.RoomId });
             //modelBuilder.Entity<Address>().ToTable("Addresses");
+            modelBuilder.Entity<Office>().HasMany(x => x.Rooms)
+                    .WithOne(e => e.Office);
+            modelBuilder.Entity<Office>().HasMany(x => x.Desks)
+                    .WithOne(e => e.Office);
         }
 
         public DbSet<User> Users { get; set; }

@@ -46,8 +46,12 @@ namespace Reservations
             services.AddAuthorization(x => x.AddPolicy("user", p => p.RequireRole("user")));
             services.AddDbContext<DataContext>(options =>
                         options.UseSqlServer(Configuration["sql:connectionString"]));
-                        //options.UseSqlite(Configuration
-                        //.GetConnectionString("DefaultConnection")));
+            //options.UseSqlite(Configuration
+            //.GetConnectionString("DefaultConnection")));
+            services.AddControllersWithViews()
+            .AddNewtonsoftJson(options =>
+            options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
             services.AddControllers();
             services.AddMemoryCache();
 

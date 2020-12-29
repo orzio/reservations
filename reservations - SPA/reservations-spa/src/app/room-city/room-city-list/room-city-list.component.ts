@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Office } from 'src/app/_models/Office';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { OfficeService } from 'src/app/_services/office.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-room-city-list',
@@ -12,7 +13,7 @@ export class RoomCityListComponent implements OnInit {
   offices:Office[]=[];
   subscription:Subscription;
   
-  constructor(private officeService:OfficeService) { }
+  constructor(private officeService:OfficeService, private router:Router) { }
 
   ngOnInit(): void {
     this.offices = this.officeService.getOffices();

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommunicationService } from '../_services/communcation.service';
 
 @Component({
   selector: 'app-desk-city',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DeskCityComponent implements OnInit {
 
-  constructor() { }
+  label:string="Wstecz";
+  showDetails = false;
+  constructor(private communicationService: CommunicationService) { }
 
   ngOnInit(): void {
+    this.communicationService.deskDetailsClicked.subscribe((data:boolean)=>{
+    this.showDetails = data;
+    })
   }
 
 }

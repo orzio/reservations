@@ -12,6 +12,9 @@
                       <li class="nav-item" *ngIf="isLoggedIn">
                         <a class="nav-link" [routerLink]="['/offices']" routerLinkActive="router-link-active" href="#">Twoje Biura</a>
                       </li>
+                      <li class="nav-item" *ngIf="isLoggedIn">
+                        <a class="nav-link" [routerLink]="['/user/reservations']" routerLinkActive="router-link-active" href="#">Twoje Rezerwacje</a>
+                      </li>
                       <li class="nav-item"  *ngIf="!isLoggedIn">
                         <a class="nav-link" [routerLink]="['/register']" routerLinkActive="router-link-active"  href="#">Rejestracja</a>
                       </li>

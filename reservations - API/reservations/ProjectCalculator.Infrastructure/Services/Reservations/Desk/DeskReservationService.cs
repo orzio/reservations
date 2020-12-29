@@ -38,6 +38,13 @@ namespace Reservations.Infrastructure.Services
             return _mapper.Map<IEnumerable<DeskReservation>, IEnumerable<DeskReservationDto>>(reservations);
         }
 
+        public async Task<IEnumerable<DeskOfficeReservationDto>> GetDeskWithOfficeReservationsAsync(Guid userId)
+        {
+            var reservations = await _deskReservationRepository.GetReservationByUserIdAsync(userId);
+            return _mapper.Map<IEnumerable<DeskReservation>, IEnumerable<DeskOfficeReservationDto>>(reservations);
+        }
+
+
         public async Task RemoveReservation(Guid reservationId)
         {
             await _deskReservationRepository.DeleteAsync(reservationId);

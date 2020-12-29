@@ -6,6 +6,7 @@ import { throwError, Observable, Subject } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { DeskReservation } from '../_models/DeskReservation';
 import { ReservationDto } from '../_models/ReservationDto';
+import { DeskOfficeReservation } from '../_models/DeskOfficeReservation';
 
 @Injectable({
     providedIn: 'root'
@@ -15,6 +16,7 @@ export class DeskReservationService {
 
     desksReservations:ReservationDto[];
     deskReservationsChanged =new Subject<ReservationDto[]>();
+    deskOfficeReservationChanged = new Subject<DeskOfficeReservation[]>();
     currentDeskIdChanged = new Subject<string>();
 
     constructor(private http:HttpClient){}
@@ -54,6 +56,10 @@ export class DeskReservationService {
     setDeskReservations(deskReservations:ReservationDto[]){
         this.desksReservations = deskReservations;
         this.deskReservationsChanged.next(this.desksReservations.slice());
+      }
+
+      getUserReservation(userId:string){
+          return this.http.get<DeskOfficeReservation[]>(`https://localhost:44310/DeskReservations/user/${userId}`);
       }
 
 }
