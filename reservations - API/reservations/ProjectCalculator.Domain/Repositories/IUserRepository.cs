@@ -15,5 +15,6 @@ namespace Reservations.Api.Repositories
         Task UpdateAsync(User user);
         Task RemoveAsync(Guid id);
         Task<User> GetUserByTokenAsync(string resetToken);
+        
     }
 }

@@ -25,8 +25,8 @@ namespace Reservations.Infrastructure.Services
             var userDto = (await _userService.GetAsync(command.UserId));
             var role = userDto.Role;
             var userName = $"{userDto.FirstName} {userDto.LastName}";
-            _jwtService.CreateToken(command.UserId, userName, role);
-           await _refreshService.UpdateTokenAsync(command.UserId, command.ExpiredToken, command.Refresh);
+           var newToken = _jwtService.CreateToken(command.UserId, userName, role).Token;
+           await _refreshService.UpdateTokenAsync(command.UserId, newToken, command.Refresh);
         }
     }
 }

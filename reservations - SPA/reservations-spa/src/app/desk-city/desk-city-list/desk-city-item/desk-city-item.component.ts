@@ -6,6 +6,8 @@ import { DeskReservationService } from 'src/app/_services/deskReservation.servic
 import { CommunicationService } from 'src/app/_services/communcation.service';
 import { DeskOffice } from 'src/app/_models/DeskOffice';
 import { DeskService } from 'src/app/_services/desk.service';
+import { AuthService } from 'src/app/_services/auth.service';
+import { User } from 'src/app/_models/user';
 
 @Component({
   selector: 'app-desk-city-item',
@@ -15,6 +17,7 @@ import { DeskService } from 'src/app/_services/desk.service';
 export class DeskCityItemComponent implements OnInit {
 
 
+  currentUser:User;
   deskOffice : DeskOffice;
 
   @Input() officeName:string;
@@ -23,10 +26,14 @@ export class DeskCityItemComponent implements OnInit {
   showInfo:boolean = false;
 
   constructor(private router:Router, private reservationService:DeskReservationService, 
-    private communicationService:CommunicationService, private deskService:DeskService) { }
+    private communicationService:CommunicationService, private deskService:DeskService, private authService:AuthService) { }
 
-  ngOnInit(): void {
-  }
+
+    ngOnInit(): void {
+      this.authService.user.subscribe((user:User)=>{
+        this.currentUser = user;
+      })
+    }
 
 
   reserveDesk(){

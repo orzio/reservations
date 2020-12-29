@@ -56,8 +56,10 @@ namespace Reservations.Api.Controllers
 
         // PUT api/<UsersController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public async Task<IActionResult> Put([FromBody] UpdateUser command)
         {
+            await _commandDispatcher.DispatchAsync(command);
+            return Ok();
         }
 
         // DELETE api/<UsersController>/5

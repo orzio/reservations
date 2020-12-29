@@ -9,8 +9,9 @@
         </div> 
     </a>
     <div>
-        <div class="center">
-            <button class="btn btn-primary" (click)="reserveRoom()">Zarezerwuj</button>
+        <div class="center" ngbTooltip="Aby dokonać rezerwacji zaloguj się">
+            <button class="btn btn-primary"  [disabled]="currentUser==null"  (click)="reserveRoom()">Zarezerwuj</button>
         </div>
+
     </div>
 </div>

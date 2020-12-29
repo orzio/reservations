@@ -1,4 +1,5 @@
-﻿using Reservations.Infrastructure.DTO;
+﻿using Reservations.Core.Domain;
+using Reservations.Infrastructure.DTO;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,5 +15,6 @@ namespace Reservations.Infrastructure.Services
         Task RegisterAsync(Guid userId, string email,
             string firstname, string lastname, string password, string role);
         Task LoginAsync(string email, string password);
+        Task UpdateUser(Guid userId, string firstname, string lastname);
     }
 }

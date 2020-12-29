@@ -7,6 +7,8 @@ import { Address } from 'src/app/_models/Address';
 import { RoomOffice } from 'src/app/_models/RoomOffice';
 import { RoomService } from 'src/app/_services/room.service';
 import { CommunicationService } from 'src/app/_services/communcation.service';
+import { AuthService } from 'src/app/_services/auth.service';
+import { User } from 'src/app/_models/user';
 
 @Component({
   selector: 'app-room-city-item',
@@ -15,16 +17,24 @@ import { CommunicationService } from 'src/app/_services/communcation.service';
 })
 export class RoomCityItemComponent implements OnInit {
 
-  constructor(private reservationService:RoomReservationService, private router:Router, 
-    private communicationService:CommunicationService, private roomService:RoomService) { }
 
-  ngOnInit(): void {
-  }
-
+  currentUser:User;
   roomOffice:RoomOffice;
   @Input() officeName:string;
   @Input() officeAddress:Address;
   @Input() room:Room;
+
+  constructor(private reservationService:RoomReservationService, private router:Router, 
+    private communicationService:CommunicationService, private roomService:RoomService,
+    private authService:AuthService) { }
+
+  ngOnInit(): void {
+    this.authService.user.subscribe((user:User)=>{
+      this.currentUser = user;
+    })
+  }
+
+
 
   reserveRoom(){
     this.reservationService.currentRoomIdChanged.next(this.room.id); 

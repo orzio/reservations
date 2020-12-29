@@ -13,20 +13,56 @@ export interface LoginResponse{
     refreshToken:string;
 } 
 
+export interface RefreshTokenCommand{
+    userId:string;
+    refreshToken:string;
+    expiredToken:string;
+} 
+
 @Injectable({
     providedIn: 'root'
   })
 export class AuthService {
 
+
+   
     user = new ReplaySubject<User>();
 
     private expTimer:any;
     baseUrl = `${environment.apiUrl}`;
+    private refToken:string;
     jwtHelper = new JwtHelperService();
     decodedToken:any;
     
     constructor(private http: HttpClient, private router:Router){
     console.log("authservice");
+    }
+
+
+    getNewToken(){
+        const data:{
+            name:string, 
+            id:string,
+            _token:string,
+            _tokenExpirationDate:string,
+            _resreshToken:string
+        } = JSON.parse(localStorage.getItem('data'));
+       
+        let refreshCommand = {
+            userId : data.id,
+            refresh:data._resreshToken,
+            expiredToken: data._token
+        }
+
+        this.http.post<LoginResponse>(`https://localhost:44310/refreshtoken/`, refreshCommand).subscribe(
+            (response:LoginResponse)=>{
+                console.log(this.jwtHelper.decodeToken(response.jwtToken));
+                this.setUserData(response);
+                console.log("get new token!!!!!!");
+                console.log(response.jwtToken);
+            }
+        )
+        
     }
 
 
@@ -47,27 +83,33 @@ export class AuthService {
         return this.http.post<LoginResponse>(`${this.baseUrl}login/`, model).pipe(
             catchError(this.handleError),
             tap((response:LoginResponse) =>{
-                this.decodedToken = this.jwtHelper.decodeToken(response.jwtToken);
-                
-                const expDate = new Date(new Date().getTime() + +this.decodedToken['exp']).getTime();
-                const userId = this.decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
-                console.log("curr user id" + userId);
-                const userRole = this.decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
-                const userName = this.decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'];
-                
-                let currentUser = new User(userName,userId,response.jwtToken,expDate,response.refreshToken);
-                console.log("behvalue");
-                this.user.next(currentUser);
-                console.log(this.user);
-                // this.refreshToken(expDate);
-                localStorage.setItem('data', JSON.stringify(currentUser));
-                console.log(JSON.stringify(currentUser));
-                console.log(currentUser);
-                console.log(expDate);
-                console.log("end LOGIN");
+                this.setUserData(response);
             }),
         )
     }
+
+
+    setUserData(response:LoginResponse){
+        this.decodedToken = this.jwtHelper.decodeToken(response.jwtToken);
+        const expDate = new Date(new Date().getTime() + +this.decodedToken['exp']).getTime();
+        const userId = this.decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
+        const userRole = this.decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+        const userName = this.decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'];
+        console.log("curr user id" + userName);
+        
+        let currentUser = new User(userName,userId,response.jwtToken,expDate,response.refreshToken);
+        console.log("behvalue");
+        this.user.next(currentUser);
+        console.log(this.user);
+        // this.refreshToken(expDate);
+        localStorage.setItem('data', JSON.stringify(currentUser));
+        console.log(JSON.stringify(currentUser));
+        console.log(currentUser);
+
+        console.log(expDate);
+        console.log("end LOGIN");
+    }
+
 
     loginAfterRefresh(){
         const data:{

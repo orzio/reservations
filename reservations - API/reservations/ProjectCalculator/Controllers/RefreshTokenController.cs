@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 
 namespace Reservations.Api.Controllers
 {
+    [Route("[controller]")]
+    [ApiController]
     public class RefreshTokenController : ControllerBase
     {
         private readonly IUserService _userService;

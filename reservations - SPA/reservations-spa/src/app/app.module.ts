@@ -62,6 +62,8 @@ import { RoomReservationListComponent } from './user-reservations/room-reservati
 import { RoomReservationItemComponent } from './user-reservations/room-reservation-list/room-reservation-item/room-reservation-item.component';
 import { DeskReservationListComponent } from './user-reservations/desk-reservation-list/desk-reservation-list.component';
 import { DeskReservationItemComponent } from './user-reservations/desk-reservation-list/desk-reservation-item/desk-reservation-item.component';
+import { UserProfileComponent } from './user-profile/user-profile.component';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -110,13 +112,15 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     RoomReservationListComponent,
     RoomReservationItemComponent,
     DeskReservationListComponent,
-    DeskReservationItemComponent
+    DeskReservationItemComponent,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     CollapseModule.forRoot(),
     HttpClientModule,
+    NgbModule,
     RouterModule.forRoot(appRoutes),
     FormsModule, 
     FullCalendarModule, // register FullCalendar with you app

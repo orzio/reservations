@@ -26,6 +26,7 @@ import { RoomEventsResolverService } from './room-callendar/room-events-resolver
 import { RoomCityComponent } from './room-city/room-city.component'
 import { DeskCityComponent } from './desk-city/desk-city.component'
 import { UserReservationsComponent } from './user-reservations/user-reservations.component'
+import { UserProfileComponent } from './user-profile/user-profile.component'
 
 
 export const appRoutes: Routes = [
@@ -34,6 +35,7 @@ export const appRoutes: Routes = [
         {path:'forgotpassword',component:ForgotPasswordComponent},
         {path:'forgotpassword/resetpassword',component:ResetPasswordComponent},
         {path: 'register', component: RegisterComponent},
+        {path: 'user/profile', component: UserProfileComponent},
         // {path:'callendar', component:CallendarComponent},
         {path:'callendar/desk/:deskId', component:DeskCallendarComponent, resolve:[DeskEventsResolverService]},
         {path:'callendar/room/:roomId', component:RoomCallendarComponent, resolve:[RoomEventsResolverService]},

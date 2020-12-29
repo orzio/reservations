@@ -8,8 +8,8 @@
         </div> 
     </a>
     <div>
-        <div class="center">
-            <button class="btn btn-primary" (click)="reserveDesk()">Zarezerwuj</button>
+        <div class="center" ngbTooltip="Aby dokonać rezerwacji zaloguj się">
+            <button class="btn btn-primary"  [disabled]="currentUser==null"  (click)="reserveDesk()">Zarezerwuj</button>
         </div>
     </div>
 </div>

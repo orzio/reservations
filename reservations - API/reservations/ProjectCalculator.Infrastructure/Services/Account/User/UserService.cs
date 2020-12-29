@@ -83,5 +83,18 @@ namespace Reservations.Infrastructure.Services
             user = new User(userId, email, firstname, lastname, role, hash, salt);
             await _userRepository.AddAsync(user);
         }
+
+        public async Task UpdateUser(Guid userId, string firstname, string lastname)
+        {
+            var user = await _userRepository.GetAsync(userId);
+            if(user == null)
+            {
+                throw new Exception($"User doesn't exists.");
+            }
+            user.FirstName = firstname;
+            user.LastName = lastname;
+            await _userRepository.UpdateAsync(user);
+               
+        }
     }
 }
