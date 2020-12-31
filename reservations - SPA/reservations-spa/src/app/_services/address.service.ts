@@ -13,7 +13,7 @@ export class AddressService {
 
 
   citiesChanged = new Subject<City[]>();
-  private readonly API_URL:string = 'https://localhost:44310/cities';
+  private readonly API_URL:string = 'http://localhost:44310/cities';
   private cities:City[]=[];
 
   getCities():City[]{

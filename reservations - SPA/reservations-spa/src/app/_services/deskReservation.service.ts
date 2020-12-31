@@ -12,7 +12,7 @@ import { DeskOfficeReservation } from '../_models/DeskOfficeReservation';
     providedIn: 'root'
   })
 export class DeskReservationService {
-    baseUrl = 'https://localhost:44310/deskReservations';
+    baseUrl = 'http://localhost:44310/deskReservations';
 
     desksReservations:ReservationDto[];
     deskReservationsChanged =new Subject<ReservationDto[]>();
@@ -59,7 +59,7 @@ export class DeskReservationService {
       }
 
       getUserReservation(userId:string){
-          return this.http.get<DeskOfficeReservation[]>(`https://localhost:44310/DeskReservations/user/${userId}`);
+          return this.http.get<DeskOfficeReservation[]>(`http://localhost:44310/DeskReservations/user/${userId}`);
       }
 
 }

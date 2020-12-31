@@ -13,6 +13,7 @@ import { reduce } from 'rxjs/operators';
 import { RoomReservation } from '../_models/RoomReservation';
 import { RoomReservationService } from '../_services/roomReservation.Service';
 import { createEventId } from '../desk-callendar/event-utils';
+import { SignalRService } from '../_services/signalR.service';
 
 @Component({
   selector: 'app-callendar',
@@ -76,7 +77,7 @@ export class RoomCallendarComponent implements OnInit {
 
   constructor(private authService:AuthService, private activatedRoute: ActivatedRoute, 
     private router:Router,
-    private reservationService: RoomReservationService) {
+    private reservationService: RoomReservationService, private signalRService: SignalRService) {
      }
 
   ngOnInit(): void {
@@ -88,7 +89,15 @@ export class RoomCallendarComponent implements OnInit {
     });
     })
 
+    this.signalRService.startConnection();
+    this.signalRService.addTransferChartDataListener();
+this.handleChanges();
 
+
+  }
+
+
+  handleChanges(){
 
     this.reservationService.roomReservationsChanged.subscribe(
       (data:ReservationDto[])=>{
@@ -136,6 +145,7 @@ export class RoomCallendarComponent implements OnInit {
             editable:true
           });
       };
+      this.handleChanges();
     },
     error=>{
       alert("Nie mozna dodac rezerwacji");
@@ -154,7 +164,7 @@ export class RoomCallendarComponent implements OnInit {
   handleEventDeleted(removeInfo){
     this.reservationService.deleteReservation(removeInfo.event.id).subscribe(
       (data)=>{
-
+        this.handleChanges();
       },
       error => {
         removeInfo.revert();

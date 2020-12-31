@@ -9,7 +9,7 @@ import { RoomOffice } from '../_models/RoomOffice';
 export class RoomService{
 
     constructor(private http: HttpClient) {}
-    private readonly API_URL:string = 'https://localhost:44310/offices/rooms/';
+    private readonly API_URL:string = 'http://localhost:44310/offices/rooms/';
     
     roomsChanged = new Subject<Room[]>();
     roomUpdated = new Subject<Room>();

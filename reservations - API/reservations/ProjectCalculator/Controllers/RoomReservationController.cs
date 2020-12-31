@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Reservations.Infrastructure.Commands;
 using Reservations.Infrastructure.Commands.ReservationCommands.Room;
 using Reservations.Infrastructure.Services;
+using Reservations.Infrastructure.SignalR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,16 +17,18 @@ namespace Reservations.Api.Controllers
     {
         private readonly ICommandDispatcher _commandDispatcher;
         private readonly IRoomReservationService _roomReservationService;
-        public RoomReservationController(ICommandDispatcher commandDispatcher, IRoomReservationService roomReservationService)
+        private IHubContext<ReservationHub> _hub;
+        public RoomReservationController(ICommandDispatcher commandDispatcher, IHubContext<ReservationHub> hub, IRoomReservationService roomReservationService)
         {
             _commandDispatcher = commandDispatcher;
             _roomReservationService = roomReservationService;
+            _hub = hub;
         }
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CreateRoomReservation command)
         {
             await _commandDispatcher.DispatchAsync(command);
-            
+            await _hub.Clients.All.SendAsync("rere");
             return Created($"roomreservations/{command.UserId}", null);
         }
 

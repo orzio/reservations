@@ -13,6 +13,7 @@ using Reservations.Infrastructure.Settings;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Text;
 using Reservations.Infrastructure.Extensions;
+using Reservations.Infrastructure.SignalR;
 
 namespace Reservations
 {
@@ -29,18 +30,27 @@ namespace Reservations
         public void ConfigureServices(IServiceCollection services)
         {
 
+          services.AddCors(options => options.AddPolicy("CorsPolicy",
+            builder =>
+            {
+                builder.AllowAnyHeader()
+                       .AllowAnyMethod()
+                       .SetIsOriginAllowed((host) => true)
+                       .AllowCredentials();
+            }));
+
             var jwtKey = Configuration.GetSettings<JwtSettings>().Key;
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-               .AddJwtBearer(options =>
-               {
-                   options.TokenValidationParameters = new TokenValidationParameters
-                   {
-                       ValidateIssuerSigningKey = true,
-                       IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration.GetSettings<JwtSettings>().Key)),
-                       ValidateIssuer = false,
-                       ValidateAudience = false
-                   };
-               });
+            //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+            //   .AddJwtBearer(options =>
+            //   {
+            //       options.TokenValidationParameters = new TokenValidationParameters
+            //       {
+            //           ValidateIssuerSigningKey = true,
+            //           IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration.GetSettings<JwtSettings>().Key)),
+            //           ValidateIssuer = false,
+            //           ValidateAudience = false
+            //       };
+            //   });
             //services.AddCors();
             services.AddAuthorization(x => x.AddPolicy("admin", p => p.RequireRole("admin")));
             services.AddAuthorization(x => x.AddPolicy("user", p => p.RequireRole("user")));
@@ -48,12 +58,15 @@ namespace Reservations
                         options.UseSqlServer(Configuration["sql:connectionString"]));
             //options.UseSqlite(Configuration
             //.GetConnectionString("DefaultConnection")));
-            services.AddControllersWithViews()
+            services.AddControllers()
             .AddNewtonsoftJson(options =>
             options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
             );
+            services.AddSignalR();
             services.AddControllers();
             services.AddMemoryCache();
+
+            services.AddDirectoryBrowser();
 
         }
         public void ConfigureContainer(ContainerBuilder builder)
@@ -69,10 +82,6 @@ namespace Reservations
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseCors(builder => builder
-                        .AllowAnyOrigin()
-                        .AllowAnyMethod()
-                        .AllowAnyHeader());
                 
             app.UseDefaultFiles();
             app.UseStaticFiles();
@@ -81,7 +90,7 @@ namespace Reservations
             app.UseHttpsRedirection();
 
             app.UseRouting();
-            //app.UseCors();
+            app.UseCors("CorsPolicy");
 
             app.UseAuthentication();
             app.UseAuthorization();
@@ -89,6 +98,7 @@ namespace Reservations
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<ReservationHub>("/reservations");
             });
 
 

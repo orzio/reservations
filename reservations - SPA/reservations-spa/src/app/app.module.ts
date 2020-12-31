@@ -64,6 +64,7 @@ import { DeskReservationListComponent } from './user-reservations/desk-reservati
 import { DeskReservationItemComponent } from './user-reservations/desk-reservation-list/desk-reservation-item/desk-reservation-item.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { SignalRService } from './_services/signalR.service';
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -126,7 +127,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     FullCalendarModule, // register FullCalendar with you app
     ReactiveFormsModule, CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
   ],
-  providers: [OfficeService,CommunicationService,AddressService,
+  providers: [OfficeService,CommunicationService,AddressService,SignalRService,
     DeskReservationService, RoomReservationService,RoomService,ResetPasswordService, DeskService, {provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true},AuthGuard],
   bootstrap: [AppComponent],
   

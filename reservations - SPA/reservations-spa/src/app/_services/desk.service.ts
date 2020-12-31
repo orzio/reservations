@@ -10,7 +10,7 @@ import { DeskOffice } from '../_models/DeskOffice';
 export class DeskService{
 
     constructor(private http: HttpClient) {}
-    private readonly API_URL:string = 'https://localhost:44310/offices/desks/';
+    private readonly API_URL:string = 'http://localhost:44310/offices/desks/';
     
     desksChanged = new Subject<Desk[]>();
     deskInfoChanged = new ReplaySubject<DeskOffice>();

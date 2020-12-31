@@ -7,19 +7,20 @@ import { catchError } from 'rxjs/operators';
 import { RoomReservation } from '../_models/RoomReservation';
 import { ReservationDto } from '../_models/ReservationDto';
 import { RoomOfficeReservation } from '../_models/RoomOfficeReservation';
+import { Router } from '@angular/router';
 
 @Injectable({
     providedIn: 'root'
   })
 export class RoomReservationService {
-    baseUrl = 'https://localhost:44310/roomReservation';
+    baseUrl = 'http://localhost:44310/roomReservation';
 
     roomsReservations:ReservationDto[];
     roomReservationsChanged =new Subject<ReservationDto[]>();
     roomOfficeReservationChanged = new Subject<RoomOfficeReservation[]>();
     currentRoomIdChanged = new Subject<string>();
 
-    constructor(private http:HttpClient){}
+    constructor(private http:HttpClient,  ){}
 
     addReservation(reservation:RoomReservation):Observable<Object>{
         console.log("reservationService");
@@ -59,9 +60,18 @@ export class RoomReservationService {
       }
 
       getUserReservation(userId:string){
-        return this.http.get<RoomOfficeReservation[]>(`https://localhost:44310/RoomReservation/user/${userId}`);
+        return this.http.get<RoomOfficeReservation[]>(`http://localhost:44310/RoomReservation/user/${userId}`);
     }
 
+
+    getCurrentReservations(){
+        let events:ReservationDto[]=[];
+        this.fetchRoomReservations("1165d9f9-68e6-4035-a883-e87eb06499bf").subscribe((resp:ReservationDto[]) => {
+            events = resp;
+            this.setRoomReservations(events)
+            // this.currentRoomIdChanged.next(this.roomId);
+        })
+    }
 
 
 

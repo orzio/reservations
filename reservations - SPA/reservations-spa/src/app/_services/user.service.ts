@@ -21,11 +21,11 @@ export class UserService {
     constructor(private http:HttpClient, private authService:AuthService){}
 
     updateUser(updateUser:UpdateUser){
-        return this.http.put(`https://localhost:44310/users/${updateUser.id}`,updateUser);
+        return this.http.put(`http://localhost:44310/users/${updateUser.id}`,updateUser);
     }
     
     changePassword(changePassword:ChangePassword){
-        return this.http.post(`https://localhost:44310/changepassword`,changePassword);
+        return this.http.post(`http://localhost:44310/changepassword`,changePassword);
     }
 
 }

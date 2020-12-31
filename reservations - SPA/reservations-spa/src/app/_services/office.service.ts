@@ -12,7 +12,7 @@ import { City } from '../_models/City';
 export class OfficeService{
 
   constructor(private http: HttpClient, private authService:AuthService) {}
-  private readonly API_URL:string = 'https://localhost:44310/offices';
+  private readonly API_URL:string = 'http://localhost:44310/offices';
 
   officesChanged = new Subject<Office[]>();
   private offices: Office[]=[];
@@ -59,7 +59,7 @@ getUserOffice(){
 
       updateOffice(index:number, updatedOffice:Office){
         this.http
-        .put<Office>('https://localhost:44310/offices',updatedOffice).subscribe(response =>{
+        .put<Office>('http://localhost:44310/offices',updatedOffice).subscribe(response =>{
             this.fetchUserOffices().subscribe((resp:Office[]) =>{
               this.officesChanged.next(resp.slice());
               this.officeUpdated.next(this.getOfficeById(index));
@@ -70,7 +70,7 @@ getUserOffice(){
 
       deleteOffice(index:number){
         const office = this.getOfficeById(index);
-       return  this.http.delete(`https://localhost:44310/offices/${office.id}`);
+       return  this.http.delete(`http://localhost:44310/offices/${office.id}`);
       }
 
       setOffices(offices:Office[]){

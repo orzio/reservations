@@ -54,7 +54,7 @@ export class AuthService {
             expiredToken: data._token
         }
 
-        this.http.post<LoginResponse>(`https://localhost:44310/refreshtoken/`, refreshCommand).subscribe(
+        this.http.post<LoginResponse>(`http://localhost:44310/refreshtoken/`, refreshCommand).subscribe(
             (response:LoginResponse)=>{
                 console.log(this.jwtHelper.decodeToken(response.jwtToken));
                 this.setUserData(response);
