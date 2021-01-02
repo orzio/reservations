@@ -134,6 +134,7 @@ this.handleChanges();
       console.log("::::"+eventId);
       let event = new RoomReservation(eventId,this.user.id,this.roomId, new Date(selectInfo.startStr),new Date(selectInfo.endStr));
 
+      console.log(event)
       this.reservationService.addReservation(event).subscribe((data)=> {
         
         if (title) {

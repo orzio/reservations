@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Reservations.Infrastructure.Services.Reservations.Validators;
 
 namespace Reservations.Infrastructure.Repositories.Revervations.Room
 {
@@ -23,19 +24,46 @@ namespace Reservations.Infrastructure.Repositories.Revervations.Room
 
         public async Task AddAsync(Guid reservationId, Guid userId, Guid roomId, DateTime startTime, DateTime endTime)
         {
-            var user = await _userRepository.GetAsync(userId);
-            var join = new RoomReservation()
-            {
-                Id = reservationId,
-                UserId = userId,
-                RoomId = roomId,
-                StartDate = startTime,
-                EndDate = endTime,
-                User = user
-            };
+            //using var transaction = _context.Database.BeginTransaction();
+            //try
+            //{
+                var user = await _userRepository.GetAsync(userId);
+                var join = new RoomReservation()
+                {
+                    Id = reservationId,
+                    UserId = userId,
+                    RoomId = roomId,
+                    StartDate = startTime,
+                    EndDate = endTime,
+                    User = user
+                };
 
-            await _context.RoomReservations.AddAsync(join);
-            await _context.SaveChangesAsync();
+                await _context.RoomReservations.AddAsync(join);
+                await _context.SaveChangesAsync();
+
+                //var reservations = (await GetReservationByRoomIdAsync(roomId)).ToList();
+                //var validators = new List<IReservationValidator>()
+                //{
+                //    new EventStartsWithinOther(startTime, reservations),
+                //    new EventEndsWithinOther(endTime, reservations),
+                //    new EventCoversOther(startTime, endTime, reservations),
+                //};
+
+                //foreach (var validator in validators)
+                //{
+                //    if (!validator.Verify())
+                //    {
+                //        throw new Exception("Cannot add reservation");
+                //    }
+                //}
+
+            //    transaction.Commit();
+            //}
+            //catch (Exception e )
+            //{
+            //    transaction.Rollback();
+            //    throw new Exception();
+            //}
         }
 
         public async Task DeleteAsync(Guid reservationId)

@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Text;
 using Reservations.Infrastructure.Extensions;
 using Reservations.Infrastructure.SignalR;
+using System.Threading;
 
 namespace Reservations
 {
@@ -62,10 +63,11 @@ namespace Reservations
             .AddNewtonsoftJson(options =>
             options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
             );
+            
             services.AddSignalR();
             services.AddControllers();
             services.AddMemoryCache();
-
+            services.AddSingleton<MySemaphore>();
             services.AddDirectoryBrowser();
 
         }

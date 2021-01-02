@@ -33,6 +33,8 @@ namespace Reservations.Infrastructure.Data
                     .WithOne(e => e.Office);
             modelBuilder.Entity<Office>().HasMany(x => x.Desks)
                     .WithOne(e => e.Office);
+            //modelBuilder.Entity<RoomReservation>(entity => entity.
+            //                    HasCheckConstraint("CK_RoomReservations_StartDate", "X not between [StartDate] and [EndDate]"));
         }
 
         public DbSet<User> Users { get; set; }

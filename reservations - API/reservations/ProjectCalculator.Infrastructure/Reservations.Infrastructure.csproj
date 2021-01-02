@@ -18,6 +18,14 @@
     <Compile Remove="Data\Migrations\20201126183033_CreateIdentitySchemat.Designer.cs" />
     <Compile Remove="Data\Migrations\20201126183134_CreateIdentitySchema.cs" />
     <Compile Remove="Data\Migrations\20201126183134_CreateIdentitySchema.Designer.cs" />
+    <Compile Remove="Migrations\20210102134948_addConstraint.cs" />
+    <Compile Remove="Migrations\20210102134948_addConstraint.Designer.cs" />
+    <Compile Remove="Migrations\20210102135507_testconstraint.cs" />
+    <Compile Remove="Migrations\20210102135507_testconstraint.Designer.cs" />
+    <Compile Remove="Migrations\20210102135739_testconstraint.cs" />
+    <Compile Remove="Migrations\20210102135739_testconstraint.Designer.cs" />
+    <Compile Remove="Migrations\20210102140558_testconstraint.cs" />
+    <Compile Remove="Migrations\20210102140558_testconstraint.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
