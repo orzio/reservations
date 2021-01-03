@@ -12,7 +12,7 @@ export class DeskSignalRService {
 constructor(private http: HttpClient, private deskReservationService: DeskReservationService) {
     this.deskReservationService.currentDeskIdChanged.subscribe((data:string)=>{
         this.deskId= data;
-        console.log("%%%%%%%%%%%%%%%%%Desk$$$$$"+this.deskReservationService);
+        // console.log("%%%%%%%%%%%%%%%%%Desk$$$$$"+this.deskReservationService);
     })
  }
 
@@ -28,13 +28,13 @@ public startConnection = () => {
 
   
   public addNewCallendarEventListener = (deskId:string) => {
-      console.log("::::::::::::SignalR" +deskId);
+    //   console.log("::::::::::::SignalR" +deskId);
       this.hubConnection.on("deskEventsChanged", (data) => {
-        console.log(data.deskId+":::::::TERRERERE");
+        // console.log(data.deskId+":::::::TERRERERE");
         if(this.deskId == data.deskId){
             this.deskReservationService.getCurrentReservations(this.deskId);
         }
-          console.log("deskdesk");
+        //   console.log("deskdesk");
         });
     }
 
