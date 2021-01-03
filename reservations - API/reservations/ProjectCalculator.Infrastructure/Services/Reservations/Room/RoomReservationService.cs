@@ -17,9 +17,9 @@ namespace Reservations.Infrastructure.Services.Reservations.Room
     {
         private readonly IMapper _mapper;
         private readonly IRoomReservationRepository _roomReservationRepository;
-        private readonly MySemaphore _semaphoregate;
+        private readonly RoomSemaphore _semaphoregate;
 
-        public RoomReservationService(IRoomReservationRepository roomReservationRepository, IMapper mapper, MySemaphore semaphore)
+        public RoomReservationService(IRoomReservationRepository roomReservationRepository, IMapper mapper, RoomSemaphore semaphore)
         {
             _roomReservationRepository = roomReservationRepository;
             _semaphoregate = semaphore;
@@ -28,9 +28,6 @@ namespace Reservations.Infrastructure.Services.Reservations.Room
 
         public async Task ReserveRoom(Guid reservationId, Guid userId, Guid roomId, DateTime startTime, DateTime endTime)
         {
-            //try
-            //{
-           
             try
             {
                 await _semaphoregate.WaitAsync();
@@ -46,19 +43,11 @@ namespace Reservations.Infrastructure.Services.Reservations.Room
             {
                 _semaphoregate.Release();
             }
-            
-
-
-
-            //}catch(Exception e)
-            //{
-            //    throw new Exception("Cannot add reservation");
-            //}
         }
 
-        public  async Task Check(Guid roomId, DateTime startTime, DateTime endTime)
+        private  async Task Check(Guid roomId, DateTime startTime, DateTime endTime)
         {
-            var reservations = (await _roomReservationRepository.GetReservationByRoomIdAsync(roomId)).ToList();
+            var reservations = (await _roomReservationRepository.GetReservationByRoomIdAsync(roomId)).Cast<IReservation>().ToList();
             var validators = new List<IReservationValidator>()
                 {
                     new EventStartsWithinOther(startTime, reservations),

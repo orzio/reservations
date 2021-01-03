@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Reservations.Core.Domain
 {
-   public class DeskReservation
+   public class DeskReservation:IReservation
     {
         public Guid Id { get; set; }
         public Guid UserId { get; set; }

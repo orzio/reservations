@@ -11,6 +11,7 @@ import { ActionSequence } from 'protractor';
 import { ActivatedRoute, Params } from '@angular/router';
 import { ReservationDto } from '../_models/ReservationDto';
 import { reduce } from 'rxjs/operators';
+import { DeskSignalRService } from '../_services/deskSignalR.service';
 
 @Component({
   selector: 'app-callendar',
@@ -49,7 +50,7 @@ export class DeskCallendarComponent implements OnInit {
   currentEvents: any[];
 
    handleDateClick(arg) {
-      alert('date click! ' + arg.dateStr)
+      // alert('date click! ' + arg.dateStr)
     }
 
 
@@ -72,7 +73,7 @@ export class DeskCallendarComponent implements OnInit {
     }
 
   constructor(private authService:AuthService, private activatedRoute: ActivatedRoute, 
-    private reservationService: DeskReservationService) {
+    private reservationService: DeskReservationService,private signalRService: DeskSignalRService) {
      }
 
   ngOnInit(): void {
@@ -81,7 +82,10 @@ export class DeskCallendarComponent implements OnInit {
     this.eventTitle = user.name;
     this.reservationService.currentDeskIdChanged.subscribe((deskId:string)=>{
       this.deskId =deskId;
-    })
+      this.signalRService.startConnection();
+      console.log("SignalR----------:::::::::::::::::::::::::::::::::::::::::::::::::::::::::" + this.deskId);
+      this.signalRService.addNewCallendarEventListener(this.deskId);
+    });
     })
 
 
@@ -121,15 +125,15 @@ export class DeskCallendarComponent implements OnInit {
 
       this.reservationService.addReservation(event).subscribe((data)=> {
         
-        if (title) {
-          calendarApi.addEvent({
-            id:eventId,
-            title,
-            start: selectInfo.startStr,
-            end: selectInfo.endStr,
-            editable:true
-          });
-      };
+      //   if (title) {
+      //     calendarApi.addEvent({
+      //       id:eventId,
+      //       title,
+      //       start: selectInfo.startStr,
+      //       end: selectInfo.endStr,
+      //       editable:true
+      //     });
+      // };
     },
     error=>{
       alert("Nie mozna dodac rezerwacji");

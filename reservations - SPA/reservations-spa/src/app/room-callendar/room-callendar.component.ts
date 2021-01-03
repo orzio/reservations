@@ -13,7 +13,7 @@ import { reduce } from 'rxjs/operators';
 import { RoomReservation } from '../_models/RoomReservation';
 import { RoomReservationService } from '../_services/roomReservation.Service';
 import { createEventId } from '../desk-callendar/event-utils';
-import { SignalRService } from '../_services/signalR.service';
+import { RoomSignalRService } from '../_services/roomSignalR.service';
 
 @Component({
   selector: 'app-callendar',
@@ -53,7 +53,7 @@ export class RoomCallendarComponent implements OnInit {
   currentEvents: any[];
 
    handleDateClick(arg) {
-      alert('date click! ' + arg.dateStr)
+      // alert('date click! ' + arg.dateStr)
     }
 
 
@@ -77,21 +77,27 @@ export class RoomCallendarComponent implements OnInit {
 
   constructor(private authService:AuthService, private activatedRoute: ActivatedRoute, 
     private router:Router,
-    private reservationService: RoomReservationService, private signalRService: SignalRService) {
+    private reservationService: RoomReservationService, private signalRService: RoomSignalRService) {
      }
 
   ngOnInit(): void {
+
     this.authService.user.subscribe((user:User)=>{
     this.user = user;
     this.eventTitle = user.name;
+    
     this.reservationService.currentRoomIdChanged.subscribe((roomId:string)=>{
       this.roomId = roomId;
+      
     });
-    })
+  })
+  
+  this.signalRService.startConnection();
+  console.log("SignalR----------:::::::::::::::::::::::::::::::::::::::::::::::::::::::::" + this.roomId);
+  this.signalRService.addNewCallendarEventListener();
 
-    this.signalRService.startConnection();
-    this.signalRService.addTransferChartDataListener();
-this.handleChanges();
+  this.handleChanges();
+
 
 
   }
@@ -104,7 +110,7 @@ this.handleChanges();
         let reservations=[];
         data.forEach(reservation => {
           let editable=reservation.userId == this.user.id ? true:false;
-          console.log("-=-=-=-=-="+reservation.userId == this.user.id);
+          // console.log("-=-=-=-=-="+reservation.userId == this.user.id);
           let bgColor=reservation.userId == this.user.id ? "#3788d8":"#999999"
           let eventTitle = reservation.userId == this.user.id ?  this.eventTitle : this.RESERVED_EVENT_STRING
             reservations.push({
@@ -137,15 +143,15 @@ this.handleChanges();
       console.log(event)
       this.reservationService.addReservation(event).subscribe((data)=> {
         
-        if (title) {
-          calendarApi.addEvent({
-            id:eventId,
-            title,
-            start: selectInfo.startStr,
-            end: selectInfo.endStr,
-            editable:true
-          });
-      };
+      //   if (title) {
+      //     calendarApi.addEvent({
+      //       id:eventId,
+      //       title,
+      //       start: selectInfo.startStr,
+      //       end: selectInfo.endStr,
+      //       editable:true
+      //     });
+      // };
       this.handleChanges();
     },
     error=>{
@@ -156,7 +162,7 @@ this.handleChanges();
 
   handleEventClick(clickInfo: EventClickArg) {
     if(clickInfo.event.title == this.RESERVED_EVENT_STRING)
-    return;
+      return;
 
      if (confirm(`${clickInfo.event.title}, napewno chesz odwołać rezerwację?`)) 
        clickInfo.event.remove();

@@ -5,9 +5,9 @@ using System.Threading;
 
 namespace Reservations.Infrastructure.IoC
 {
-    public class MySemaphore : SemaphoreSlim
+    public class RoomSemaphore : SemaphoreSlim
     {
-        public MySemaphore(int initialCount=1) : base(initialCount)
+        public RoomSemaphore(int initialCount=1) : base(initialCount)
         {
         }
     }

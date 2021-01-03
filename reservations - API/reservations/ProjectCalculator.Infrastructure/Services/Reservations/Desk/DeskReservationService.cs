@@ -2,8 +2,11 @@
 using Reservations.Core.Domain;
 using Reservations.Core.Repositories;
 using Reservations.Infrastructure.DTO;
+using Reservations.Infrastructure.Helpers;
+using Reservations.Infrastructure.Services.Reservations.Validators;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,11 +16,13 @@ namespace Reservations.Infrastructure.Services
     {
         private readonly IDeskReservationRepository _deskReservationRepository;
         private readonly IMapper _mapper;
+        private readonly DeskSemaphore _semaphoregate;
 
-        public DeskReservationService(IDeskReservationRepository deskReservationRepository, IMapper mapper)
+        public DeskReservationService(IDeskReservationRepository deskReservationRepository, IMapper mapper, DeskSemaphore semaphore)
         {
             _deskReservationRepository = deskReservationRepository;
             _mapper = mapper;
+            _semaphoregate = semaphore;
         }
 
         public async Task<IEnumerable<DeskReservationDto>> BrowseAsync()
@@ -52,7 +57,22 @@ namespace Reservations.Infrastructure.Services
 
         public async Task ReserveDesk(Guid reservationId, Guid userId, Guid deskId, DateTime startTime, DateTime endTime)
         {
-            await _deskReservationRepository.AddAsync(reservationId, userId, deskId, startTime, endTime);
+            try
+            {
+                await _semaphoregate.WaitAsync();
+
+                await Check(deskId, startTime, endTime.AddMinutes(-1));
+                await _deskReservationRepository.AddAsync(reservationId, userId, deskId, startTime, endTime.AddMinutes(-1));
+
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Nie da sie dodac rezewacji");
+            }
+            finally
+            {
+                _semaphoregate.Release();
+            }
         }
 
         public async Task UpdateReservation(Guid reservationId, DateTime start, DateTime end)
@@ -60,6 +80,24 @@ namespace Reservations.Infrastructure.Services
             await _deskReservationRepository.UpdateAsync(reservationId, start, end);
         }
 
+        private async Task Check(Guid deskId, DateTime startTime, DateTime endTime)
+        {
+            var reservations = (await _deskReservationRepository.GetReservationByDeskIdAsync(deskId)).Cast<IReservation>().ToList();
+            var validators = new List<IReservationValidator>()
+                {
+                    new EventStartsWithinOther(startTime, reservations),
+                    new EventEndsWithinOther(endTime, reservations),
+                    new EventCoversOther(startTime, endTime, reservations),
+                };
+
+            foreach (var validator in validators)
+            {
+                if (!validator.Verify())
+                {
+                    throw new Exception("Cannot add reservation");
+                }
+            }
+        }
 
     }
 }

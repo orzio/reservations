@@ -62,4 +62,14 @@ export class DeskReservationService {
           return this.http.get<DeskOfficeReservation[]>(`http://localhost:44310/DeskReservations/user/${userId}`);
       }
 
+
+      getCurrentReservations(deskId:string){
+        let events:ReservationDto[]=[];
+        this.fetchDeskReservations(deskId).subscribe((resp:ReservationDto[]) => {
+            events = resp;
+            this.setDeskReservations(events)
+            // this.currentRoomIdChanged.next(this.roomId);
+        })
+}
+
 }

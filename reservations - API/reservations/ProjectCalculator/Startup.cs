@@ -15,6 +15,7 @@ using System.Text;
 using Reservations.Infrastructure.Extensions;
 using Reservations.Infrastructure.SignalR;
 using System.Threading;
+using Reservations.Infrastructure.Helpers;
 
 namespace Reservations
 {
@@ -67,7 +68,8 @@ namespace Reservations
             services.AddSignalR();
             services.AddControllers();
             services.AddMemoryCache();
-            services.AddSingleton<MySemaphore>();
+            services.AddSingleton<RoomSemaphore>();
+            services.AddSingleton<DeskSemaphore>();
             services.AddDirectoryBrowser();
 
         }
