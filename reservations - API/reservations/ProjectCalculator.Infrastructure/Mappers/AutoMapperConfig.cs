@@ -6,6 +6,7 @@ using Reservations.Infrastructure.DTO;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace Reservations.Infrastructure.Mappers
 {
@@ -15,9 +16,11 @@ namespace Reservations.Infrastructure.Mappers
             => new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<User, UserDto>();
+                cfg.CreateMap<Photo, PhotoDto>();
                 cfg.CreateMap<Token, TokenDto>();
                 cfg.CreateMap<Desk, DeskDto>();
-                cfg.CreateMap<Room, RoomDto>();
+                cfg.CreateMap<Room, RoomDto>()
+                .ForMember(dest => dest.MainUrl, opt => opt.MapFrom(src => src.Photos.FirstOrDefault(x => x.IsMain).PhotoUrl));
                 cfg.CreateMap<Office, OfficeDto>();
                 cfg.CreateMap<Address, CityDto>();
                 cfg.CreateMap<DeskReservation, DeskReservationDto>();

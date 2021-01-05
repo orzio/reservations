@@ -27,10 +27,14 @@ import { RoomCityComponent } from './room-city/room-city.component'
 import { DeskCityComponent } from './desk-city/desk-city.component'
 import { UserReservationsComponent } from './user-reservations/user-reservations.component'
 import { UserProfileComponent } from './user-profile/user-profile.component'
+import { Component } from '@angular/core'
+import { ImageUploadComponent } from './image-upload/image-upload.component'
+import { PhotoComponent } from './photo/photo.component'
 
 
 export const appRoutes: Routes = [
     {path: '', component: HomeComponent,pathMatch:'full', resolve: [CityResolverService]},
+  
         {path: 'login', component: LoginComponent},
         {path:'forgotpassword',component:ForgotPasswordComponent},
         {path:'forgotpassword/resetpassword',component:ResetPasswordComponent},
@@ -75,7 +79,8 @@ export const appRoutes: Routes = [
         ]},
         {path:'offices/rooms/city', component:RoomCityComponent},
         {path: 'user/reservations', component:UserReservationsComponent},
-
+        // {path:'photo',component:ImageUploadComponent},
+        {path:'photo',component:PhotoComponent},
 
 
 

@@ -15,5 +15,8 @@ namespace Reservations.Infrastructure.DTO
         public bool HasWhiteBoard { get; set; }
         public bool HasProjector { get; set; }
         public string OtherEquipment { get; set; }
+        public string MainUrl { get; set; }
+        public List<PhotoDto> Photos { get; set; }
+
     }
 }

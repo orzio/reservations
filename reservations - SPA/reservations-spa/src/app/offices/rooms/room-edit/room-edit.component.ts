@@ -5,6 +5,7 @@ import { FormGroup, Validators, FormControl } from '@angular/forms';
 import { OfficeService } from 'src/app/_services/office.service';
 import { Office } from 'src/app/_models/Office';
 import { Room } from 'src/app/_models/room';
+import { Photo } from 'src/app/_models/Photo';
 
 @Component({
   selector: 'app-room-edit',
@@ -20,6 +21,11 @@ export class RoomEditComponent implements OnInit {
   currentOffice:Office;
   officeId:number;
   editedRoom:Room;
+  photos:Photo[] =[];
+  currentRoomId:string="";
+
+
+
   constructor(private activatedRoute: ActivatedRoute, private roomService:RoomService, private officeService: OfficeService, private router: Router) { }
 
   ngOnInit(): void {
@@ -31,9 +37,6 @@ export class RoomEditComponent implements OnInit {
       this.activatedRoute.parent.params.subscribe((params) =>{
         this.currentOffice = this.officeService.getOfficeById(params.id);
       })
-
-
-     
 
       this.initForm();
     })
@@ -59,6 +62,7 @@ export class RoomEditComponent implements OnInit {
      hasProjector = room.hasProjector;
      otherEquipment = room.otherEquipment;
      this.roomGuid = room.id;
+     this.photos = room.photos;
   }  
 
     this.roomForm = new FormGroup({

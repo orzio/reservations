@@ -66,6 +66,11 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { RoomSignalRService } from './_services/roomSignalR.service';
 import { DeskSignalRService } from './_services/deskSignalR.service';
+import { ImageService } from './_services/image.service';
+import { ImageUploadComponent } from './image-upload/image-upload.component';
+import { PhotoComponent } from './photo/photo.component';
+import { FileUploadModule } from 'ng2-file-upload';
+
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   dayGridPlugin,
@@ -115,10 +120,15 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     RoomReservationItemComponent,
     DeskReservationListComponent,
     DeskReservationItemComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    ImageUploadComponent,
+    PhotoComponent
   ],
+
+  
   imports: [
     BrowserModule,
+    FileUploadModule,
     BrowserAnimationsModule,
     CollapseModule.forRoot(),
     HttpClientModule,
@@ -128,7 +138,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     FullCalendarModule, // register FullCalendar with you app
     ReactiveFormsModule, CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
   ],
-  providers: [OfficeService,CommunicationService,AddressService,RoomSignalRService,DeskSignalRService,
+  providers: [OfficeService,CommunicationService,AddressService,RoomSignalRService,DeskSignalRService,ImageService,
     DeskReservationService, RoomReservationService,RoomService,ResetPasswordService, DeskService, {provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true},AuthGuard],
   bootstrap: [AppComponent],
   

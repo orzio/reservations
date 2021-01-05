@@ -30,18 +30,18 @@ namespace Reservations.Infrastructure.Services.Reservations.Room
         {
             try
             {
-                await _semaphoregate.WaitAsync();
+                //await _semaphoregate.WaitAsync();
                 
-                 await Check(roomId, startTime, endTime.AddMinutes(-1));
+                 //await Check(roomId, startTime, endTime.AddMinutes(-1));
                 await _roomReservationRepository.AddAsync(reservationId, userId, roomId, startTime, endTime.AddMinutes(-1));
                 
             }catch(Exception e)
             {
-                throw new Exception("Nie da sie dodac rezewacji");
+                throw new Exception("Cannot add reservation");
             }
             finally
             {
-                _semaphoregate.Release();
+                //_semaphoregate.Release();
             }
         }
 

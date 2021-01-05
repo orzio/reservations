@@ -11,6 +11,7 @@ export class RoomService{
     constructor(private http: HttpClient) {}
     private readonly API_URL:string = 'http://localhost:44310/offices/rooms/';
     
+    roomDetailsId = new ReplaySubject<string>();
     roomsChanged = new Subject<Room[]>();
     roomUpdated = new Subject<Room>();
     roomInfoChanged = new ReplaySubject<RoomOffice>();

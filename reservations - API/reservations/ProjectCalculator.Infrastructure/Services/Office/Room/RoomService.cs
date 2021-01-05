@@ -63,7 +63,8 @@ namespace Reservations.Infrastructure.Services
                 HasProjector = hasProjector,
                 HasWhiteBoard = hasWhiteBoard,
                 Name = name,
-                OtherEquipment = otherEquipment
+                OtherEquipment = otherEquipment,
+                
             };
 
             await _roomRepository.AddAsync(room);

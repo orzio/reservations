@@ -35,13 +35,13 @@ namespace Reservations.Infrastructure.Repositories
         public async Task<IEnumerable<Office>> GetAllAsync()
        => await _context.Offices
             .Include(c => c.Address)
-            .Include(x => x.Rooms)
+            .Include(x => x.Rooms).ThenInclude(x => x.Photos)
             .Include(x => x.Desks)
             .ToListAsync();
 
         public async Task<Office> GetAsync(Guid officeId)
         => await _context.Offices
-            .Include(x => x.Rooms)
+            .Include(x => x.Rooms).ThenInclude(x => x.Photos)
             .Include(x => x.Desks)
             .SingleOrDefaultAsync(x => x.Id == officeId);
 
@@ -54,7 +54,7 @@ namespace Reservations.Infrastructure.Repositories
         public async Task<IEnumerable<Office>> GetUsersOfficeAsync(Guid userId)
             => await _context.Offices.Where(x => x.UserId == userId)
             .Include(x=> x.Address)
-            .Include(x => x.Rooms)
+            .Include(x => x.Rooms).ThenInclude(x => x.Photos)
             .Include(x => x.Desks).ToListAsync();
 
        public async Task<IEnumerable<Office>> GetOfficesWithDesksInCity(string city)
@@ -75,7 +75,7 @@ namespace Reservations.Infrastructure.Repositories
             var offices = await _context.Offices
                 .Include(x => x.Address)
                 .Where(x => x.Address.City == city)
-                .Include(x => x.Rooms)
+                .Include(x => x.Rooms).ThenInclude(x => x.Photos)
                 .Where(x => x.Rooms.Count > 0)
                 .ToListAsync();
 

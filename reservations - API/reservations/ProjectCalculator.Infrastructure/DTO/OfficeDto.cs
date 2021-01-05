@@ -12,7 +12,7 @@ namespace Reservations.Infrastructure.DTO
         public Address Address { get;  set; }
         public string Name { get;  set; }
         public string Description { get; set; }
-        public List<Room> Rooms { get;  set; }
-        public List<Desk> Desks { get;  set; }
+        public List<RoomDto> Rooms { get;  set; }
+        public List<DeskDto> Desks { get;  set; }
     }
 }

@@ -113,6 +113,31 @@ namespace Reservations.Infrastructure.Migrations
                     b.ToTable("Offices");
                 });
 
+            modelBuilder.Entity("Reservations.Core.Domain.Photo", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsMain")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("OfficeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("PhotoUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("RoomId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoomId");
+
+                    b.ToTable("Photos");
+                });
+
             modelBuilder.Entity("Reservations.Core.Domain.Room", b =>
                 {
                     b.Property<Guid>("Id")
@@ -246,7 +271,7 @@ namespace Reservations.Infrastructure.Migrations
 
             modelBuilder.Entity("Reservations.Core.Domain.Desk", b =>
                 {
-                    b.HasOne("Reservations.Core.Domain.Office", null)
+                    b.HasOne("Reservations.Core.Domain.Office", "Office")
                         .WithMany("Desks")
                         .HasForeignKey("OfficeId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -275,9 +300,18 @@ namespace Reservations.Infrastructure.Migrations
                         .HasForeignKey("AddressId");
                 });
 
+            modelBuilder.Entity("Reservations.Core.Domain.Photo", b =>
+                {
+                    b.HasOne("Reservations.Core.Domain.Room", "Room")
+                        .WithMany("Photos")
+                        .HasForeignKey("RoomId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Reservations.Core.Domain.Room", b =>
                 {
-                    b.HasOne("Reservations.Core.Domain.Office", null)
+                    b.HasOne("Reservations.Core.Domain.Office", "Office")
                         .WithMany("Rooms")
                         .HasForeignKey("OfficeId")
                         .OnDelete(DeleteBehavior.Cascade)

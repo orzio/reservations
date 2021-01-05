@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
 
 namespace Reservations.Infrastructure.Data
 {
@@ -17,8 +18,18 @@ namespace Reservations.Infrastructure.Data
 
         }
 
+
+        public static readonly ILoggerFactory ConsoleLoggerFactory = LoggerFactory.Create(builder =>
+        {
+            builder.AddFilter((category, level) =>
+            category == DbLoggerCategory.Database.Command.Name
+            && level == LogLevel.Information).AddConsole();
+        });
+       
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
+            optionsBuilder.UseLoggerFactory(ConsoleLoggerFactory);
     //        optionsBuilder.UseSqlServer(
     //"Data Source = (localdb)\\MSSQLLocalDB; Initial Catalog = newDB");
         }
@@ -37,7 +48,9 @@ namespace Reservations.Infrastructure.Data
             //                    HasCheckConstraint("CK_RoomReservations_StartDate", "X not between [StartDate] and [EndDate]"));
         }
 
+
         public DbSet<User> Users { get; set; }
+        public DbSet<Photo> Photos{ get; set; }
         public DbSet<Token> Tokens { get; set; }
         public DbSet<Office> Offices{ get; set; }
         public DbSet<Room> Rooms{ get; set; }

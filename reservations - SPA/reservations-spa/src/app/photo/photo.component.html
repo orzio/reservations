@@ -1,0 +1,71 @@
+<div class="row mt-5">
+    <div class="col-sm-2 img-wrapper" *ngFor="let photo of photos">
+     <img src="{{photo.photoUrl}}" class="img-thumbnail p-1" alt=""
+       [ngClass]="!photo.isApproved && 'not-approved'">
+
+     <div class="text-center">
+         <div class="row">
+
+             <button type="button" class="btn btn-sm mr-1"
+             [ngClass]="photo.isMain ? 'btn-success active' : 'btn-secondary'"
+             (click)="setMainPhoto(photo)"
+             [disabled]="photo.isMain">Główne</button>
+             <button type="button" class="btn btn-sm btn-danger"
+             [disabled]="photo.isMain"
+             (click)="remove(photo.id)">Usuń</button>
+        </div>
+    </div>
+   </div> 
+ </div>
+  
+  <div class="row">
+  
+      <div class="col-md-3 mt-5">
+  
+          <h3>Dodaj zdjęcie:</h3>
+
+          <input type="file" ng2FileSelect [uploader]="uploader" />
+      </div>
+  </div>
+  <div class="mt-5" class="row">
+      <div class="col-md-9 mt-5" style="margin-bottom: 40px" >
+  
+          
+
+  
+          <table class="table">
+              <thead>
+              <tr>
+                  <th width="50%">Nazwa</th>
+                  <th>Rozmiar</th>
+              </tr>
+              </thead>
+              <tbody>
+              <tr *ngFor="let item of uploader.queue">
+                  <td><strong>{{ item?.file?.name }}</strong></td>
+                  <td *ngIf="uploader.options.isHTML5" nowrap>{{ item?.file?.size/1024/1024 | number:'.2' }} MB</td>
+              </tr>
+              </tbody>
+          </table>
+  
+          <div class="mt-5">
+              <div>
+                  Postęp:
+                  <div class="progress mb-4">
+                      <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
+                  </div>
+              </div>
+              <button type="button" class="btn btn-primary btn-s"
+                      (click)="uploader.uploadAll()" [disabled]="!uploader.getNotUploadedItems().length">
+                  <span class="fa fa-upload"></span> Wyślij
+              </button>
+
+              <button type="button" class="btn btn-danger btn-s"
+                      (click)="uploader.clearQueue()" [disabled]="!uploader.queue.length">
+                  <span class="fa fa-trash"></span> Usuń
+              </button>
+          </div>
+  
+      </div>
+  
+  </div>

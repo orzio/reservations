@@ -57,7 +57,7 @@ namespace Reservations
             services.AddAuthorization(x => x.AddPolicy("admin", p => p.RequireRole("admin")));
             services.AddAuthorization(x => x.AddPolicy("user", p => p.RequireRole("user")));
             services.AddDbContext<DataContext>(options =>
-                        options.UseSqlServer(Configuration["sql:connectionString"]));
+                        options.UseSqlServer(Configuration["sql:connectionString"]).EnableSensitiveDataLogging().EnableDetailedErrors());
             //options.UseSqlite(Configuration
             //.GetConnectionString("DefaultConnection")));
             services.AddControllers()

@@ -21,10 +21,13 @@ export class RoomDetailComponent implements OnInit {
     this.activatedRoute.params.subscribe((params:Params)=>{
     this.index=+params['roomId'];
     this.room = this.roomService.getRoomById(this.index);
+    console.log("::::::::::::::::::::::::::::")
+    console.log(this.room.mainUrl);
     this.officeId = this.room.officeId;
     });
     this.roomService.roomUpdated.subscribe((resp:Room)=>{
       this.room = resp;
+
     })
   
   }

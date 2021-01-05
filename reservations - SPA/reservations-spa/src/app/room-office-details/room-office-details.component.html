@@ -1,4 +1,5 @@
 <div class="background"></div>
+
 <div class="room-info">
     <div class="col-md-7">
         <div class="row">
@@ -46,21 +47,19 @@
 </div>
 
 <hr>
-<div class="row" >
-    <div class="row">
-        <h2>Kontakt:</h2>
-        <p>Biuro: {{roomOffice.officeName}}</p>
-        <p>{{roomOffice.officeAddress.street}}, {{roomOffice.officeAddress.zipCode}} {{roomOffice.officeAddress.city}}</p>
-        <!-- <p>{{roomOffice.officeAddress.zipCode}} {{roomOffice.officeAddress.city}}</p> -->
-        
-
-    </div>
-    <div class="row">
-        <div class="room-info-actions">
-            <button class="btn btn-primary" (click)="close()">Zamknij</button>
+    <div class="row" >
+        <div class="row">
+            <h2>Kontakt:</h2>
+            <p>Biuro: {{roomOffice.officeName}}</p>
+            <p>{{roomOffice.officeAddress.street}}, {{roomOffice.officeAddress.zipCode}} {{roomOffice.officeAddress.city}}</p>
+            <!-- <p>{{roomOffice.officeAddress.zipCode}} {{roomOffice.officeAddress.city}}</p> -->
+        </div>
+        <div class="row">
+            <div class="room-info-actions">
+                <button class="btn btn-primary" (click)="close()">Zamknij</button>
+            </div>
         </div>
     </div>
-</div>
 </div>
 
 

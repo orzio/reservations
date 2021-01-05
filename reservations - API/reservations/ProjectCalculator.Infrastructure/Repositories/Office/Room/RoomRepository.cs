@@ -35,10 +35,10 @@ namespace Reservations.Infrastructure.Repositories
         => await _context.Rooms.ToListAsync();
 
         public async Task<Room> GetAsync(Guid id)
-        => await _context.Rooms.SingleOrDefaultAsync(x => x.Id == id);
+        => await _context.Rooms.Include(x => x.Photos).SingleOrDefaultAsync(x => x.Id == id);
 
         public async Task<Room> GetAsync(string name)
-        => await _context.Rooms.SingleOrDefaultAsync(x => x.Name == name);
+        => await _context.Rooms.Include(x => x.Photos).SingleOrDefaultAsync(x => x.Name == name);
 
         public async Task UpdateAsync(Room room)
         {
