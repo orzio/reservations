@@ -17,18 +17,19 @@ export class PhotoComponent implements OnInit {
   currentMainPhoto: Photo;
   currentRoomId:string="";
   ngOnInit(): void {
+    console.log("ngoninit-----PhotoCompoennt")
     const _this = this;
     this.roomService.roomDetailsId.subscribe((data:string)=>{
       _this.currentRoomId = data;
       console.log(data);
       console.log("Kurka:" + _this.currentRoomId);
+      this.initializeUploader();
     })
-    this.initializeUploader();
   }
   initializeUploader() {
 
     this.uploader = new FileUploader({
-      url: 'http://localhost:44310/photos/room/'+this.currentRoomId.toString(),
+      url: 'http://localhost:44310/photos/room/'+this.currentRoomId,
       // authToken: 'Bearer ' + localStorage.getItem('token'),
       isHTML5: true,
       allowedFileType: ['image'],
@@ -50,11 +51,6 @@ export class PhotoComponent implements OnInit {
          };
          console.log(photo.photoUrl);
          this.photos.push(photo);
-        if(photo.isMain){
-          this.currentMainPhoto.photoUrl = photo.photoUrl;
-          // this.authService.changeMemberPhoto(photo.url);
-          // this.authService.currentUser.photoUrl = photo.url;
-         }
       }
     }
   }
@@ -71,12 +67,11 @@ export class PhotoComponent implements OnInit {
 
 
   setMainPhoto(photo: Photo, currentRoomId:string ) {
-
-
     this.imageService.toggleMainPhoto(photo.id, this.currentRoomId).subscribe(() => {
       this.currentMainPhoto = this.photos.filter(p => p.isMain === true)[0];
       this.currentMainPhoto.isMain = false;
       photo.isMain = true;
+      this.roomService.fetchRooms().subscribe(()=>{});
       this.imageService.currentMainChanged.next(photo.photoUrl);
     }, error => {
      

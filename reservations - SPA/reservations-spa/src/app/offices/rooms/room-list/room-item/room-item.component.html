@@ -1,16 +1,26 @@
-<div style="display: flex; flex-direction: row; justify-content: space-between;" class="list-group-item" >
+
+<div class="card mb-3" style="max-width: 540px;">
     <a style="cursor: pointer; border:none;" class="list-group-item"
     [routerLink]="[index]">
-        <div class="pull-left">
-            <h4 class="list-group-item-heading">{{room.name}}</h4>
-            <p class="list-group-item-text">{{room.description}}</p>
-        </div> 
+    <div class="row no-gutters">
+      <div class="col-md-4">
+        <img src="{{room.mainUrl}}" class="card-img" alt="...">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">{{room.name}}</h5>
+          <p class="card-text">{{room.description}}</p>
+          
+        </div>
+      </div>
+    </div>
     </a>
-    <div>
-        <div class="optionLink">
-            <a (click)="onEditRoom()">Edit</a>
+    <div class="row">
+        <div class="optionLink" >
+            <a style="float:right; margin-right: 10px; margin-bottom: 10px;" (click)="onEditRoom()">Edytuj</a>
         </div>
     </div>
-</div>
+    
 
+  </div>
 

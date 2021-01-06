@@ -14,7 +14,7 @@ namespace Reservations.Infrastructure.Repositories.Photos
         Task<Photo> GetPhoto(Guid id);
         Task RemovePhoto(Guid photoId);
         Task<IEnumerable<Photo>> GetPhotos(Guid roomId);
-        Task SetMain(Guid id);
+        Task SetMain(Guid roomId, Guid id);
     }
 
 }

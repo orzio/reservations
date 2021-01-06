@@ -37,7 +37,7 @@ export class ImageService {
   }
 
   toggleMainPhoto(id:string, currentRoomId:string){
-    return this.http.post('http://localhost:44310/photos/room/'+currentRoomId+'main/'+id,{});
+    return this.http.post('http://localhost:44310/photos/room/'+currentRoomId+'/main/'+id,{});
   }
 
 }

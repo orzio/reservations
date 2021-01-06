@@ -14,6 +14,7 @@ import { Photo } from 'src/app/_models/Photo';
 })
 export class RoomEditComponent implements OnInit {
 
+  active = 1;
   roomGuid:string;
   roomId:number;
   editMode:boolean=false;

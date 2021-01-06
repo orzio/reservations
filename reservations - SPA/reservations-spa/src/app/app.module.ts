@@ -70,6 +70,8 @@ import { ImageService } from './_services/image.service';
 import { ImageUploadComponent } from './image-upload/image-upload.component';
 import { PhotoComponent } from './photo/photo.component';
 import { FileUploadModule } from 'ng2-file-upload';
+import { PhotoGalerryComponent } from './photo-galerry/photo-galerry.component';
+import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
@@ -122,13 +124,15 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     DeskReservationItemComponent,
     UserProfileComponent,
     ImageUploadComponent,
-    PhotoComponent
+    PhotoComponent,
+    PhotoGalerryComponent
   ],
 
   
   imports: [
     BrowserModule,
     FileUploadModule,
+    NgxGalleryModule,
     BrowserAnimationsModule,
     CollapseModule.forRoot(),
     HttpClientModule,

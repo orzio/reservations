@@ -1,89 +1,103 @@
-<div class="row">
-    <div class="col-xs-12">
-        <form [formGroup]="roomForm" (ngSubmit)="onSubmit()">
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="form-group">
-                        <label for="name">Nazwa</label>
-                        <input 
-                        type="text"
-                        formControlName="name"
-                        class="form-control">
-                    </div>
-                </div>
-            </div>
-            
-
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="form-group">
-                        <label for="description">Description</label>
-                        <textarea formControlName="description" class="form-control" rows="3"></textarea>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="form-group">
-                        <label for="city">Ilość miejsc</label>
-                        <input type="number"
-                        formControlName="seats"
-                        class="form-control">
-                    </div>
-                </div>
-            </div>    
-
-            <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-check">
-                            <label for="street">TV</label>
-                            <input type="checkbox"
-                            formControlName="hasTV"
-                            class="form-control form-check-input">
+<ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+    <li [ngbNavItem]="1">
+      <a ngbNavLink>Dane ogólne</a>
+      <ng-template ngbNavContent>
+        <div class="row">
+            <div class="col-xs-12">
+                <form [formGroup]="roomForm" (ngSubmit)="onSubmit()">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label for="name">Nazwa</label>
+                                <input 
+                                type="text"
+                                formControlName="name"
+                                class="form-control">
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="form-check">
-                            <label for="street">Tablica</label>
-                            <input type="checkbox" 
-                            formControlName="hasWhiteBoard"
-                            class="form-control form-check-input">
+                    
+        
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <textarea formControlName="description" class="form-control" rows="3"></textarea>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="form-check">
-                            <label for="zipCode">Projektor</label>
-                            <input type="checkbox"
-                            formControlName="hasProjector"
-                            class="form-control form-check-input"
-                            >
+        
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label for="city">Ilość miejsc</label>
+                                <input type="number"
+                                formControlName="seats"
+                                class="form-control">
+                            </div>
                         </div>
+                    </div>    
+        
+                    <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-check">
+                                    <label for="street">TV</label>
+                                    <input type="checkbox"
+                                    formControlName="hasTV"
+                                    class="form-control form-check-input">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check">
+                                    <label for="street">Tablica</label>
+                                    <input type="checkbox" 
+                                    formControlName="hasWhiteBoard"
+                                    class="form-control form-check-input">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-check">
+                                    <label for="zipCode">Projektor</label>
+                                    <input type="checkbox"
+                                    formControlName="hasProjector"
+                                    class="form-control form-check-input"
+                                    >
+                                </div>
+                            </div>
+                    </div> 
+        
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label for="city">Dodatkowe wyposażenie</label>
+                                <textarea formControlName="otherEquipment" class="form-control" rows="3"></textarea>
+                            </div>
+                        </div>
+                    </div>    
+        
+        
+                    
+        
+                    <div class="row">
+                        <div class="col-md-3 mt-2">
+                            <button [disabled]="!roomForm.valid" class="btn btn-primary" type="submit">Zapisz</button>
+                            <button class="btn btn-danger" (click)="onCancel()" type="button">Anuluj</button>
+                        </div>
+                        
                     </div>
-            </div> 
-
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="form-group">
-                        <label for="city">Dodatkowe wyposażenie</label>
-                        <textarea formControlName="otherEquipment" class="form-control" rows="3"></textarea>
-                    </div>
-                </div>
-            </div>    
-
-
-            
-
-            <div class="row">
-                <div class="col-md-3 mt-2">
-                    <button [disabled]="!roomForm.valid" class="btn btn-primary" type="submit">Zapisz</button>
-                    <button class="btn btn-danger" (click)="onCancel()" type="button">Anuluj</button>
-                </div>
-                
+        
+                </form>
             </div>
-
-        </form>
-    </div>
-</div> 
-
-<app-photo [photos]="photos"  *ngIf="editMode"></app-photo>
+        </div> 
+      </ng-template>
+    </li>
+    <li [ngbNavItem]="2" *ngIf="editMode">
+      <a ngbNavLink>Edycja zdjęć</a>
+      <ng-template ngbNavContent>
+        <app-photo [photos]="photos"  ></app-photo>
+      </ng-template>
+    </li>
+  </ul>
+  
+  <div [ngbNavOutlet]="nav" class="mt-2"></div>
+  

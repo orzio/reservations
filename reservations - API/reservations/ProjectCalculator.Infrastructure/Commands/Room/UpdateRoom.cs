@@ -1,4 +1,5 @@
 ﻿using Reservations.Infrastructure.Commands;
+using Reservations.Infrastructure.DTO;
 using System;
 using System.Collections.Generic;
 using System.Text;

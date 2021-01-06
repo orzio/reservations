@@ -16,6 +16,7 @@ export class RoomService{
     roomUpdated = new Subject<Room>();
     roomInfoChanged = new ReplaySubject<RoomOffice>();
     private rooms:Room[] = [];
+    photoRoomChanged = new ReplaySubject<Room>();
 
     getRooms():Room[]{
         console.log("get rooms"+this.rooms.length);
@@ -62,12 +63,14 @@ export class RoomService{
 
     updateRoom(index:number, updatedRoom:Room){
         this.http.put<Room>(`${this.API_URL}`,updatedRoom).subscribe(response =>{
+            const _this = this;
             this.fetchRooms().subscribe((resp:Room[])=>{
                 console.log("updated room:");
-                console.dir(updatedRoom);
-                this.rooms = this.rooms.filter(x => x.officeId == updatedRoom.officeId);
-                this.roomsChanged.next(this.rooms.slice());
-                this.roomUpdated.next(this.getRoomById(index));
+                console.dir(resp);
+                console.dir(_this.rooms);
+                _this.rooms = _this.rooms.filter(x => x.officeId == updatedRoom.officeId);
+                _this.roomsChanged.next(_this.rooms.slice());
+                _this.roomUpdated.next(_this.getRoomById(index));
             })
         })
     }

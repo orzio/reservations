@@ -32,7 +32,7 @@ namespace Reservations.Infrastructure.Repositories
         }
 
         public async Task<IEnumerable<Room>> GetAllAsync()
-        => await _context.Rooms.ToListAsync();
+        => await _context.Rooms.Include(x => x.Photos).ToListAsync();
 
         public async Task<Room> GetAsync(Guid id)
         => await _context.Rooms.Include(x => x.Photos).SingleOrDefaultAsync(x => x.Id == id);
