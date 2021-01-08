@@ -28,7 +28,8 @@ namespace Reservations.Infrastructure.Repositories.Revervations.Room
             {
                 try
                 {
-                    var reservationsExists = _context.RoomReservations.Any(x => endTime >= x.StartDate   && startTime <= x.EndDate);
+                    //var reservationExists = _context.RoomReservations.Where(x => endTime >= x.StartDate && startTime <= x.EndDate);
+                    var reservationsExists = _context.RoomReservations.Where(x => x.RoomId == roomId).Any(x => endTime >= x.StartDate   && startTime <= x.EndDate);
                     if (reservationsExists)
                     {
                         //TODO NEW exception Class
