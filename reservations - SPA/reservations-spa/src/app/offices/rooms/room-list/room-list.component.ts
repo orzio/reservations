@@ -19,11 +19,12 @@ export class RoomListComponent implements OnInit,OnDestroy {
     private router:Router) { }
 
   ngOnInit(): void {
-    this.rooms = this.roomService.getRooms();
+    const _this = this;
+    // this.rooms = this.roomService.getRooms();
     this.subscription = this.roomService.roomsChanged
     .subscribe(
       (rooms:Room[]) =>{
-        this.rooms = rooms;
+        _this.rooms = rooms;
         console.log("room-list");
         console.log(rooms);
       }
@@ -35,7 +36,7 @@ export class RoomListComponent implements OnInit,OnDestroy {
   }
 
   ngOnDestroy():void{
-    this.subscription.unsubscribe();
+    this.subscription?.unsubscribe();
   }
 
   goToPrevious(){

@@ -11,21 +11,21 @@
             <div class ="col-12">
                 <div class="row">
                     <div class="col-12">
-                        <span class="help-block" *ngIf="!email.valid && email.touched">Please enter valid email</span>
-                        <input type="text" class="form-control" name="username"  placeholder="Email" [(ngModel)]="model.email" email #email="ngModel" required>
+                        <label [ngClass]="{'help-block': !email.valid && email.touched}" for="username"> Podaj e-mail</label>
+                            <input type="text" class="form-control" name="username"  placeholder="e-mail" [(ngModel)]="model.email" email #email="ngModel" required>
                     </div>
                 </div>
                 <div class="row mt-2">
                     <div class="col-12">
-                        <span class="help-block" *ngIf="!password.valid && password.touched">Please enter your password</span>
-                        <input type="text" class="form-control" name="password" placeholder="Password" type="password" #password="ngModel" [(ngModel)]="model.password" required>
+                        <label [ngClass]="{'help-block': !password.valid && password.touched}" for="password" >Podaj hasło</label>
+                        <input type="text" class="form-control" name="password" placeholder="Hasło" type="password" #password="ngModel" [(ngModel)]="model.password" required>
                     </div>
                 </div>
                 <div class="row mt-2">
                     <a (click)="onForgotPassword()" style="cursor: pointer;">Zapomnialem hasła</a>
                 </div>
                 <div class="row mt-2">
-                    <button class="btn btn-primary" type="submit">Zaloguj</button>
+                    <button class="btn btn-secondary" type="submit">Zaloguj</button>
                 </div>
             </div>
         </div>  

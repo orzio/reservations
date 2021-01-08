@@ -14,7 +14,7 @@ import { Subscription } from 'rxjs';
 export class DeskItemComponent implements OnInit, OnDestroy {
 
   @Input() desk:Desk;
-  @Input() index:number;
+  @Input() index:string;
 
   subscription :Subscription;
   currentOffice:Office;
@@ -25,23 +25,22 @@ export class DeskItemComponent implements OnInit, OnDestroy {
    this.subscription =  this.activatedRoute.params
     .subscribe((params:Params) => {
       this.activatedRoute.params.subscribe((params) =>{
-        this.currentOffice = this.officeService.getOfficeById(+this.activatedRoute.snapshot.params['id']);
+        this.currentOffice = this.officeService.getOfficeById(this.activatedRoute.snapshot.params['id']);
       })
     }
     )}
 
   onDeleteDesk(){
-    this.deskService.deleteDesk(this.index).subscribe(()=>{
-      this.deskService.fetchdesks().subscribe((resp:Desk[]) => {
-        var desks = resp.filter(x => x.officeId == this.currentOffice.id);
-        this.deskService.desksChanged.next(desks.slice());
-      })
+
+    this.deskService.deleteDesk(this.desk.id).subscribe(()=>{
+      this.deskService.fetchOfficesdesks(this.desk.officeId)
+      .subscribe((resp:Desk[]) => {})
     })
     };
 
 
     ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.subscription?.unsubscribe();
     }
   }
 

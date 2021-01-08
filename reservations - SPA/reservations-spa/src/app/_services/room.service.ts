@@ -11,6 +11,10 @@ export class RoomService{
     constructor(private http: HttpClient) {}
     private readonly API_URL:string = 'http://localhost:44310/offices/rooms/';
     
+
+
+
+    currentOfficeId = new ReplaySubject<string>();
     roomDetailsId = new ReplaySubject<string>();
     roomsChanged = new Subject<Room[]>();
     roomUpdated = new Subject<Room>();
@@ -24,11 +28,19 @@ export class RoomService{
         return this.rooms.slice();
     }
 
-    getRoomById(index:number){
+    // getRoomById(index:number){
+    //     console.log("get room by id")
+    //     console.log(this.rooms);
+    //     return this.rooms[index];
+    // }
+
+
+    getRoomById(index:string){
         console.log("get room by id")
         console.log(this.rooms);
-        return this.rooms[index];
+        return this.rooms.filter(x => x.id == index)[0];
     }
+
 
     addRoom(room:Room){
         this.http
@@ -40,9 +52,8 @@ export class RoomService{
         })
     }
 
-    deleteRoom(index:number){
-        const room = this.getRoomById(index);
-        return this.http.delete(`${this.API_URL}${room.id}`);
+    deleteRoom(index:string){
+        return this.http.delete(`${this.API_URL}${index}`);
     }
 
     setRooms(rooms:Room[]){
@@ -55,13 +66,25 @@ export class RoomService{
         .pipe(
             tap(rooms => {
                 this.setRooms(rooms);
-                console.log(this.rooms);
+
             })
             
         )
     }
 
-    updateRoom(index:number, updatedRoom:Room){
+    fetchOfficesRoom(officeId:string){
+        return this.http.get<Room[]>(this.API_URL)
+        .pipe(
+            tap(rooms => {
+                let officeRooms = rooms.filter(room => room.officeId ==officeId);
+                this.setRooms(officeRooms);
+            })
+            
+        )
+    }
+
+
+    updateRoom(index:string, updatedRoom:Room){
         this.http.put<Room>(`${this.API_URL}`,updatedRoom).subscribe(response =>{
             const _this = this;
             this.fetchRooms().subscribe((resp:Room[])=>{

@@ -20,7 +20,7 @@ export class OfficeService{
   roomsUpdated = new Subject<Room[]>();
 
 
-  getRooms(index:number){
+  getRooms(index:string){
   const rooms = this.getOfficeById(index).rooms;
   this.roomsUpdated.next(rooms.slice());
 }
@@ -35,11 +35,19 @@ getUserOffice(){
           return this.offices.slice();
       }
 
-      getOfficeById(index:number){
+      // getOfficeById(index:number){
+      //   console.log("index: + "+index);
+      //   let off= this.offices[index];
+      //   console.log(off);
+      //   console.log(`GetOfficeById :${this.offices[index].description}`);
+      //   return off;
+      // }
+
+      getOfficeById(index:string){
         console.log("index: + "+index);
-        let off= this.offices[index];
+        let off= this.offices.filter(x => x.id == index)[0];
         console.log(off);
-        console.log(`GetOfficeById :${this.offices[index].description}`);
+        console.log(`GetOfficeById :${off.description}`);
         return off;
       }
 
@@ -57,7 +65,7 @@ getUserOffice(){
 
       }
 
-      updateOffice(index:number, updatedOffice:Office){
+      updateOffice(index:string, updatedOffice:Office){
         this.http
         .put<Office>('http://localhost:44310/offices',updatedOffice).subscribe(response =>{
             this.fetchUserOffices().subscribe((resp:Office[]) =>{
@@ -68,10 +76,17 @@ getUserOffice(){
         );
       }
 
-      deleteOffice(index:number){
-        const office = this.getOfficeById(index);
-       return  this.http.delete(`http://localhost:44310/offices/${office.id}`);
+      // deleteOffice(index:number){
+      //   const office = this.getOfficeById(index);
+      //  return  this.http.delete(`http://localhost:44310/offices/${office.id}`);
+      // }
+
+
+      deleteOffice(index:string){
+        // const office = this.getOfficeById(index);
+       return  this.http.delete(`http://localhost:44310/offices/${index}`);
       }
+
 
       setOffices(offices:Office[]){
         this.offices = offices;
@@ -104,8 +119,8 @@ getUserOffice(){
     fetchUserOffices(){
 
       let userId;
-       this.authService.user.subscribe(user => {
-        userId = user.id;
+       this.authService.user?.subscribe(user => {
+        userId = user?.id;
       })
       
       return this.http

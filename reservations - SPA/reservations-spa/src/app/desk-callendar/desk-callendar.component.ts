@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Calendar, EventSourceInput, EventHoveringArg } from '@fullcalendar/core';
 import { CalendarOptions, DateSelectArg, EventClickArg, EventApi } from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -12,13 +12,14 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { ReservationDto } from '../_models/ReservationDto';
 import { reduce } from 'rxjs/operators';
 import { DeskSignalRService } from '../_services/deskSignalR.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-callendar',
   templateUrl: './desk-callendar.component.html',
   styleUrls: ['./desk-callendar.component.css']
 })
-export class DeskCallendarComponent implements OnInit {
+export class DeskCallendarComponent implements OnInit, OnDestroy {
 
   private resizeStared:EventClickArg;
   private resizeStopped:EventClickArg;
@@ -61,7 +62,7 @@ export class DeskCallendarComponent implements OnInit {
         new Date(changeInfo.event.start),
         new Date(changeInfo.event.end))
       
-        this.reservationService.updateReservation(uptadedReservation)
+        this.updateUubscription=this.reservationService.updateReservation(uptadedReservation)
         .subscribe((data)=>{
 
         },
@@ -75,9 +76,24 @@ export class DeskCallendarComponent implements OnInit {
   constructor(private authService:AuthService, private activatedRoute: ActivatedRoute, 
     private reservationService: DeskReservationService,private signalRService: DeskSignalRService) {
      }
+  ngOnDestroy(): void {
+   this.userSubscription?.unsubscribe();
+   this.reservationSubscription?.unsubscribe();
+   this.subscription?.unsubscribe();
+   this.deleteReservationSubscription?.unsubscribe()
+   this.updateUubscription?.unsubscribe();
+  }
+
+
+userSubscription:Subscription;
+reservationSubscription:Subscription;
+subscription:Subscription;
+deleteReservationSubscription:Subscription;
+updateUubscription:Subscription;
+
 
   ngOnInit(): void {
-    this.authService.user.subscribe((user:User)=>{
+    this.userSubscription = this.authService.user.subscribe((user:User)=>{
     this.user = user;
     this.eventTitle = user.name;
     this.reservationService.currentDeskIdChanged.subscribe((deskId:string)=>{
@@ -90,7 +106,7 @@ export class DeskCallendarComponent implements OnInit {
 
 
 
-    this.reservationService.deskReservationsChanged.subscribe(
+    this.reservationSubscription= this.reservationService.deskReservationsChanged.subscribe(
       (data:ReservationDto[])=>{
         let reservations=[];
         data.forEach(reservation => {
@@ -123,7 +139,7 @@ export class DeskCallendarComponent implements OnInit {
       let eventId = createEventId();
       let event = new DeskReservation(eventId,this.user.id,this.deskId, new Date(selectInfo.startStr),new Date(selectInfo.endStr));
 
-      this.reservationService.addReservation(event).subscribe((data)=> {
+      this.subscription= this.reservationService.addReservation(event).subscribe((data)=> {
         
       //   if (title) {
       //     calendarApi.addEvent({
@@ -150,7 +166,7 @@ export class DeskCallendarComponent implements OnInit {
   }
 
   handleEventDeleted(removeInfo){
-    this.reservationService.deleteReservation(removeInfo.event.id).subscribe(
+    this.deleteReservationSubscription = this.reservationService.deleteReservation(removeInfo.event.id).subscribe(
       (data)=>{
 
       },

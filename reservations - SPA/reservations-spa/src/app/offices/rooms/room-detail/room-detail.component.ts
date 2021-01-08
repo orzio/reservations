@@ -12,14 +12,14 @@ export class RoomDetailComponent implements OnInit {
 
   officeId:string;
   room:Room;
-  index:number;
+  index:string;
   constructor(private roomService:RoomService,
      private activatedRoute:ActivatedRoute,
      private router:Router) { }
 
   ngOnInit(): void {
     this.activatedRoute.params.subscribe((params:Params)=>{
-    this.index=+params['roomId'];
+    this.index=params['roomId'];
     this.room = this.roomService.getRoomById(this.index);
     this.roomService.photoRoomChanged.next(this.room);
     console.log("::::::::::::::::::::::::::::")
@@ -35,9 +35,8 @@ export class RoomDetailComponent implements OnInit {
 
   onDelete():void{
     this.roomService.deleteRoom(this.index).subscribe(response =>{
-
-      this.roomService.fetchRooms().subscribe((response:Room[]) =>{
-        this.roomService.roomsChanged.next(response.filter(x => x.officeId == this.officeId));
+      this.roomService.fetchOfficesRoom(this.officeId).subscribe((response:Room[]) =>{
+        // this.roomService.roomsChanged.next(response);
         this.router.navigate(['../'],{relativeTo:this.activatedRoute});
       })
     })

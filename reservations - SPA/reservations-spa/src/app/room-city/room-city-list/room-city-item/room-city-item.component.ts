@@ -41,13 +41,14 @@ export class RoomCityItemComponent implements OnInit {
     console.log('/callendar/room/'+this.room.id);
     this.router.navigate(['/callendar/room/'+this.room.id]);
   }
-
+  
   navigateToList(){
     this.router.navigate(['/']);
   }
-
+  
   showOfficeInfo(){
     this.roomOffice= new RoomOffice(this.room,this.officeName, this.officeAddress);
+    this.roomService.photoRoomChanged.next(this.room);
     this.roomService.roomInfoChanged.next(this.roomOffice);
     this.communicationService.roomDetailsClicked.next(true);
 

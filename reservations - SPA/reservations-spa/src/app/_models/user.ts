@@ -4,7 +4,8 @@ export class User{
       public id:string,
       private _token:string,
       private _tokenExpirationDate:number,
-      private _resreshToken:string
+      private _resreshToken:string,
+      private _role:string
     )
     {}
     get token(){
@@ -14,5 +15,9 @@ export class User{
         }
         console.log("token nie null");
         return this._token;
+    }
+
+    get role(){
+        return this._role;
     }
 }

@@ -1,33 +1,36 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { NgForm, FormGroup, FormControl, Validators } from '@angular/forms';
 import { OfficeService } from 'src/app/_services/office.service';
 import { Office } from 'src/app/_models/Office';
 import { AuthService } from 'src/app/_services/auth.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-office-edit',
   templateUrl: './office-edit.component.html',
   styleUrls: ['./office-edit.component.css']
 })
-export class OfficeEditComponent implements OnInit {
+export class OfficeEditComponent implements OnInit, OnDestroy {
 
   officeId:string;
-  id:number;
+  id:string;
   editMode:boolean = false;
 
+  subscription:Subscription;
   officeForm:FormGroup;
   constructor(private activatedRoute: ActivatedRoute, private officeService:OfficeService,
     private router: Router, private authService:AuthService) { 
     console.log(activatedRoute);
   }
 
+
   //w ng on init subskrybujemy ścieżkę po to, żeby zawsze sprawdzalo czy jestesmy w editmode czy nie
   ngOnInit(): void {
     this.activatedRoute.params
     .subscribe(
       (params:Params) =>{
-    this.id = +params['id'];
+    this.id = params['id'];
     this.editMode = params['id']!=null;
     this.initForm();
       }
@@ -37,7 +40,7 @@ export class OfficeEditComponent implements OnInit {
   onSubmit(){
     let updatedOffice:Office = this.officeForm.value;
     let userId;
-    this.authService.user.subscribe(user => {
+   this.subscription =  this.authService.user.subscribe(user => {
       userId = user.id;
     })
 
@@ -83,6 +86,10 @@ export class OfficeEditComponent implements OnInit {
   onCancel(){
     this.router.navigate(["../"],{relativeTo:this.activatedRoute});
   }
+
+  ngOnDestroy(): void {
+    this.subscription?.unsubscribe();
+   }
 
 
 

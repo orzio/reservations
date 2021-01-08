@@ -97,7 +97,7 @@ export class AuthService {
         const userName = this.decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'];
         console.log("curr user id" + userName);
         
-        let currentUser = new User(userName,userId,response.jwtToken,expDate,response.refreshToken);
+        let currentUser = new User(userName,userId,response.jwtToken,expDate,response.refreshToken,userRole);
         console.log("behvalue");
         this.user.next(currentUser);
         console.log(this.user);
@@ -125,10 +125,13 @@ export class AuthService {
             return;
         }
 
-        let currentUser = new User(data.name, data.id, data._token,new Date(data._tokenExpirationDate).getTime(), data._resreshToken);
+        this.decodedToken = this.jwtHelper.decodeToken(data._token);
+        const userRole = this.decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+        let currentUser = new User(data.name, data.id, data._token,new Date(data._tokenExpirationDate).getTime(), data._resreshToken, userRole);
         if(currentUser.token){
             this.user.next(currentUser);
             console.log("LOGIN AFTER REFRESH");
+            console.log(currentUser.role);
             const timeLeft = new Date(data._tokenExpirationDate).getTime() - new Date().getTime();
             // this.refreshToken(timeLeft);
         }

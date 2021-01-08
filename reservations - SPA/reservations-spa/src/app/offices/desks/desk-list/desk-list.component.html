@@ -1,5 +1,5 @@
 <div class="col-xs-12">
-    <button (click)="goToPrevious()" class="btn btn-danger">Wróć</button>
+    <button (click)="goToPrevious()" class="btn btn-dark">Wróć</button>
     
 </div>
 <div class="row">
@@ -13,13 +13,13 @@
         <app-desk-item
         *ngFor="let desk of desks; let i=index;"
         [desk]="desk"
-        [index]="i">
+        [index]="desk.id">
         </app-desk-item>
     </div>
 </div>
 
 <div class="row mt-2 mb-2">
     <div class="col-xs-12">
-        <button class="btn btn-success" (click)="onAddDesk()">Dodaj Biurko</button>
+        <button class="btn btn-secondary" (click)="onAddDesk()">Dodaj Biurko</button>
     </div>
 </div>

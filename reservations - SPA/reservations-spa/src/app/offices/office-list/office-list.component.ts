@@ -21,19 +21,19 @@ subscription :Subscription;
     private router:Router) { }
     
     ngOnInit(): void {
-     
+     const _this=this;
       let userId;
-      this.authService.user.subscribe(user => {
-        userId = user.id;
+      _this.subscription = _this.authService.user?.subscribe(user => {
+        userId = user?.id;
       })
       console.log("userId"+userId);
 
     this.offices = this.officeService.getUserOffice();
     console.log(`officeList :${this.offices}`);
-    this.subscription = this.officeService.officesChanged
+    this.subscription = _this.officeService.officesChanged
     .subscribe(
       (offices:Office[])=>{
-        this.offices=offices;
+        _this.offices=offices;
       }
     )
   }
@@ -42,7 +42,7 @@ subscription :Subscription;
     this.router.navigate(['new'],{relativeTo: this.activeRoute});
   }
   ngOnDestroy(): void {
-    this.subscription.unsubscribe();
+    this.subscription?.unsubscribe();
   }
 
 }

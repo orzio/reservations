@@ -18,11 +18,11 @@ export class DeskResolverService implements Resolve<Desk[]>{
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot){
 
         let desks:Desk[]=[];
-        let office = this.officeService.getOfficeById(+route.params['id']);
+        let office = this.officeService.getOfficeById(route.params['id']);
 
             this.officeService.fetchUserOffices().subscribe((resp) => {
                 console.log("jestesm w fetch subscribe");
-                office = this.officeService.getOfficeById(+route.params['id']);
+                office = this.officeService.getOfficeById(route.params['id']);
                 console.log("wychodze z fetch");
                 desks = office.desks;
                 this.deskService.setDesks(desks); 

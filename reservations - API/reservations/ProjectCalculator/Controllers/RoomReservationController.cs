@@ -60,6 +60,12 @@ namespace Reservations.Api.Controllers
             => Ok(await _roomReservationService.GetRoomWithOfficeReservationsAsync(userId));
 
 
+        [HttpGet("manager/{managerId}")]
+        public async Task<IActionResult> GetReservationForManager(Guid managerId)
+        => Ok(await _roomReservationService.GetAllReservationForManager(managerId));
+
+
+
         private async Task<Guid> GetRoomId(Guid reservationId)
         {
             var reservation = await _roomReservationService.GetAsync(reservationId);

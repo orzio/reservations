@@ -22,3 +22,9 @@
 .room-info-actions{
     text-align: right;
 }
+
+
+.form-check-input:checked{
+    background-color: gray;
+    border-color: gray;
+    }

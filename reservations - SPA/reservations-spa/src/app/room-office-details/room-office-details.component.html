@@ -1,66 +1,96 @@
 <div class="background"></div>
 
 <div class="room-info">
-    <div class="col-md-7">
-        <div class="row">
-        <div class="col-xs-12">
-           <h1>Sala: {{roomOffice.room.name}}</h1>
-           <br>
-           <h4>Wyposażenie:</h4>
-           <div class="row">
-                <div class="col-md-4">
+    
+
+
+<ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+  <li [ngbNavItem]="1">
+    <a style="color:black" ngbNavLink>Informacje ogólne</a>
+    <ng-template ngbNavContent>
+        <div class="col-md-7">
+            <div class="row">
+            <div class="col-xs-12">
+               <h1>Sala: {{roomOffice.room.name}}</h1>
+               <br>
+               <h4>Wyposażenie:</h4>
+               <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-check">
+                                <label for="street">TV</label>
+                                <input type="checkbox"
+                                class="form-control form-check-input"
+                                disabled
+                                [checked] ="roomOffice.room.hasTV">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
                     <div class="form-check">
-                            <label for="street">TV</label>
-                            <input type="checkbox"
-                            class="form-control form-check-input"
-                            disabled
-                            [checked] ="roomOffice.room.hasTV">
+                        <label for="street">Tablica</label>
+                        <input type="checkbox"
+                        class="form-control form-check-input"
+                        disabled
+                        [checked] ="roomOffice.room.hasWhiteBoard"
+                        >
+                    </div>
+                    </div>
+                    <div class="col-md-4">   
+                    <div class="form-check">
+                        <label for="street">Rzutnik</label>
+                        <input type="checkbox"
+                        class="form-control form-check-input"
+                        [checked] ="roomOffice.room.hasProjector"
+                        disabled>
                     </div>
                 </div>
-                <div class="col-md-4">
-                <div class="form-check">
-                    <label for="street">Tablica</label>
-                    <input type="checkbox"
-                    class="form-control form-check-input"
-                    disabled
-                    [checked] ="roomOffice.room.hasWhiteBoard"
-                    >
-                </div>
-                </div>
-                <div class="col-md-4">   
-                <div class="form-check">
-                    <label for="street">Rzutnik</label>
-                    <input type="checkbox"
-                    class="form-control form-check-input"
-                    [checked] ="roomOffice.room.hasProjector"
-                    disabled>
+               <h4>Miejsca siedzące:</h4>
+               <p>{{roomOffice.room.seats}}</p>
+               <br>
+               <h4>Dodatkowe Wyposażenie:</h4>
+               <p>{{roomOffice.room.otherEquipment}}</p>
+            </div>
+        </div>
+        </div>
+    
+    
+    <hr>
+        <div class="row" >
+            <div class="row">
+                <h2>Kontakt:</h2>
+                <p>Biuro: {{roomOffice.officeName}}</p>
+                <p>{{roomOffice.officeAddress.street}}, {{roomOffice.officeAddress.zipCode}} {{roomOffice.officeAddress.city}}</p>
+                <!-- <p>{{roomOffice.officeAddress.zipCode}} {{roomOffice.officeAddress.city}}</p> -->
+            </div>
+            <div class="row">
+                <div class="room-info-actions">
+                    <button class="btn btn-dark" (click)="close()">Zamknij</button>
                 </div>
             </div>
-           <h4>Miejsca siedzące:</h4>
-           <p>{{roomOffice.room.seats}}</p>
-           <br>
-           <h4>Dodatkowe Wyposażenie:</h4>
-           <p>{{roomOffice.room.otherEquipment}}</p>
         </div>
     </div>
-    </div>
+    </ng-template>
+  </li>
+  <li [ngbNavItem]="2">
+    <a style="color:black" ngbNavLink>Galeria</a>
+    <ng-template ngbNavContent>
+        <div>
+
+            <app-photo-galerry></app-photo-galerry>
+        </div>
+
+            <div class="row">
+                <div class="room-info-actions">
+                    <button class="btn btn-dark" (click)="close()">Zamknij</button>
+                </div>
+            </div>
+    </ng-template>
+  </li>
+</ul>
+<div [ngbNavOutlet]="nav" class="mt-2"></div>
+
+
 </div>
 
-<hr>
-    <div class="row" >
-        <div class="row">
-            <h2>Kontakt:</h2>
-            <p>Biuro: {{roomOffice.officeName}}</p>
-            <p>{{roomOffice.officeAddress.street}}, {{roomOffice.officeAddress.zipCode}} {{roomOffice.officeAddress.city}}</p>
-            <!-- <p>{{roomOffice.officeAddress.zipCode}} {{roomOffice.officeAddress.city}}</p> -->
-        </div>
-        <div class="row">
-            <div class="room-info-actions">
-                <button class="btn btn-primary" (click)="close()">Zamknij</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 
 

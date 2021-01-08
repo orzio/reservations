@@ -9,8 +9,11 @@
                 
                 <div class="collapse navbar-collapse" [collapse]="isCollapsed">
                   <ul class="navbar-nav ml-auto">
-                      <li class="nav-item" *ngIf="isLoggedIn">
+                      <li class="nav-item" *ngIf="isLoggedIn && currentUser.role=='manager'">
                         <a class="nav-link" [routerLink]="['/offices']" routerLinkActive="router-link-active">Twoje Biura</a>
+                      </li>
+                      <li class="nav-item" *ngIf="isLoggedIn && currentUser.role=='manager'">
+                        <a class="nav-link" [routerLink]="['/manager/reservations']" routerLinkActive="router-link-active">Rezerwacje użytkowników</a>
                       </li>
                       <li class="nav-item" *ngIf="isLoggedIn">
                         <a class="nav-link" [routerLink]="['/user/profile']" routerLinkActive="router-link-active">Twój Profil</a>

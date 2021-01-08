@@ -10,14 +10,14 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 })
 export class OfficeDetailComponent implements OnInit {
 office:Office;
-index:number;
+index:string;
 
   constructor(private officeService: OfficeService,
     private activatedRoute:ActivatedRoute, private router:Router) { }
 
   ngOnInit(): void {
       this.activatedRoute.params.subscribe((params:Params)=>{
-      this.index=+params['id'];
+      this.index=params['id'];
       this.office = this.officeService.getOfficeById(this.index);
     });
     this.officeService.officeUpdated.subscribe((resp:Office)=>{

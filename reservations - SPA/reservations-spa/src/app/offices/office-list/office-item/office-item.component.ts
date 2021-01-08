@@ -12,7 +12,7 @@ import { OfficeService } from 'src/app/_services/office.service';
 export class OfficeItemComponent implements OnInit {
 
   @Input() office:Office;
-  @Input() index:number;
+  @Input() index:string;
 
   constructor(private activeRoute:ActivatedRoute, private router:Router){}
 
@@ -26,6 +26,7 @@ this.router.navigate([this.index,'edit'],{relativeTo:this.activeRoute});
   }
 
   onDisplayRooms(){
+    console.log("RRRRRRRRROOOOOOMS:::::"+this.index); 
     this.router.navigate([this.index,'rooms'],{relativeTo:this.activeRoute});
   }
 

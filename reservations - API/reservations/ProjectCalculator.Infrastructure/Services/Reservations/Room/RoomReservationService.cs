@@ -33,6 +33,7 @@ namespace Reservations.Infrastructure.Services.Reservations.Room
                 //await _semaphoregate.WaitAsync();
                 
                  //await Check(roomId, startTime, endTime.AddMinutes(-1));
+                 
                 await _roomReservationRepository.AddAsync(reservationId, userId, roomId, startTime, endTime.AddMinutes(-1));
                 
             }catch(Exception e)
@@ -97,6 +98,12 @@ namespace Reservations.Infrastructure.Services.Reservations.Room
         {
             var reservations = await _roomReservationRepository.GetReservationByRoomIdAsync(roomId);
             return _mapper.Map<IEnumerable<RoomReservation>, IEnumerable<RoomReservationDto>>(reservations);
+        }
+
+        public async Task<IEnumerable<RoomReservationForManagerDto>> GetAllReservationForManager(Guid managerId)
+        {
+            var reservations = await _roomReservationRepository.GetAllReservationByManagerIdAsync(managerId);
+            return _mapper.Map<IEnumerable<RoomReservation>, IEnumerable<RoomReservationForManagerDto>>(reservations);
         }
     }
 }

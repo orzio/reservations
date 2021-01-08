@@ -16,7 +16,7 @@ export class RoomEditComponent implements OnInit {
 
   active = 1;
   roomGuid:string;
-  roomId:number;
+  roomId:string;
   editMode:boolean=false;
   roomForm:FormGroup;
   currentOffice:Office;
@@ -32,7 +32,7 @@ export class RoomEditComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.params
     .subscribe((params:Params) => {
-      this.roomId=+params['roomId'];
+      this.roomId=params['roomId'];
       this.editMode = params['roomId']!=null;
 
       this.activatedRoute.parent.params.subscribe((params) =>{

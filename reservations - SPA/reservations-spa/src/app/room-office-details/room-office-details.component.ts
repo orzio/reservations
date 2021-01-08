@@ -13,7 +13,7 @@ export class RoomOfficeDetailsComponent implements OnInit {
 
   message:string="";
 roomOffice:RoomOffice;
-
+active = 1;
   constructor(private communicationService:CommunicationService, private roomService:RoomService) { }
 
   ngOnInit(): void {

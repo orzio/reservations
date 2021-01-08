@@ -11,37 +11,47 @@
                 <div class ="col-12">
                     <div class="row">
                       <div class="col-12">
-                          <span *ngIf="!firstName.valid && firstName.touched" class="help-block">Podaj imię</span>
-                            <input type="text" class="form-control" name="firstname" placeholder="First name" [(ngModel)]="model.firstname" #firstName="ngModel" required>
+                          <label [ngClass]="{'help-block': !firstName.valid && firstName.touched}" for="firstname">Podaj imię</label>
+                            <input type="text" class="form-control" name="firstname" placeholder="Imię" [(ngModel)]="model.firstname" #firstName="ngModel" required>
                         </div>
                     </div>
 
                     <div class="row mt-2">
                         <div class="col-12">
-                          <span *ngIf="!lastName.valid && lastName.touched" class="help-block">Podaj nazwisko</span>
-                            <input type="text" class="form-control" name="lastname" placeholder="Last name" [(ngModel)]="model.lastname" #lastName="ngModel" required>
+                          <label [ngClass]="{'help-block': !lastName.valid && lastName.touched}"  for="lastName">Podaj nazwisko</label>
+                            <input type="text" class="form-control" name="lastname" placeholder="Nazwisko" [(ngModel)]="model.lastname" #lastName="ngModel" required>
                           </div>
                     </div>
 
                     
                     <div class="row mt-2">
                       <div class="col-12">
-                        <span *ngIf="!email.valid && email.touched" class="help-block"> Podam e-mail</span>
-                        <input type="text" class="form-control" name="email" placeholder="E-mail" [(ngModel)]="model.email" email #email="ngModel" required>
+                        <label [ngClass]="{'help-block': !email.valid && email.touched}" for="email"> Podaj e-mail</label>
+                          <input type="text" class="form-control" name="email" placeholder="E-mail" [(ngModel)]="model.email" email #email="ngModel" required>
                       </div>
                   </div>
                   
 
                     <div class="row mt-2">
                       <div class="col-12">
-                        <span *ngIf="!password.valid && password.touched" class="help-block">Podaj hasło</span>
-                          <input type="text" class="form-control" name="password" placeholder="Password" type="password" #password="ngModel" [(ngModel)]="model.password" required>
+                        <label [ngClass]="{'help-block': !password.valid && password.touched}"   for="password">Podaj hasło</label>
+                          <input type="text" class="form-control" name="password" placeholder="Hasło" type="password" #password="ngModel" [(ngModel)]="model.password" required>
                         </div>
                   </div>
 
+
+                  <div class="row mt-2">
+                    <div class="col-12">
+                      <label  for="selectedRole">Wybierz rolę</label>
+                        <select  [(ngModel)]="selectedRole" name="selectedRole" id="" style="width: 100%; padding: .375rem .75rem; margin-top: 0;  border-radius: .25rem;" required>
+                          <option value="Wystawca">Wystawca</option>
+                          <option value="Klient" selected>Klient</option>
+                        </select>
+                     </div>
+                  </div>
                     
                     <div class="row mt-2">
-                        <button class="btn btn-primary" type="submit">Zarejestruj</button>
+                        <button class="btn btn-secondary" type="submit">Zarejestruj</button>
                     </div>
                 </div>
               </div>  

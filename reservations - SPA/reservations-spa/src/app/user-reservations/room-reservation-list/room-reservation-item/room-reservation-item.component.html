@@ -1,22 +1,40 @@
-<div style="display: flex; flex-direction: row; justify-content: space-between; margin:10px;" class="list-group-item" >
-    <a style="cursor: pointer; border:none;" class="list-group-item" (click)="showOfficeInfo()">
-        <div class="pull-left">
-            <h2 class="list-group-item-heading">Sala: {{reservation.roomDto.name}}</h2>
-        </div> 
 
-        <div class="pull-left" *ngIf="reservationStartDay!=reservationEndDay">
-            <h6 class="list-group-item-heading">od {{reservationStartDay}} do {{reservationEndDay}} </h6>
-        </div> 
-        <div class="pull-left" *ngIf="reservationStartDay==reservationEndDay">
-            <h6 class="list-group-item-heading">{{reservationStartDay}}</h6>
-        </div> 
-        <div class="pull-left">
-            <h6 class="list-group-item-heading">od {{reservationStartHour}} do {{reservationEndHour}} </h6>
-        </div> 
-    </a>
-    <div>
-        <div class="center">
-            <button class="btn btn-primary" (click)="cancelReservation()">Odwołaj</button>
+  <div class="col-md-10">
+    <div class="row border-bottom border-top" style="justify-content: space-between;" >
+        <div class="col-md-5">
+            <div class="card mb-7" style="max-width: 540px; border:none">
+                <a style="cursor: pointer; color:black; border:none;" class="list-group-item"
+                (click)="showOfficeInfo()" >
+                <div class="row no-gutters">
+                    <div class="col-md-4">
+                        <img src="{{reservation.roomDto.mainUrl}}" class="card-img" alt="...">
+                    </div>
+                    <div class="col-md-8">
+                        <div class="card-body">
+                            <h4 class="card-title">{{reservation.roomDto.name}}</h4>
+                            <h5 class="card-title">Sala {{reservation.roomDto.seats}}-osobowa</h5>
+                            <div class="pull-left" *ngIf="reservationStartDay!=reservationEndDay">
+                              <h6 class="list-group-item-heading"> Kiedy: od {{reservationStartDay}} do {{reservationEndDay}} </h6>
+                          </div> 
+                          <div class="pull-left" *ngIf="reservationStartDay==reservationEndDay">
+                              <h6 class="list-group-item-heading"> Kiedy: {{reservationStartDay}}</h6>
+                          </div> 
+                          <div class="pull-left">
+                              <h6 class="list-group-item-heading"> Czas: od {{reservationStartHour}} do {{reservationEndHour}} </h6>
+                          </div> 
+                          </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        </div>
+
+        <div class="col-md-2" style="position:relative">
+            <div class="row inner" >
+                <div class="center">
+                    <button class="btn btn-light" (click)="cancelReservation()">Odwołaj</button>
+                </div>
+            </div>
         </div>
     </div>
 </div>

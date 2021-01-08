@@ -29,6 +29,10 @@ namespace Reservations.Infrastructure.Mappers
                     .ForMember(dest => dest.OfficeAddress, opt => opt.MapFrom(src => src.Desk.Office.Address))
                     .ForMember(dest => dest.DeskDto, opt => opt.MapFrom(src => src.Desk));
                 cfg.CreateMap<RoomReservation, RoomReservationDto>();
+                cfg.CreateMap<RoomReservation, RoomReservationForManagerDto>()
+                   .ForMember(dest => dest.OfficeName, opt => opt.MapFrom(src => src.Room.Office.Name))
+                   .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => $"{src.User.FirstName} {src.User.LastName}"))
+                   .ForMember(dest => dest.RoomName, opt => opt.MapFrom(src => src.Room.Name));
                 cfg.CreateMap<RoomReservation, RoomOfficeReservationDto>()
                     .ForMember(dest => dest.OfficeName, opt => opt.MapFrom(src => src.Room.Office.Name))
                     .ForMember(dest => dest.OfficeAddress, opt => opt.MapFrom(src => src.Room.Office.Address))

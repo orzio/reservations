@@ -51,8 +51,10 @@ export class RoomReservationItemComponent implements OnInit {
 
    showOfficeInfo(){
     let roomOffice= new RoomOffice(this.reservation.roomDto,this.reservation.officeName, this.reservation.officeAddress);
+    this.roomService.photoRoomChanged.next(roomOffice.room);
     this.roomService.roomInfoChanged.next(roomOffice);
     this.communicationService.roomDetailsClicked.next(true);
    }
   
 }
+

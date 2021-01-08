@@ -9,13 +9,13 @@
         <app-office-item 
         *ngFor="let office of offices; let i = index;"
         [office]="office"
-        [index] = "i">
+        [index] = "office.id">
     </app-office-item>
     </div>
 </div>
 
 <div class="row mt-2 mb-2">
     <div class="col-xs-12">
-        <button class="btn btn-success" (click)="onAddOffice()">Dodaj biuro</button>
+        <button class="btn btn-secondary" (click)="onAddOffice()">Dodaj biuro</button>
     </div>
 </div>

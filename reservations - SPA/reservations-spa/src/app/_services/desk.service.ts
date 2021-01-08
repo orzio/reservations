@@ -22,11 +22,12 @@ export class DeskService{
         return this.desks.slice();
     }
 
-    getDeskById(index:number){
+    getDeskById(index:string){
         console.log("get room by id")
         console.log(this.desks);
-        return this.desks[index];
+        return this.desks.filter(x => x.id ==index)[0];
     }
+
 
     addDesk(desk:Desk){
         this.http
@@ -37,10 +38,9 @@ export class DeskService{
             })
         })
     }
-
-    deleteDesk(index:number){
-        const Desk = this.getDeskById(index);
-        return this.http.delete(`${this.API_URL}${Desk.id}`);
+    
+    deleteDesk(index:string){
+        return this.http.delete(`${this.API_URL}${index}`);
     }
 
     setDesks(desks:Desk[]){
@@ -53,6 +53,19 @@ export class DeskService{
         .pipe(
             tap(desks => {
                 this.setDesks(desks);
+                console.log(this.desks);
+            })
+            
+        )
+    }
+
+
+    fetchOfficesdesks(officeId:string){
+        return this.http.get<Desk[]>(this.API_URL)
+        .pipe(
+            tap(desks => {
+                let officeDesks = desks.filter(desk => desk.officeId == officeId);
+                this.setDesks(officeDesks);
                 console.log(this.desks);
             })
             

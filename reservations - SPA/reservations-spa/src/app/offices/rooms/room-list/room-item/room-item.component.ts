@@ -11,11 +11,14 @@ import { RoomService } from 'src/app/_services/room.service';
 export class RoomItemComponent implements OnInit {
 
   @Input() room:Room;
-  @Input() index:number;
+  @Input() index:string;
 
   constructor(private router:Router, private activeRoute:ActivatedRoute, private roomService:RoomService) { }
 
   ngOnInit(): void {
+    this.activeRoute.params.subscribe(params => {
+      this.roomService.currentOfficeId.next(params['id']);
+    })
   }
 
   onEditRoom(){

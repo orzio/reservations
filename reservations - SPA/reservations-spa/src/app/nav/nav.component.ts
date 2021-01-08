@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy, ɵConsole } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 import { Subscription } from 'rxjs';
+import { User } from '../_models/user';
 
 @Component({
   selector: 'app-nav',
@@ -11,6 +12,7 @@ export class NavComponent implements OnInit, OnDestroy {
   
   isLoggedIn = false;
   isCollapsed: boolean = true;
+  currentUser:User;
   private userSubscription:Subscription;
   constructor(private authService:AuthService) { }
   
@@ -19,6 +21,7 @@ export class NavComponent implements OnInit, OnDestroy {
     this.userSubscription = this.authService.user.subscribe(user =>{
       console.log(":::::::::::::::::::::::::::::::::::::::::::::::::")
       let curruser = user;
+      this.currentUser = user;
       this.isLoggedIn = !!curruser;
       console.log(this.isLoggedIn);
       console.log(":::::::::::::::::::::::::::::::::::::::::::::::::")
@@ -33,6 +36,6 @@ export class NavComponent implements OnInit, OnDestroy {
 
     
           ngOnDestroy(): void {
-            this.userSubscription.unsubscribe();
+            this.userSubscription?.unsubscribe();
           }
 }

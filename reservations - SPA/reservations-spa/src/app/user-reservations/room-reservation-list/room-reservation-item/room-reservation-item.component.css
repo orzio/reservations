@@ -1,0 +1,8 @@
+.center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    right: 0%;
+    -ms-transform: translate(-20%, -50%);
+    transform: translate(-20%, -50%);
+  }

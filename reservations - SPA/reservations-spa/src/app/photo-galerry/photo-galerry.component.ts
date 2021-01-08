@@ -22,27 +22,27 @@ export class PhotoGalerryComponent implements OnInit {
     this.initOptions();
     const _this = this;
     this.roomService.photoRoomChanged.subscribe((room:Room)=>{
+      console.log("zmienione zdjecie");
       _this.galleryImages = _this.fillWithPhotos(room.photos);
     })
-
- 
-    // this.route.params.subscribe(data =>{
-    //   console.log('zmiana');
-    //   _this.galleryImages = _this.fillWithPhotos(room.photos);
-    //   console.log(_this.photos);
-    // })
     
   }
 
   initOptions(){
     this.galleryOptions = [
       {
-          width: '200px',
-          height: '200px',
+        breakpoint: 800,
+          width: '550px',
+          height: '500px',
           imagePercent:40,
           thumbnailsColumns: 4,
           imageAnimation: NgxGalleryAnimation.Slide,
-          preview:false
+          preview:false,
+          imageArrows:true,
+          thumbnailsArrows: true,
+          thumbnailsPercent: 20,
+          thumbnailsMargin: 20,
+          thumbnailMargin: 20
       }
     ];
 
@@ -57,6 +57,8 @@ export class PhotoGalerryComponent implements OnInit {
         big: photo.photoUrl,
       });
     }
+
+    console.log(photosUrls.length)
     return photosUrls;
   }
 

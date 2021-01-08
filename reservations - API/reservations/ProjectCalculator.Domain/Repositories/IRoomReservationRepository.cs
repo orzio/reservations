@@ -16,5 +16,6 @@ namespace Reservations.Core.Repositories
         Task<RoomReservation> GetAsync(Guid id);
         Task<IEnumerable<RoomReservation>> GetReservationByRoomIdAsync(Guid roomId);
         Task<IEnumerable<RoomReservation>> GetReservationByUserIdAsync(Guid userId);
+        Task<IEnumerable<RoomReservation>> GetAllReservationByManagerIdAsync(Guid managerId);
     }
 }

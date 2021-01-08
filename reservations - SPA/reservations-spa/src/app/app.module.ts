@@ -67,11 +67,13 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { RoomSignalRService } from './_services/roomSignalR.service';
 import { DeskSignalRService } from './_services/deskSignalR.service';
 import { ImageService } from './_services/image.service';
-import { ImageUploadComponent } from './image-upload/image-upload.component';
 import { PhotoComponent } from './photo/photo.component';
 import { FileUploadModule } from 'ng2-file-upload';
 import { PhotoGalerryComponent } from './photo-galerry/photo-galerry.component';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
+import { ManagerReservationComponent } from './manager-reservation/manager-reservation.component';
+import { ManagerRoomReservationsComponent } from './manager-reservation/manager-room-reservations/manager-room-reservations.component';
+import { ManagerDeskReservationsComponent } from './manager-reservation/manager-desk-reservations/manager-desk-reservations.component';
 
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
@@ -123,9 +125,11 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     DeskReservationListComponent,
     DeskReservationItemComponent,
     UserProfileComponent,
-    ImageUploadComponent,
     PhotoComponent,
-    PhotoGalerryComponent
+    PhotoGalerryComponent,
+    ManagerReservationComponent,
+    ManagerRoomReservationsComponent,
+    ManagerDeskReservationsComponent
   ],
 
   

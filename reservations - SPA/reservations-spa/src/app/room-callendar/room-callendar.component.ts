@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Calendar, EventSourceInput, EventHoveringArg } from '@fullcalendar/core';
 import { CalendarOptions, DateSelectArg, EventClickArg, EventApi } from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid';
@@ -14,13 +14,14 @@ import { RoomReservation } from '../_models/RoomReservation';
 import { RoomReservationService } from '../_services/roomReservation.Service';
 import { createEventId } from '../desk-callendar/event-utils';
 import { RoomSignalRService } from '../_services/roomSignalR.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-callendar',
   templateUrl: './room-callendar.component.html',
   styleUrls: ['./room-callendar.component.css']
 })
-export class RoomCallendarComponent implements OnInit {
+export class RoomCallendarComponent implements OnInit, OnDestroy {
 
   private resizeStared:EventClickArg;
   private resizeStopped:EventClickArg;
@@ -56,7 +57,21 @@ export class RoomCallendarComponent implements OnInit {
       // alert('date click! ' + arg.dateStr)
     }
 
-
+    ngOnDestroy(): void {
+      this.userSubscription?.unsubscribe();
+      this.reservationSubscription?.unsubscribe();
+      this.subscription?.unsubscribe();
+      this.deleteReservationSubscription?.unsubscribe();
+      this.updateUubscription?.unsubscribe();
+     }
+   
+   
+   userSubscription:Subscription;
+   reservationSubscription:Subscription;
+   subscription:Subscription;
+   deleteReservationSubscription:Subscription;
+   updateUubscription:Subscription;
+   
     handleEventChanged(changeInfo){
       
       var uptadedReservation =  new RoomReservation(changeInfo.event.id, this.user.id, 
@@ -64,7 +79,7 @@ export class RoomCallendarComponent implements OnInit {
         new Date(changeInfo.event.start),
         new Date(changeInfo.event.end))
       
-        this.reservationService.updateReservation(uptadedReservation)
+        this.updateUubscription = this.reservationService.updateReservation(uptadedReservation)
         .subscribe((data)=>{
 
         },
@@ -82,11 +97,11 @@ export class RoomCallendarComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.authService.user.subscribe((user:User)=>{
+    this.userSubscription = this.authService.user.subscribe((user:User)=>{
     this.user = user;
     this.eventTitle = user.name;
     
-    this.reservationService.currentRoomIdChanged.subscribe((roomId:string)=>{
+    this.reservationSubscription= this.reservationService.currentRoomIdChanged.subscribe((roomId:string)=>{
       this.roomId = roomId;
       
     });
@@ -105,7 +120,7 @@ export class RoomCallendarComponent implements OnInit {
 
   handleChanges(){
 
-    this.reservationService.roomReservationsChanged.subscribe(
+    this.subscription=this.reservationService.roomReservationsChanged.subscribe(
       (data:ReservationDto[])=>{
         let reservations=[];
         data.forEach(reservation => {
@@ -169,7 +184,7 @@ export class RoomCallendarComponent implements OnInit {
   }
 
   handleEventDeleted(removeInfo){
-    this.reservationService.deleteReservation(removeInfo.event.id).subscribe(
+    this.deleteReservationSubscription = this.reservationService.deleteReservation(removeInfo.event.id).subscribe(
       (data)=>{
         this.handleChanges();
       },

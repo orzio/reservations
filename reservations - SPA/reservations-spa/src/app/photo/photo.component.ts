@@ -3,6 +3,8 @@ import { FileUploader } from 'ng2-file-upload';
 import { Photo } from '../_models/Photo';
 import { ImageService } from '../_services/image.service';
 import { RoomService } from '../_services/room.service';
+import { ActivatedRoute, Params } from '@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-photo',
@@ -11,20 +13,27 @@ import { RoomService } from '../_services/room.service';
 })
 export class PhotoComponent implements OnInit {
 
-  constructor(private imageService:ImageService, private roomService:RoomService) { }
+  constructor(private imageService:ImageService, private roomService:RoomService, private activatedRoute:ActivatedRoute, private router:Router) { }
   @Input() photos: Photo[];
   uploader:FileUploader;
   currentMainPhoto: Photo;
   currentRoomId:string="";
+  currentOfficeId:string ="";
+  testOfficeId:string ="";
   ngOnInit(): void {
     console.log("ngoninit-----PhotoCompoennt")
-    const _this = this;
     this.roomService.roomDetailsId.subscribe((data:string)=>{
+      const _this = this;
       _this.currentRoomId = data;
       console.log(data);
       console.log("Kurka:" + _this.currentRoomId);
       this.initializeUploader();
     })
+
+  this.roomService.currentOfficeId.subscribe((officeId:string)=>{
+      this.currentOfficeId = officeId;
+    })
+
   }
   initializeUploader() {
 
@@ -51,6 +60,10 @@ export class PhotoComponent implements OnInit {
          };
          console.log(photo.photoUrl);
          this.photos.push(photo);
+         if(this.photos.length ==1 && photo.isMain){
+           this.roomService.fetchOfficesRoom(this.currentOfficeId).subscribe(()=>{});
+         }
+
       }
     }
   }
@@ -66,12 +79,12 @@ export class PhotoComponent implements OnInit {
   }
 
 
-  setMainPhoto(photo: Photo, currentRoomId:string ) {
+  setMainPhoto(photo: Photo, currentRoomId:string) {
     this.imageService.toggleMainPhoto(photo.id, this.currentRoomId).subscribe(() => {
       this.currentMainPhoto = this.photos.filter(p => p.isMain === true)[0];
       this.currentMainPhoto.isMain = false;
       photo.isMain = true;
-      this.roomService.fetchRooms().subscribe(()=>{});
+      this.roomService.fetchOfficesRoom( this.currentOfficeId).subscribe(()=>{});
       this.imageService.currentMainChanged.next(photo.photoUrl);
     }, error => {
      

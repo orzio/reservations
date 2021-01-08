@@ -28,13 +28,14 @@ import { DeskCityComponent } from './desk-city/desk-city.component'
 import { UserReservationsComponent } from './user-reservations/user-reservations.component'
 import { UserProfileComponent } from './user-profile/user-profile.component'
 import { Component } from '@angular/core'
-import { ImageUploadComponent } from './image-upload/image-upload.component'
 import { PhotoComponent } from './photo/photo.component'
+import { ManagerReservationComponent } from './manager-reservation/manager-reservation.component'
 
 
 export const appRoutes: Routes = [
     {path: '', component: HomeComponent,pathMatch:'full', resolve: [CityResolverService]},
   
+        {path:'manager/reservations', component:ManagerReservationComponent},
         {path: 'login', component: LoginComponent},
         {path:'forgotpassword',component:ForgotPasswordComponent},
         {path:'forgotpassword/resetpassword',component:ResetPasswordComponent},
