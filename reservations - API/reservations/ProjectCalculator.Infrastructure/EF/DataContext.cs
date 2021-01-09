@@ -41,7 +41,12 @@ namespace Reservations.Infrastructure.Data
             //modelBuilder.Entity<RoomReservations>().HasKey(x => new { x.UserId, x.RoomId });
             //modelBuilder.Entity<Address>().ToTable("Addresses");
             modelBuilder.Entity<Office>().HasMany(x => x.Rooms)
-                    .WithOne(e => e.Office);
+                    .WithOne(e => e.Office).HasForeignKey(x => x.OfficeId)
+                    .OnDelete(DeleteBehavior.Cascade);
+            
+
+        //.WithOne(e => e.Office).HasForeignKey(x => x.OfficeId)
+        //.OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<Office>().HasMany(x => x.Desks)
                     .WithOne(e => e.Office);
             //modelBuilder.Entity<RoomReservation>(entity => entity.
