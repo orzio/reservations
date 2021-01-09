@@ -119,8 +119,8 @@ getUserOffice(){
     fetchUserOffices(){
 
       let userId;
-       this.authService.user?.subscribe(user => {
-        userId = user?.id;
+       this.authService.user.subscribe(user => {
+        userId = user.id;
       })
       
       return this.http

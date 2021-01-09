@@ -10,5 +10,8 @@ namespace Reservations.Core.Domain
         public string Street { get;  set; }
         public string City { get;  set; }
         public string ZipCode { get;  set; }
+        public Office Office { get; set; }
+        public Guid OfficeId { get; set; }
+
     }
 }

@@ -10,8 +10,8 @@ using Reservations.Infrastructure.Data;
 namespace Reservations.Infrastructure.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210104233740_updateentitiesa")]
-    partial class updateentitiesa
+    [Migration("20210109124509_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -96,7 +96,7 @@ namespace Reservations.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("AddressId")
+                    b.Property<Guid>("AddressId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
@@ -110,7 +110,8 @@ namespace Reservations.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AddressId");
+                    b.HasIndex("AddressId")
+                        .IsUnique();
 
                     b.ToTable("Offices");
                 });
@@ -298,8 +299,10 @@ namespace Reservations.Infrastructure.Migrations
             modelBuilder.Entity("Reservations.Core.Domain.Office", b =>
                 {
                     b.HasOne("Reservations.Core.Domain.Address", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressId");
+                        .WithOne("Office")
+                        .HasForeignKey("Reservations.Core.Domain.Office", "AddressId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Reservations.Core.Domain.Photo", b =>

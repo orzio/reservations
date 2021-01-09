@@ -13,7 +13,7 @@ export class OfficeResolverService implements Resolve<Office[]>{
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
 
-            let offices:Office[];
+            let offices:Office[]=[];
             this.officeService.fetchUserOffices().subscribe((response:Office[])=>{
                 console.log(offices);
                 offices = response;

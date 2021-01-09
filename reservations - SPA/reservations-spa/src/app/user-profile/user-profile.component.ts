@@ -39,10 +39,10 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     const _this = this;
    this.userSubscription = _this.authService.user.subscribe((user:User)=>{
-     console.log(user?.name);
+     console.log(user.name);
     _this.currentUser = user;
     _this.firstName = user?.name.split(' ')[0];
-    _this.lastName = user?.name.split(' ')[1];
+    _this.lastName = user.name.split(' ')[1];
 
     })
     console.log(_this.firstName);

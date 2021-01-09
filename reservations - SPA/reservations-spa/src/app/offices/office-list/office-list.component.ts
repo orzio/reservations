@@ -23,8 +23,8 @@ subscription :Subscription;
     ngOnInit(): void {
      const _this=this;
       let userId;
-      _this.subscription = _this.authService.user?.subscribe(user => {
-        userId = user?.id;
+      _this.subscription = _this.authService.user.subscribe(user => {
+        userId = user.id;
       })
       console.log("userId"+userId);
 

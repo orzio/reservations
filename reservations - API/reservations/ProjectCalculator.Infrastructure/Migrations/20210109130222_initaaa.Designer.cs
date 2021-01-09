@@ -10,8 +10,8 @@ using Reservations.Infrastructure.Data;
 namespace Reservations.Infrastructure.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20210104002933_tete")]
-    partial class tete
+    [Migration("20210109130222_initaaa")]
+    partial class initaaa
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -29,6 +29,9 @@ namespace Reservations.Infrastructure.Migrations
 
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("OfficeId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Street")
                         .HasColumnType("nvarchar(max)");
@@ -93,10 +96,6 @@ namespace Reservations.Infrastructure.Migrations
             modelBuilder.Entity("Reservations.Core.Domain.Office", b =>
                 {
                     b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<Guid?>("AddressId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
@@ -110,9 +109,32 @@ namespace Reservations.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AddressId");
-
                     b.ToTable("Offices");
+                });
+
+            modelBuilder.Entity("Reservations.Core.Domain.Photo", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsMain")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("OfficeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("PhotoUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("RoomId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoomId");
+
+                    b.ToTable("Photos");
                 });
 
             modelBuilder.Entity("Reservations.Core.Domain.Room", b =>
@@ -273,8 +295,19 @@ namespace Reservations.Infrastructure.Migrations
             modelBuilder.Entity("Reservations.Core.Domain.Office", b =>
                 {
                     b.HasOne("Reservations.Core.Domain.Address", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressId");
+                        .WithOne("Office")
+                        .HasForeignKey("Reservations.Core.Domain.Office", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Reservations.Core.Domain.Photo", b =>
+                {
+                    b.HasOne("Reservations.Core.Domain.Room", "Room")
+                        .WithMany("Photos")
+                        .HasForeignKey("RoomId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Reservations.Core.Domain.Room", b =>

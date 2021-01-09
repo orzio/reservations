@@ -43,10 +43,15 @@ namespace Reservations.Infrastructure.Data
             modelBuilder.Entity<Office>().HasMany(x => x.Rooms)
                     .WithOne(e => e.Office).HasForeignKey(x => x.OfficeId)
                     .OnDelete(DeleteBehavior.Cascade);
-            
 
-        //.WithOne(e => e.Office).HasForeignKey(x => x.OfficeId)
-        //.OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<Address>().HasOne(x => x.Office)
+                .WithOne(x => x.Address)
+                .HasForeignKey<Address>(x => x.OfficeId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+
+            //.WithOne(e => e.Office).HasForeignKey(x => x.OfficeId)
+            //.OnDelete(DeleteBehavior.Cascade);
             modelBuilder.Entity<Office>().HasMany(x => x.Desks)
                     .WithOne(e => e.Office);
             //modelBuilder.Entity<RoomReservation>(entity => entity.

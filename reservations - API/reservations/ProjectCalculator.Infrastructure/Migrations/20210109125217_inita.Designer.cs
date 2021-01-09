@@ -10,8 +10,8 @@ using Reservations.Infrastructure.Data;
 namespace Reservations.Infrastructure.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20201130201508_indsfasd")]
-    partial class indsfasd
+    [Migration("20210109125217_inita")]
+    partial class inita
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -96,7 +96,7 @@ namespace Reservations.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid?>("AddressId")
+                    b.Property<Guid>("AddressId")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
@@ -110,9 +110,35 @@ namespace Reservations.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AddressId");
+                    b.HasIndex("AddressId")
+                        .IsUnique();
 
                     b.ToTable("Offices");
+                });
+
+            modelBuilder.Entity("Reservations.Core.Domain.Photo", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<bool>("IsMain")
+                        .HasColumnType("bit");
+
+                    b.Property<Guid>("OfficeId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("PhotoUrl")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid>("RoomId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoomId");
+
+                    b.ToTable("Photos");
                 });
 
             modelBuilder.Entity("Reservations.Core.Domain.Room", b =>
@@ -248,7 +274,7 @@ namespace Reservations.Infrastructure.Migrations
 
             modelBuilder.Entity("Reservations.Core.Domain.Desk", b =>
                 {
-                    b.HasOne("Reservations.Core.Domain.Office", null)
+                    b.HasOne("Reservations.Core.Domain.Office", "Office")
                         .WithMany("Desks")
                         .HasForeignKey("OfficeId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -273,13 +299,24 @@ namespace Reservations.Infrastructure.Migrations
             modelBuilder.Entity("Reservations.Core.Domain.Office", b =>
                 {
                     b.HasOne("Reservations.Core.Domain.Address", "Address")
-                        .WithMany()
-                        .HasForeignKey("AddressId");
+                        .WithOne("Office")
+                        .HasForeignKey("Reservations.Core.Domain.Office", "AddressId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Reservations.Core.Domain.Photo", b =>
+                {
+                    b.HasOne("Reservations.Core.Domain.Room", "Room")
+                        .WithMany("Photos")
+                        .HasForeignKey("RoomId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Reservations.Core.Domain.Room", b =>
                 {
-                    b.HasOne("Reservations.Core.Domain.Office", null)
+                    b.HasOne("Reservations.Core.Domain.Office", "Office")
                         .WithMany("Rooms")
                         .HasForeignKey("OfficeId")
                         .OnDelete(DeleteBehavior.Cascade)
