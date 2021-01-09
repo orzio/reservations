@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Reservations.Infrastructure.Helpers;
 
 namespace Reservations.Infrastructure.Repositories.Revervations.Desk
 {
@@ -25,19 +26,61 @@ namespace Reservations.Infrastructure.Repositories.Revervations.Desk
 
         public async Task AddAsync(Guid reservationId, Guid userId, Guid deskId, DateTime startTime, DateTime endTime)
         {
-            var user = await _userRepository.GetAsync(userId);
-            var join = new DeskReservation()
-            {
-                Id = reservationId,
-                UserId = userId,
-                DeskId = deskId,
-                StartDate = startTime,
-                EndDate = endTime,
-                User = user,
-            };
+                using (var transaction = _context.Database.BeginTransaction(System.Data.IsolationLevel.Serializable))
+                {
+                    try
+                    {
+                        var reservationsExists = _context.DeskReservations.Where(x => x.DeskId == deskId)
+                            .Where(x => x.Status != (int)ReservationStatus.Rejected).Any(x => endTime >= x.StartDate && startTime <= x.EndDate);
+                        if (reservationsExists)
+                        {
+                            //TODO NEW exception Class
+                            throw new Exception();
+                        }
+                       var join = new DeskReservation()
+                       {
+                           Id = reservationId,
+                           UserId = userId,
+                           DeskId = deskId,
+                           StartDate = startTime,
+                           EndDate = endTime,
+                           User = _context.Users.Find(userId),
+                           Status = (int)ReservationStatus.WatingForApproval
+                       };
 
-            await _context.DeskReservations.AddAsync(join);
-            await _context.SaveChangesAsync();
+                        await _context.DeskReservations.AddAsync(join);
+                        await _context.SaveChangesAsync();
+                        transaction.Commit();
+
+                    }
+                    //TOTO add specific exceptions)
+                    catch (Exception e)
+                    {
+                        transaction.Rollback();
+                        throw new Exception();
+                    }
+                }
+
+
+
+
+
+
+
+            //var user = await _userRepository.GetAsync(userId);
+            //var join = new DeskReservation()
+            //{
+            //    Id = reservationId,
+            //    UserId = userId,
+            //    DeskId = deskId,
+            //    StartDate = startTime,
+            //    EndDate = endTime,
+            //    User = user,
+            //    Status = 0
+            //};
+
+            //await _context.DeskReservations.AddAsync(join);
+            //await _context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<DeskReservation>> GetReservationByDeskIdAsync(Guid deskId)

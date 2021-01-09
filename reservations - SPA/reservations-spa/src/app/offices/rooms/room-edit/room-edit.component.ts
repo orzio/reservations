@@ -81,13 +81,13 @@ export class RoomEditComponent implements OnInit {
     let room:Room = this.roomForm.value;
     room.officeId = this.currentOffice.id;
     room.id = this.roomGuid;
-    console.log(room);
+    //console.log(room);
 
     if(this.editMode){
-      console.log("editMode");
+      //console.log("editMode");
       this.roomService.updateRoom(this.roomId, room);
     }else{
-      console.log("nie editMode");
+      //console.log("nie editMode");
       this.roomService.addRoom(room);
     }
     this.onCancel();

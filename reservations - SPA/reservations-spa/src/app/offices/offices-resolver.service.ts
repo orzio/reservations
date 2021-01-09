@@ -15,7 +15,7 @@ export class OfficeResolverService implements Resolve<Office[]>{
 
             let offices:Office[]=[];
             this.officeService.fetchUserOffices().subscribe((response:Office[])=>{
-                console.log(offices);
+                //console.log(offices);
                 offices = response;
                 this.officeService.officesChanged.next(offices.slice());
                 

@@ -8,14 +8,14 @@ export class AuthInterceptor implements HttpInterceptor{
     constructor(private authService: AuthService){}
 
  intercept(req: HttpRequest<any>, next: HttpHandler) {
-    //     console.log("interceptor");
+    //     //console.log("interceptor");
     //    return this.authService.user.pipe(
     //        take(1),
     //        exhaustMap(user =>{
                
-    //            console.log(user);
+    //            //console.log(user);
     //         if(!user){
-    //             console.log("interceptor");
+    //             //console.log("interceptor");
             return next.handle(req);
     //         }
 

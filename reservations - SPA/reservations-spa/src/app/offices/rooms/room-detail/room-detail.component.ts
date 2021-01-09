@@ -22,8 +22,8 @@ export class RoomDetailComponent implements OnInit {
     this.index=params['roomId'];
     this.room = this.roomService.getRoomById(this.index);
     this.roomService.photoRoomChanged.next(this.room);
-    console.log("::::::::::::::::::::::::::::")
-    console.log(this.room.mainUrl);
+    //console.log("::::::::::::::::::::::::::::")
+    //console.log(this.room.mainUrl);
     this.officeId = this.room.officeId;
     });
     this.roomService.roomUpdated.subscribe((resp:Room)=>{

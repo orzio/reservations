@@ -10,10 +10,10 @@ export class User{
     {}
     get token(){
         if(!this._tokenExpirationDate || new Date().getTime() > this._tokenExpirationDate ){
-            console.log("token to null");
+            //console.log("token to null");
             return null;
         }
-        console.log("token nie null");
+        //console.log("token nie null");
         return this._token;
     }
 

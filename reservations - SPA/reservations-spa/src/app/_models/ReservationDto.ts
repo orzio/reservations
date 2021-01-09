@@ -4,6 +4,7 @@ export class ReservationDto{
       public userId:string,
       public title: string,
       public startDate:Date,
-      public endDate:Date
+      public endDate:Date,
+      public status:number
     ){}
 }

@@ -21,7 +21,7 @@ export class OfficesComponent implements OnInit {
   
   ngOnInit(): void {
     this.commicationService.roomsClicked.subscribe((resp:boolean) =>{
-      console.log(`odpowiedz z komunikacji:${resp}`);
+      //console.log(`odpowiedz z komunikacji:${resp}`);
     this.isRoomsTabOpen = resp;
     })
 }

@@ -46,9 +46,9 @@ export class DeskEditComponent implements OnInit {
     let desk:Desk = this.deskForm.value;
     desk.officeId = this.currentOffice.id;
     desk.id = this.deskGuid;
-    console.log(desk);
+    //console.log(desk);
 
-      console.log("nie editMode");
+      //console.log("nie editMode");
       this.deskService.addDesk(desk);
    
       this.onCancel();

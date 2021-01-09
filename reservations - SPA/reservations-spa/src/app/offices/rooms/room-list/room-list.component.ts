@@ -25,8 +25,8 @@ export class RoomListComponent implements OnInit,OnDestroy {
     .subscribe(
       (rooms:Room[]) =>{
         _this.rooms = rooms;
-        console.log("room-list");
-        console.log(rooms);
+        //console.log("room-list");
+        //console.log(rooms);
       }
     )
   }

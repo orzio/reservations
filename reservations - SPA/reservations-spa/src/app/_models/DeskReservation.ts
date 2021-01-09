@@ -6,4 +6,5 @@ export class DeskReservation{
       private startDate:Date,
       private endDate:Date
     ){}
+    public status:number
 }

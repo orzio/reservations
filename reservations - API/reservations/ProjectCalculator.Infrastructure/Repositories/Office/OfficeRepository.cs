@@ -47,7 +47,14 @@ namespace Reservations.Infrastructure.Repositories
 
         public async Task UpdateAsync(Office office)
         {
-            _context.Offices.Update(office);
+            var officeToUpdate = await _context.Offices.Include(x => x.Address).FirstOrDefaultAsync(x => x.Id == office.Id);
+            officeToUpdate.Name = office.Name;
+            officeToUpdate.Description = office.Description;
+            officeToUpdate.Address.City = office.Address.City;
+            officeToUpdate.Address.Street = office.Address.Street;
+            officeToUpdate.Address.ZipCode = office.Address.ZipCode;
+
+            _context.Offices.Update(officeToUpdate);
             await _context.SaveChangesAsync();
         }
 

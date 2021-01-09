@@ -26,7 +26,7 @@ this.router.navigate([this.index,'edit'],{relativeTo:this.activeRoute});
   }
 
   onDisplayRooms(){
-    console.log("RRRRRRRRROOOOOOMS:::::"+this.index); 
+    //console.log("RRRRRRRRROOOOOOMS:::::"+this.index); 
     this.router.navigate([this.index,'rooms'],{relativeTo:this.activeRoute});
   }
 

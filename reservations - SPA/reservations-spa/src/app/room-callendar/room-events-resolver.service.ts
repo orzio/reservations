@@ -16,7 +16,7 @@ export class RoomEventsResolverService implements Resolve<ReservationDto[]>{
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot){
        this.roomId =  route.params['roomId'];
-       console.log("roomek"+this.roomId);
+       //console.log("roomek"+this.roomId);
 
         let events:ReservationDto[]=[];
             this.reservationService.fetchRoomReservations(this.roomId).subscribe((resp:ReservationDto[]) => {

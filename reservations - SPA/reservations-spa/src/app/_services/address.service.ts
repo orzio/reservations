@@ -34,8 +34,8 @@ export class AddressService {
   setCities(cities: City[]) {
     this.cities = cities;
     this.citiesChanged.next(this.cities.slice());
-    console.log("set cities");
-    console.log(this.cities);
+    //console.log("set cities");
+    //console.log(this.cities);
   }
     
 }

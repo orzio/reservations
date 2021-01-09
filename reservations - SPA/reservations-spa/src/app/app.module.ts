@@ -74,6 +74,8 @@ import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { ManagerReservationComponent } from './manager-reservation/manager-reservation.component';
 import { ManagerRoomReservationsComponent } from './manager-reservation/manager-room-reservations/manager-room-reservations.component';
 import { ManagerDeskReservationsComponent } from './manager-reservation/manager-desk-reservations/manager-desk-reservations.component';
+import { ManagerRoomListReservationsComponent } from './manager-reservation/manager-room-reservations/manager-room-list-reservations/manager-room-list-reservations.component';
+import { ManagerRoomListItemReservationsComponent } from './manager-reservation/manager-room-reservations/manager-room-list-reservations/manager-room-list-item-reservations/manager-room-list-item-reservations.component';
 
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
@@ -129,7 +131,9 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     PhotoGalerryComponent,
     ManagerReservationComponent,
     ManagerRoomReservationsComponent,
-    ManagerDeskReservationsComponent
+    ManagerDeskReservationsComponent,
+    ManagerRoomListReservationsComponent,
+    ManagerRoomListItemReservationsComponent
   ],
 
   

@@ -36,26 +36,26 @@ getUserOffice(){
       }
 
       // getOfficeById(index:number){
-      //   console.log("index: + "+index);
+      //   //console.log("index: + "+index);
       //   let off= this.offices[index];
-      //   console.log(off);
-      //   console.log(`GetOfficeById :${this.offices[index].description}`);
+      //   //console.log(off);
+      //   //console.log(`GetOfficeById :${this.offices[index].description}`);
       //   return off;
       // }
 
       getOfficeById(index:string){
-        console.log("index: + "+index);
+        //console.log("index: + "+index);
         let off= this.offices.filter(x => x.id == index)[0];
-        console.log(off);
-        console.log(`GetOfficeById :${off.description}`);
+        //console.log(off);
+        //console.log(`GetOfficeById :${off.description}`);
         return off;
       }
 
       addOffice(office:Office){
         this.http
         .post<Office[]>(this.API_URL,office).subscribe(response =>{
-         console.log("dodalem biuro");
-         console.log(office)
+         //console.log("dodalem biuro");
+         //console.log(office)
         this.fetchUserOffices().subscribe((response:Office[]) =>
             {
                 this.officesChanged.next(response.slice())
@@ -90,8 +90,8 @@ getUserOffice(){
 
       setOffices(offices:Office[]){
         this.offices = offices;
-        console.log("jestem w set");
-        console.log(this.offices);
+        //console.log("jestem w set");
+        //console.log(this.offices);
         this.officesChanged.next(this.offices.slice());
       }
 
@@ -102,7 +102,7 @@ getUserOffice(){
             .pipe(
         map(offices => {
           return offices.map(office =>{
-              console.log(office);
+              //console.log(office);
               return {
               ...office,
               rooms:office.rooms ? office.rooms : [],
@@ -120,6 +120,9 @@ getUserOffice(){
 
       let userId;
        this.authService.user.subscribe(user => {
+         if(user==null)
+          return;
+         //console.log(user.name + "userOffice");
         userId = user.id;
       })
       
@@ -129,7 +132,7 @@ getUserOffice(){
         .pipe(
     map(offices => {
       return offices.map(office =>{
-          console.log(office);
+          //console.log(office);
           return {
           ...office,
           rooms:office.rooms ? office.rooms : [],
@@ -149,7 +152,7 @@ fetchOfficesDesksInCity(city:string){
     .pipe(
 map(offices => {
   return offices.map(office =>{
-      console.log(office);
+      //console.log(office);
       return {
       ...office,
       rooms:office.rooms ? office.rooms : [],
@@ -172,7 +175,7 @@ fetchOfficesRoomsInCity(city:string){
     .pipe(
 map(offices => {
   return offices.map(office =>{
-      console.log(office);
+      //console.log(office);
       return {
       ...office,
       rooms:office.rooms ? office.rooms : [],

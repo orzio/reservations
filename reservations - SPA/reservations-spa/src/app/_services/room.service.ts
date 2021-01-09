@@ -23,21 +23,21 @@ export class RoomService{
     photoRoomChanged = new ReplaySubject<Room>();
 
     getRooms():Room[]{
-        console.log("get rooms"+this.rooms.length);
-        console.log(this.rooms);
+        //console.log("get rooms"+this.rooms.length);
+        //console.log(this.rooms);
         return this.rooms.slice();
     }
 
     // getRoomById(index:number){
-    //     console.log("get room by id")
-    //     console.log(this.rooms);
+    //     //console.log("get room by id")
+    //     //console.log(this.rooms);
     //     return this.rooms[index];
     // }
 
 
     getRoomById(index:string){
-        console.log("get room by id")
-        console.log(this.rooms);
+        //console.log("get room by id")
+        //console.log(this.rooms);
         return this.rooms.filter(x => x.id == index)[0];
     }
 
@@ -88,7 +88,7 @@ export class RoomService{
         this.http.put<Room>(`${this.API_URL}`,updatedRoom).subscribe(response =>{
             const _this = this;
             this.fetchRooms().subscribe((resp:Room[])=>{
-                console.log("updated room:");
+                //console.log("updated room:");
                 console.dir(resp);
                 console.dir(_this.rooms);
                 _this.rooms = _this.rooms.filter(x => x.officeId == updatedRoom.officeId);

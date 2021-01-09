@@ -18,11 +18,10 @@ namespace Reservations.Infrastructure.Services
         private readonly IMapper _mapper;
         private readonly DeskSemaphore _semaphoregate;
 
-        public DeskReservationService(IDeskReservationRepository deskReservationRepository, IMapper mapper, DeskSemaphore semaphore)
+        public DeskReservationService(IDeskReservationRepository deskReservationRepository, IMapper mapper)
         {
             _deskReservationRepository = deskReservationRepository;
             _mapper = mapper;
-            _semaphoregate = semaphore;
         }
 
         public async Task<IEnumerable<DeskReservationDto>> BrowseAsync()
@@ -59,19 +58,12 @@ namespace Reservations.Infrastructure.Services
         {
             try
             {
-                await _semaphoregate.WaitAsync();
-
-                await Check(deskId, startTime, endTime.AddMinutes(-1));
-                await _deskReservationRepository.AddAsync(reservationId, userId, deskId, startTime, endTime.AddMinutes(-1));
+               await _deskReservationRepository.AddAsync(reservationId, userId, deskId, startTime, endTime.AddMinutes(-1));
 
             }
             catch (Exception e)
             {
                 throw new Exception("Nie da sie dodac rezewacji");
-            }
-            finally
-            {
-                _semaphoregate.Release();
             }
         }
 

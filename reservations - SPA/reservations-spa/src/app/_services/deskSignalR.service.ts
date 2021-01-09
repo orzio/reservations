@@ -12,7 +12,7 @@ export class DeskSignalRService {
 constructor(private http: HttpClient, private deskReservationService: DeskReservationService) {
     this.deskReservationService.currentDeskIdChanged.subscribe((data:string)=>{
         this.deskId= data;
-        // console.log("%%%%%%%%%%%%%%%%%Desk$$$$$"+this.deskReservationService);
+        // //console.log("%%%%%%%%%%%%%%%%%Desk$$$$$"+this.deskReservationService);
     })
  }
 
@@ -22,19 +22,19 @@ public startConnection = () => {
                             .build();
     this.hubConnection
       .start()
-      .then(() => console.log('Connection started'))
-      .catch(err => console.log('Error while starting connection: ' + err))
+      .then(() => {})//console.log('Connection started'))
+      .catch(err => {})//console.log('Error while starting connection: ' + err))
   }
 
   
   public addNewCallendarEventListener = (deskId:string) => {
-    //   console.log("::::::::::::SignalR" +deskId);
+    //   //console.log("::::::::::::SignalR" +deskId);
       this.hubConnection.on("deskEventsChanged", (data) => {
-        // console.log(data.deskId+":::::::TERRERERE");
+        // //console.log(data.deskId+":::::::TERRERERE");
         if(this.deskId == data.deskId){
             this.deskReservationService.getCurrentReservations(this.deskId);
         }
-        //   console.log("deskdesk");
+        //   //console.log("deskdesk");
         });
     }
 

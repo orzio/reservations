@@ -20,7 +20,7 @@ active = 1;
       this.roomService.roomInfoChanged.subscribe((data:RoomOffice)=>{
       this.roomOffice = data;
       this.message = this.roomOffice.officeName;
-      console.log(this.roomOffice);
+      //console.log(this.roomOffice);
     })
 
 

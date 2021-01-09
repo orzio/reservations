@@ -9,6 +9,7 @@ export class RoomOfficeReservation{
     public officeName:string;
     public startDate:Date;
     public endDate:Date;
+    public status:number;
 
 
     constructor(id:string, room:Room, officeName:string, officeAddress:Address, startDate:Date, endDate:Date) {

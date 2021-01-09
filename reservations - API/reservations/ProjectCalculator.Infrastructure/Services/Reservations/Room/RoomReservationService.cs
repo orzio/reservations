@@ -17,12 +17,10 @@ namespace Reservations.Infrastructure.Services.Reservations.Room
     {
         private readonly IMapper _mapper;
         private readonly IRoomReservationRepository _roomReservationRepository;
-        private readonly RoomSemaphore _semaphoregate;
 
-        public RoomReservationService(IRoomReservationRepository roomReservationRepository, IMapper mapper, RoomSemaphore semaphore)
+        public RoomReservationService(IRoomReservationRepository roomReservationRepository, IMapper mapper)
         {
             _roomReservationRepository = roomReservationRepository;
-            _semaphoregate = semaphore;
             _mapper = mapper;
         }
 
@@ -30,20 +28,13 @@ namespace Reservations.Infrastructure.Services.Reservations.Room
         {
             try
             {
-                //await _semaphoregate.WaitAsync();
-                
-                 //await Check(roomId, startTime, endTime.AddMinutes(-1));
-                 
                 await _roomReservationRepository.AddAsync(reservationId, userId, roomId, startTime, endTime.AddMinutes(-1));
                 
             }catch(Exception e)
             {
                 throw new Exception("Cannot add reservation");
             }
-            finally
-            {
-                //_semaphoregate.Release();
-            }
+
         }
 
         private  async Task Check(Guid roomId, DateTime startTime, DateTime endTime)
@@ -104,6 +95,11 @@ namespace Reservations.Infrastructure.Services.Reservations.Room
         {
             var reservations = await _roomReservationRepository.GetAllReservationByManagerIdAsync(managerId);
             return _mapper.Map<IEnumerable<RoomReservation>, IEnumerable<RoomReservationForManagerDto>>(reservations);
+        }
+
+        public async Task UpdateReservationStatus(Guid id, int status)
+        {
+            await _roomReservationRepository.UpdateReservationStatus(id, status);
         }
     }
 }

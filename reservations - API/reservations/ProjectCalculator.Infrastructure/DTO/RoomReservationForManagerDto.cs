@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Reservations.Infrastructure.DTO
 {
-   public  class RoomReservationForManagerDto
+   public class RoomReservationForManagerDto
     {
         public Guid Id { get; set; }
         public Guid UserId { get; set; }
@@ -14,5 +14,6 @@ namespace Reservations.Infrastructure.DTO
         public Guid RoomId { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
+        public int Status { get; set; }
     }
 }

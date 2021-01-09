@@ -84,7 +84,7 @@ export class RoomCallendarComponent implements OnInit, OnDestroy {
 
         },
         error => {
-          console.log(error.error.error);
+          //console.log(error.error.error);
           changeInfo.revert();
         })
 
@@ -108,7 +108,7 @@ export class RoomCallendarComponent implements OnInit, OnDestroy {
   })
   
   this.signalRService.startConnection();
-  console.log("SignalR----------:::::::::::::::::::::::::::::::::::::::::::::::::::::::::" + this.roomId);
+  //console.log("SignalR----------:::::::::::::::::::::::::::::::::::::::::::::::::::::::::" + this.roomId);
   this.signalRService.addNewCallendarEventListener();
 
   this.handleChanges();
@@ -125,7 +125,7 @@ export class RoomCallendarComponent implements OnInit, OnDestroy {
         let reservations=[];
         data.forEach(reservation => {
           let editable=reservation.userId == this.user.id ? true:false;
-          // console.log("-=-=-=-=-="+reservation.userId == this.user.id);
+          // //console.log("-=-=-=-=-="+reservation.userId == this.user.id);
           let bgColor=reservation.userId == this.user.id ? "#3788d8":"#999999"
           let eventTitle = reservation.userId == this.user.id ?  this.eventTitle : this.RESERVED_EVENT_STRING
             reservations.push({
@@ -152,10 +152,10 @@ export class RoomCallendarComponent implements OnInit, OnDestroy {
     let result = title;
 
       let eventId = createEventId();
-      console.log("::::"+eventId);
+      //console.log("::::"+eventId);
       let event = new RoomReservation(eventId,this.user.id,this.roomId, new Date(selectInfo.startStr),new Date(selectInfo.endStr));
 
-      console.log(event)
+      //console.log(event)
       this.reservationService.addReservation(event).subscribe((data)=> {
         
       //   if (title) {

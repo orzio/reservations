@@ -38,7 +38,7 @@ export class DeskCityItemComponent implements OnInit {
 
   reserveDesk(){
     this.reservationService.currentDeskIdChanged.next(this.desk.id); 
-    console.log('/callendar/desk/'+this.desk.id);
+    //console.log('/callendar/desk/'+this.desk.id);
     this.router.navigate(['/callendar/desk/'+this.desk.id]);
   }
 

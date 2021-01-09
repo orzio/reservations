@@ -21,7 +21,7 @@ export class OfficeEditComponent implements OnInit, OnDestroy {
   officeForm:FormGroup;
   constructor(private activatedRoute: ActivatedRoute, private officeService:OfficeService,
     private router: Router, private authService:AuthService) { 
-    console.log(activatedRoute);
+    //console.log(activatedRoute);
   }
 
 

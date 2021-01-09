@@ -24,10 +24,7 @@ export interface RefreshTokenCommand{
   })
 export class AuthService {
 
-
-   
-    user = new ReplaySubject<User>();
-
+    user = new BehaviorSubject<User>(null);
     private expTimer:any;
     baseUrl = `${environment.apiUrl}`;
     private refToken:string;
@@ -35,7 +32,6 @@ export class AuthService {
     decodedToken:any;
     
     constructor(private http: HttpClient, private router:Router){
-    console.log("authservice");
     }
 
 
@@ -56,10 +52,7 @@ export class AuthService {
 
         this.http.post<LoginResponse>(`http://localhost:44310/refreshtoken/`, refreshCommand).subscribe(
             (response:LoginResponse)=>{
-                console.log(this.jwtHelper.decodeToken(response.jwtToken));
                 this.setUserData(response);
-                console.log("get new token!!!!!!");
-                console.log(response.jwtToken);
             }
         )
         
@@ -67,9 +60,7 @@ export class AuthService {
 
 
     logOut(){
-        console.log("LOGOUT");
         this.user.next(null);
-        console.log("LOGOUT");
         this.router.navigate(['/home']);
         localStorage.removeItem('data');
         if(this.expTimer){
@@ -79,7 +70,6 @@ export class AuthService {
     }
 
     login(model:any){
-        console.log("login");
         return this.http.post<LoginResponse>(`${this.baseUrl}login/`, model).pipe(
             catchError(this.handleError),
             tap((response:LoginResponse) =>{
@@ -95,19 +85,10 @@ export class AuthService {
         const userId = this.decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
         const userRole = this.decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
         const userName = this.decodedToken['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'];
-        console.log("curr user id" + userName);
         
         let currentUser = new User(userName,userId,response.jwtToken,expDate,response.refreshToken,userRole);
-        console.log("behvalue");
         this.user.next(currentUser);
-        console.log(this.user);
-        // this.refreshToken(expDate);
         localStorage.setItem('data', JSON.stringify(currentUser));
-        console.log(JSON.stringify(currentUser));
-        console.log(currentUser);
-
-        console.log(expDate);
-        console.log("end LOGIN");
     }
 
 
@@ -119,8 +100,6 @@ export class AuthService {
             _tokenExpirationDate:string,
             _resreshToken:string
         } = JSON.parse(localStorage.getItem('data'));
-        console.log("LOGIN AFTER REFRESH - before data");
-        console.log(data);
         if(!data){
             return;
         }
@@ -130,10 +109,7 @@ export class AuthService {
         let currentUser = new User(data.name, data.id, data._token,new Date(data._tokenExpirationDate).getTime(), data._resreshToken, userRole);
         if(currentUser.token){
             this.user.next(currentUser);
-            console.log("LOGIN AFTER REFRESH");
-            console.log(currentUser.role);
             const timeLeft = new Date(data._tokenExpirationDate).getTime() - new Date().getTime();
-            // this.refreshToken(timeLeft);
         }
     }
 
@@ -155,7 +131,6 @@ export class AuthService {
         if(!errResp.error || !errResp.error.error){
             return throwError(errorMsg);
         }
-       
         errorMsg = errResp.error;
         throwError(errorMsg);
     }

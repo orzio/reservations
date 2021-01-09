@@ -67,7 +67,7 @@ export class DeskCallendarComponent implements OnInit, OnDestroy {
 
         },
         error => {
-          console.log(error.error.error);
+          //console.log(error.error.error);
           changeInfo.revert();
         })
 
@@ -99,7 +99,7 @@ updateUubscription:Subscription;
     this.reservationService.currentDeskIdChanged.subscribe((deskId:string)=>{
       this.deskId =deskId;
       this.signalRService.startConnection();
-      console.log("SignalR----------:::::::::::::::::::::::::::::::::::::::::::::::::::::::::" + this.deskId);
+      //console.log("SignalR----------:::::::::::::::::::::::::::::::::::::::::::::::::::::::::" + this.deskId);
       this.signalRService.addNewCallendarEventListener(this.deskId);
     });
     })

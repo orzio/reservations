@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Reservations.Infrastructure.Helpers;
 
 namespace Reservations.Infrastructure.Repositories.Revervations.Room
 {
@@ -28,8 +29,8 @@ namespace Reservations.Infrastructure.Repositories.Revervations.Room
             {
                 try
                 {
-                    //var reservationExists = _context.RoomReservations.Where(x => endTime >= x.StartDate && startTime <= x.EndDate);
-                    var reservationsExists = _context.RoomReservations.Where(x => x.RoomId == roomId).Any(x => endTime >= x.StartDate   && startTime <= x.EndDate);
+                    var reservationsExists = _context.RoomReservations.Where(x => x.RoomId == roomId)
+                        .Where(x => x.Status !=(int)ReservationStatus.Rejected).Any(x => endTime >= x.StartDate   && startTime <= x.EndDate);
                     if (reservationsExists)
                     {
                         //TODO NEW exception Class
@@ -42,7 +43,8 @@ namespace Reservations.Infrastructure.Repositories.Revervations.Room
                         RoomId = roomId,
                         StartDate = startTime,
                         EndDate = endTime,
-                        User = _context.Users.Find(userId)
+                        User = _context.Users.Find(userId),
+                        Status = (int)ReservationStatus.WatingForApproval
                     };
 
                     await _context.RoomReservations.AddAsync(join);
@@ -100,6 +102,15 @@ public async Task DeleteAsync(Guid reservationId)
             var officeReservations = offices.SelectMany(x => reservations.Where(room => room.Room.OfficeId == x));
             return officeReservations;
 
+        }
+
+
+
+        public async Task UpdateReservationStatus(Guid id, int status)
+        {
+            var reservation = await GetAsync(id);
+            reservation.Status = status;
+            await _context.SaveChangesAsync();
         }
     }
 }

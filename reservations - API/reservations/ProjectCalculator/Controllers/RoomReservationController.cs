@@ -65,6 +65,15 @@ namespace Reservations.Api.Controllers
         => Ok(await _roomReservationService.GetAllReservationForManager(managerId));
 
 
+        [HttpPut("manager/updatestatus/{reservationId}")]
+        public async Task<IActionResult> PutStatusForUserReservation(UpdateRoomReservationStatus command)
+        {
+            await _commandDispatcher.DispatchAsync(command);
+            return Ok();
+        }
+       
+
+
 
         private async Task<Guid> GetRoomId(Guid reservationId)
         {

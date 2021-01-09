@@ -17,14 +17,14 @@ export class DeskService{
     private desks:Desk[] = [];
 
     getDesks():Desk[]{
-        console.log("get desks"+this.desks.length);
-        console.log(this.desks);
+        //console.log("get desks"+this.desks.length);
+        //console.log(this.desks);
         return this.desks.slice();
     }
 
     getDeskById(index:string){
-        console.log("get room by id")
-        console.log(this.desks);
+        //console.log("get room by id")
+        //console.log(this.desks);
         return this.desks.filter(x => x.id ==index)[0];
     }
 
@@ -53,7 +53,7 @@ export class DeskService{
         .pipe(
             tap(desks => {
                 this.setDesks(desks);
-                console.log(this.desks);
+                //console.log(this.desks);
             })
             
         )
@@ -66,7 +66,7 @@ export class DeskService{
             tap(desks => {
                 let officeDesks = desks.filter(desk => desk.officeId == officeId);
                 this.setDesks(officeDesks);
-                console.log(this.desks);
+                //console.log(this.desks);
             })
             
         )

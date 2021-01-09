@@ -39,14 +39,14 @@ export class UserProfileComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     const _this = this;
    this.userSubscription = _this.authService.user.subscribe((user:User)=>{
-     console.log(user.name);
+     //console.log(user.name);
     _this.currentUser = user;
     _this.firstName = user?.name.split(' ')[0];
     _this.lastName = user.name.split(' ')[1];
 
     })
-    console.log(_this.firstName);
-    console.log(this.firstName);
+    //console.log(_this.firstName);
+    //console.log(this.firstName);
     this.initProfileForm();
     this.initPasswordForm();
   }
@@ -91,7 +91,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     this.firstName = updatedUser.firstName;
     this.lastName = updatedUser.lastName;
     updatedUser.id=this.currentUser.id;
-    console.log("submitted");
+    //console.log("submitted");
 
 
     this.userService.updateUser(updatedUser).subscribe(
@@ -99,7 +99,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
         this.currentUser.name=`${this.firstName} ${this.lastName}`;
         this.authService.user.next(this.currentUser);
         this.authService.getNewToken();
-        console.log("::::::update user"+this.currentUser.name);
+        //console.log("::::::update user"+this.currentUser.name);
       }
     )
   }
@@ -116,13 +116,13 @@ export class UserProfileComponent implements OnInit, OnDestroy {
         this.passwordChanged = true;
       },
       error=>{
-        console.log(error.error);
+        //console.log(error.error);
       })
 
     // this.firstName = updatedUser.firstName;
     // this.lastName = updatedUser.lastName;
     // updatedUser.id=this.currentUser.id;
-    // console.log("submitted");
+    // //console.log("submitted");
 
 
     // this.userService.updateUser(updatedUser).subscribe(
@@ -130,7 +130,7 @@ export class UserProfileComponent implements OnInit, OnDestroy {
     //     this.currentUser.name=`${this.firstName} ${this.lastName}`;
     //     this.authService.user.next(this.currentUser);
     //     this.authService.getNewToken();
-    //     console.log("::::::update user"+this.currentUser.name);
+    //     //console.log("::::::update user"+this.currentUser.name);
     //   }
     // )
   }

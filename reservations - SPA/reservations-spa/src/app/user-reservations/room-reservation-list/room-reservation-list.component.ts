@@ -26,8 +26,6 @@ export class RoomReservationListComponent implements OnInit {
       this.user = user;
     })
 
-    
-
     this.roomReservationService.getUserReservation(this.user.id)
     .subscribe((roomsReservations:RoomOfficeReservation[])=>{
       this.roomsReservations = roomsReservations;

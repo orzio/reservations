@@ -17,5 +17,6 @@ namespace Reservations.Core.Repositories
         Task<IEnumerable<RoomReservation>> GetReservationByRoomIdAsync(Guid roomId);
         Task<IEnumerable<RoomReservation>> GetReservationByUserIdAsync(Guid userId);
         Task<IEnumerable<RoomReservation>> GetAllReservationByManagerIdAsync(Guid managerId);
+        Task UpdateReservationStatus(Guid id, int status);
     }
 }

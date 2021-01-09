@@ -9,6 +9,7 @@ export class DeskOfficeReservation{
     public officeName:string;
     public startDate:Date;
     public endDate:Date;
+    public status:number
 
 
     constructor(desk:Desk, officeName:string, officeAddress:Address, startDate:Date, endDate:Date) {

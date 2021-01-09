@@ -22,7 +22,7 @@ export class PhotoGalerryComponent implements OnInit {
     this.initOptions();
     const _this = this;
     this.roomService.photoRoomChanged.subscribe((room:Room)=>{
-      console.log("zmienione zdjecie");
+      //console.log("zmienione zdjecie");
       _this.galleryImages = _this.fillWithPhotos(room.photos);
     })
     
@@ -58,7 +58,7 @@ export class PhotoGalerryComponent implements OnInit {
       });
     }
 
-    console.log(photosUrls.length)
+    //console.log(photosUrls.length)
     return photosUrls;
   }
 

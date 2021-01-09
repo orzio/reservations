@@ -46,12 +46,12 @@ export class ResetPasswordComponent implements OnInit {
     let confirmPassword =values['confirmPassword'];
 
     let resp = password === confirmPassword? null : {theSame:false};
-    console.log(resp);
+    //console.log(resp);
     return resp;
   }
   
   submit(){
-    console.log(123123132312);
+    //console.log(123123132312);
     let password = this.resetPasswordForm.value['password']; 
     let token = this.activatedRoute.snapshot.queryParams['token'];
    

@@ -38,7 +38,7 @@ export class RoomCityItemComponent implements OnInit {
 
   reserveRoom(){
     this.reservationService.currentRoomIdChanged.next(this.room.id); 
-    console.log('/callendar/room/'+this.room.id);
+    //console.log('/callendar/room/'+this.room.id);
     this.router.navigate(['/callendar/room/'+this.room.id]);
   }
   

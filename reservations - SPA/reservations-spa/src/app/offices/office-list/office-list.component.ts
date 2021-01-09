@@ -4,6 +4,7 @@ import { OfficeService } from 'src/app/_services/office.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/_services/auth.service';
+import { User } from 'src/app/_models/user';
 
 
 @Component({
@@ -21,19 +22,15 @@ subscription :Subscription;
     private router:Router) { }
     
     ngOnInit(): void {
-     const _this=this;
-      let userId;
-      _this.subscription = _this.authService.user.subscribe(user => {
-        userId = user.id;
+
+      this.subscription = this.authService.user.subscribe((user:User) => {
       })
-      console.log("userId"+userId);
 
     this.offices = this.officeService.getUserOffice();
-    console.log(`officeList :${this.offices}`);
-    this.subscription = _this.officeService.officesChanged
+    this.subscription = this.officeService.officesChanged
     .subscribe(
       (offices:Office[])=>{
-        _this.offices=offices;
+        this.offices=offices;
       }
     )
   }

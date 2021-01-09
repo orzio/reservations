@@ -21,12 +21,12 @@ export class PhotoComponent implements OnInit {
   currentOfficeId:string ="";
   testOfficeId:string ="";
   ngOnInit(): void {
-    console.log("ngoninit-----PhotoCompoennt")
+    //console.log("ngoninit-----PhotoCompoennt")
     this.roomService.roomDetailsId.subscribe((data:string)=>{
       const _this = this;
       _this.currentRoomId = data;
-      console.log(data);
-      console.log("Kurka:" + _this.currentRoomId);
+      //console.log(data);
+      //console.log("Kurka:" + _this.currentRoomId);
       this.initializeUploader();
     })
 
@@ -58,7 +58,7 @@ export class PhotoComponent implements OnInit {
            photoUrl: res.photoUrl,
            isMain:res.isMain
          };
-         console.log(photo.photoUrl);
+         //console.log(photo.photoUrl);
          this.photos.push(photo);
          if(this.photos.length ==1 && photo.isMain){
            this.roomService.fetchOfficesRoom(this.currentOfficeId).subscribe(()=>{});

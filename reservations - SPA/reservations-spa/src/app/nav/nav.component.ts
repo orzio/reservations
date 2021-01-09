@@ -17,14 +17,14 @@ export class NavComponent implements OnInit, OnDestroy {
   constructor(private authService:AuthService) { }
   
   ngOnInit(): void {
-    console.log('!!!!!!!ng oninit!!!!!!!!');
+    //console.log('!!!!!!!ng oninit!!!!!!!!');
     this.userSubscription = this.authService.user.subscribe(user =>{
-      console.log(":::::::::::::::::::::::::::::::::::::::::::::::::")
+      //console.log(":::::::::::::::::::::::::::::::::::::::::::::::::")
       let curruser = user;
       this.currentUser = user;
       this.isLoggedIn = !!curruser;
-      console.log(this.isLoggedIn);
-      console.log(":::::::::::::::::::::::::::::::::::::::::::::::::")
+      //console.log(this.isLoggedIn);
+      //console.log(":::::::::::::::::::::::::::::::::::::::::::::::::")
     })
 
 

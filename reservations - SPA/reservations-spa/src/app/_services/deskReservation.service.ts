@@ -3,10 +3,11 @@ import { environment } from 'src/environments/environment';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { ResetPassword } from '../_models/ResetPassword';
 import { throwError, Observable, Subject } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 import { DeskReservation } from '../_models/DeskReservation';
 import { ReservationDto } from '../_models/ReservationDto';
 import { DeskOfficeReservation } from '../_models/DeskOfficeReservation';
+import { ReservationStatus } from '../_models/ReservationStatus';
 
 @Injectable({
     providedIn: 'root'
@@ -22,8 +23,8 @@ export class DeskReservationService {
     constructor(private http:HttpClient){}
 
     addReservation(reservation:DeskReservation):Observable<Object>{
-        console.log("reservationService");
-        console.log(reservation);
+        //console.log("reservationService");
+        //console.log(reservation);
         return this.http.post<DeskReservation>(`${this.baseUrl}`,reservation)
         .pipe(
             catchError(this.handleError)
@@ -32,7 +33,12 @@ export class DeskReservationService {
 
 
     fetchDeskReservations(deskId: string){
-        return this.http.get<ReservationDto[]>(`${this.baseUrl}/${deskId}`);
+        return this.http.get<ReservationDto[]>(`${this.baseUrl}/${deskId}`)
+        .pipe(
+            map(reservations => {
+                return reservations.filter(x => x.status==ReservationStatus.Accepted || x.status==ReservationStatus.WatingForApproval) 
+            })
+        );
     }
 
     private handleError(errResp:HttpErrorResponse){
