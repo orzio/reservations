@@ -76,6 +76,8 @@ import { ManagerRoomReservationsComponent } from './manager-reservation/manager-
 import { ManagerDeskReservationsComponent } from './manager-reservation/manager-desk-reservations/manager-desk-reservations.component';
 import { ManagerRoomListReservationsComponent } from './manager-reservation/manager-room-reservations/manager-room-list-reservations/manager-room-list-reservations.component';
 import { ManagerRoomListItemReservationsComponent } from './manager-reservation/manager-room-reservations/manager-room-list-reservations/manager-room-list-item-reservations/manager-room-list-item-reservations.component';
+import { StatusFilter } from './filters/StatusFilter';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
@@ -128,6 +130,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     DeskReservationItemComponent,
     UserProfileComponent,
     PhotoComponent,
+    StatusFilter,
     PhotoGalerryComponent,
     ManagerReservationComponent,
     ManagerRoomReservationsComponent,
@@ -139,6 +142,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
   
   imports: [
     BrowserModule,
+    Ng2SearchPipeModule,
     FileUploadModule,
     NgxGalleryModule,
     BrowserAnimationsModule,
@@ -148,7 +152,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     RouterModule.forRoot(appRoutes),
     FormsModule, 
     FullCalendarModule, // register FullCalendar with you app
-    ReactiveFormsModule, CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
+    ReactiveFormsModule, CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory }),
+    
   ],
   providers: [OfficeService,CommunicationService,AddressService,RoomSignalRService,DeskSignalRService,ImageService,
     DeskReservationService, RoomReservationService,RoomService,ResetPasswordService, DeskService, {provide:HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi:true},AuthGuard],

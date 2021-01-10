@@ -4,6 +4,7 @@ import { RoomReservationService } from 'src/app/_services/roomReservation.Servic
 import { CommunicationService } from 'src/app/_services/communcation.service';
 import { User } from 'src/app/_models/user';
 import { RoomReservationForManager } from 'src/app/_models/RoomReservationForManager';
+import { ReservationStatus } from 'src/app/_models/ReservationStatus';
 
 @Component({
   selector: 'app-manager-room-list-reservations',
@@ -16,8 +17,9 @@ export class ManagerRoomListReservationsComponent implements OnInit {
   constructor(private authService:AuthService,private roomReservationService: RoomReservationService,
     private communicationService:CommunicationService) { }
 
+    searchText;
     showDetails:boolean=false;
- 
+    filterargs = {status: ReservationStatus.WatingForApproval};
   roomsReservations:RoomReservationForManager[] =[];
   private user:User;
   ngOnInit(): void {

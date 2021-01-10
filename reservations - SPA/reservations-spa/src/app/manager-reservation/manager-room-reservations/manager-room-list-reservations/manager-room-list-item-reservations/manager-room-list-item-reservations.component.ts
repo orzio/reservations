@@ -21,6 +21,7 @@ export class ManagerRoomListItemReservationsComponent implements OnInit {
   reservationStartHour:string="";
   reservationEndHour:string="";
 
+
   private currentUser:User;
 
 
