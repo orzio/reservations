@@ -21,6 +21,8 @@ export class RoomCityItemComponent implements OnInit {
   currentUser:User;
   roomOffice:RoomOffice;
   @Input() officeName:string;
+  @Input() officeEmail:string;
+  @Input() officePhoneNumber:string;
   @Input() officeAddress:Address;
   @Input() room:Room;
 
@@ -47,7 +49,7 @@ export class RoomCityItemComponent implements OnInit {
   }
   
   showOfficeInfo(){
-    this.roomOffice= new RoomOffice(this.room,this.officeName, this.officeAddress);
+    this.roomOffice= new RoomOffice(this.room,this.officeName, this.officeAddress, this.officePhoneNumber, this.officeEmail);
     this.roomService.photoRoomChanged.next(this.room);
     this.roomService.roomInfoChanged.next(this.roomOffice);
     this.communicationService.roomDetailsClicked.next(true);

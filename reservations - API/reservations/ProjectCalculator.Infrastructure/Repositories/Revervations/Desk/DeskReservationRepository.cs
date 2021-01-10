@@ -18,10 +18,12 @@ namespace Reservations.Infrastructure.Repositories.Revervations.Desk
         private readonly DataContext _context;
 
         private readonly IUserRepository _userRepository;
-        public DeskReservationRepository(DataContext context, IUserRepository userRepository)
+        private readonly IOfficeRepository _officeRepository;
+        public DeskReservationRepository(DataContext context, IUserRepository userRepository, IOfficeRepository officeRepository)
         {
             _context = context;
             _userRepository = userRepository;
+            _officeRepository = officeRepository;
         }
 
         public async Task AddAsync(Guid reservationId, Guid userId, Guid deskId, DateTime startTime, DateTime endTime)
@@ -61,26 +63,6 @@ namespace Reservations.Infrastructure.Repositories.Revervations.Desk
                     }
                 }
 
-
-
-
-
-
-
-            //var user = await _userRepository.GetAsync(userId);
-            //var join = new DeskReservation()
-            //{
-            //    Id = reservationId,
-            //    UserId = userId,
-            //    DeskId = deskId,
-            //    StartDate = startTime,
-            //    EndDate = endTime,
-            //    User = user,
-            //    Status = 0
-            //};
-
-            //await _context.DeskReservations.AddAsync(join);
-            //await _context.SaveChangesAsync();
         }
 
         public async Task<IEnumerable<DeskReservation>> GetReservationByDeskIdAsync(Guid deskId)
@@ -100,6 +82,14 @@ namespace Reservations.Infrastructure.Repositories.Revervations.Desk
         public async Task<DeskReservation> GetAsync(Guid id)
             => await _context.DeskReservations.SingleOrDefaultAsync(x => x.Id == id);
 
+        public async Task<DeskReservation> GetAsyncWithFullInfo(Guid id)
+             => await _context.DeskReservations
+            .Include(x => x.User)
+            .Include(x => x.Desk)
+            .ThenInclude(x => x.Office)
+            .ThenInclude(x => x.Address)
+            .SingleOrDefaultAsync(x => x.Id == id);
+
         public async Task UpdateAsync(Guid reservationId, DateTime startTime, DateTime endTime)
         {
             var reservation = await _context.DeskReservations.SingleOrDefaultAsync(x => x.Id == reservationId);
@@ -114,5 +104,22 @@ namespace Reservations.Infrastructure.Repositories.Revervations.Desk
             .Include(x => x.Desk)
             .ThenInclude(x => x.Office).ThenInclude(x => x.Address)
             .ToListAsync();
+
+
+        public async Task<IEnumerable<DeskReservation>> GetAllReservationByManagerIdAsync(Guid managerId)
+        {
+            var offices = (await _officeRepository.GetUsersOfficeAsync(managerId)).Select(x => x.Id);
+            var reservations = await _context.DeskReservations.Include(x => x.User).Include(res => res.Desk).ToListAsync();
+            var officeReservations = offices.SelectMany(x => reservations.Where(desk => desk.Desk.OfficeId == x));
+            return officeReservations;
+
+        }
+
+        public async Task UpdateReservationStatus(Guid id, int status)
+        {
+            var reservation = await GetAsync(id);
+            reservation.Status = status;
+            await _context.SaveChangesAsync();
+        }
     }
 }

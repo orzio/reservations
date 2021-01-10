@@ -30,6 +30,13 @@
                           <input type="text" class="form-control" name="email" placeholder="E-mail" [(ngModel)]="model.email" email #email="ngModel" required>
                       </div>
                   </div>
+
+                  <div class="row mt-2">
+                    <div class="col-12">
+                      <label [ngClass]="{'help-block': !phoneNumber.valid && phoneNumber.touched}" for="phoneNumber"> Podaj numer telefonu</label>
+                        <input type="text" class="form-control" name="phoneNumber" placeholder="Number Telefonu" [(ngModel)]="model.phoneNumber" #phoneNumber="ngModel" required>
+                    </div>
+                </div>
                   
 
                     <div class="row mt-2">
@@ -38,6 +45,13 @@
                           <input type="text" class="form-control" name="password" placeholder="Hasło" type="password" #password="ngModel" [(ngModel)]="model.password" required>
                         </div>
                   </div>
+
+                  <div class="row mt-2">
+                    <div class="col-12">
+                      <label [ngClass]="{'help-block': model.password != model.confirmPassword}" for="confirmPassword">Powtórz hasło</label>
+                        <input type="text" class="form-control" name="confirmPassword" placeholder="Powtórz Hasło" type="password" #confirmPassword="ngModel" [(ngModel)]="model.confirmPassword"  required>
+                      </div>
+                </div>
 
 
                   <div class="row mt-2">
@@ -51,7 +65,7 @@
                   </div>
                     
                     <div class="row mt-2">
-                        <button class="btn btn-secondary" type="submit">Zarejestruj</button>
+                        <button class="btn btn-secondary" [disabled]="!f.valid"  type="submit">Zarejestruj</button>
                     </div>
                 </div>
               </div>  

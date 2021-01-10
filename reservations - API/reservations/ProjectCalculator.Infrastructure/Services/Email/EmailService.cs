@@ -8,10 +8,11 @@ namespace Reservations.Infrastructure.Services.Email
     public class EmailService : IEmailService
     {
         private readonly string _coworkEmail = "cowork.reservation@gmail.com";
-        private readonly string _emailSubject = "Reset password";
+        private string _emailSubject;
 
-        public async Task SendEmail(string to, string text)
+        public async Task SendEmail(string to, string text, string subject)
         {
+            _emailSubject = subject;
             var email = new MimeMessage();
             email.From.Add(MailboxAddress.Parse(_coworkEmail));
             email.To.Add(MailboxAddress.Parse(to));

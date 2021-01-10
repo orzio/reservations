@@ -67,7 +67,7 @@ namespace Reservations.Infrastructure.Services
             throw new Exception("Invalid credentials");
         }
 
-        public async Task RegisterAsync(Guid userId, string email, string firstname, string lastname, string password, string role)
+        public async Task RegisterAsync(Guid userId, string email, string firstname, string lastname, string password, string role, string phoneNumber)
         {
             var user = await _userRepository.GetAsync(email);
             if(user != null)
@@ -80,11 +80,11 @@ namespace Reservations.Infrastructure.Services
             var salt = _encrypter.GetSalt();
             var hash = _encrypter.GetPassworHash();
 
-            user = new User(userId, email, firstname, lastname, role, hash, salt);
+            user = new User(userId, email, firstname, lastname, role, hash, salt, phoneNumber);
             await _userRepository.AddAsync(user);
         }
 
-        public async Task UpdateUser(Guid userId, string firstname, string lastname)
+        public async Task UpdateUser(Guid userId, string firstname, string lastname, string phoneNumber)
         {
             var user = await _userRepository.GetAsync(userId);
             if(user == null)
@@ -93,6 +93,7 @@ namespace Reservations.Infrastructure.Services
             }
             user.FirstName = firstname;
             user.LastName = lastname;
+            user.PhoneNumber = phoneNumber;
             await _userRepository.UpdateAsync(user);
                
         }

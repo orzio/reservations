@@ -46,6 +46,17 @@ namespace Reservations.Api.Controllers
             return Ok(user);
         }
 
+
+
+        [HttpGet("single/{id}")]
+        public async Task<IActionResult> GetUser(Guid id)
+        {
+            var user = await _userService.GetAsync(id);
+            if (user == null)
+                return NotFound();
+            return Ok(user);
+        }
+
         // POST api/<UsersController>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CreateUser command)

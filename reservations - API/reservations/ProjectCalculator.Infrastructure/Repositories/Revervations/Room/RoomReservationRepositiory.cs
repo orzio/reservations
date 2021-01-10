@@ -104,7 +104,13 @@ public async Task DeleteAsync(Guid reservationId)
 
         }
 
-
+        public async Task<RoomReservation> GetAsyncWithFullInfo(Guid id)
+             => await _context.RoomReservations
+            .Include(x => x.User)
+            .Include(x => x.Room)
+            .ThenInclude(x => x.Office)
+            .ThenInclude(x => x.Address)
+            .SingleOrDefaultAsync(x => x.Id == id);
 
         public async Task UpdateReservationStatus(Guid id, int status)
         {

@@ -3,6 +3,7 @@ using Reservations.Core.Domain;
 using Reservations.Core.Repositories;
 using Reservations.Infrastructure.DTO;
 using Reservations.Infrastructure.Helpers;
+using Reservations.Infrastructure.Services.Email;
 using Reservations.Infrastructure.Services.Reservations.Validators;
 using System;
 using System.Collections.Generic;
@@ -14,12 +15,14 @@ namespace Reservations.Infrastructure.Services
 {
     public class DeskReservationService : IDeskReservationService
     {
+        private readonly IEmailService _emailService;
         private readonly IDeskReservationRepository _deskReservationRepository;
         private readonly IMapper _mapper;
-        private readonly DeskSemaphore _semaphoregate;
 
-        public DeskReservationService(IDeskReservationRepository deskReservationRepository, IMapper mapper)
+        public DeskReservationService(IDeskReservationRepository deskReservationRepository, IMapper mapper, IEmailService emailService,
+            IUserService userService)
         {
+            _emailService = emailService;
             _deskReservationRepository = deskReservationRepository;
             _mapper = mapper;
         }
@@ -65,6 +68,7 @@ namespace Reservations.Infrastructure.Services
             {
                 throw new Exception("Nie da sie dodac rezewacji");
             }
+            //await UpdateReservationStatus(reservationId, (int)ReservationStatus.WatingForApproval);
         }
 
         public async Task UpdateReservation(Guid reservationId, DateTime start, DateTime end)
@@ -72,23 +76,39 @@ namespace Reservations.Infrastructure.Services
             await _deskReservationRepository.UpdateAsync(reservationId, start, end);
         }
 
-        private async Task Check(Guid deskId, DateTime startTime, DateTime endTime)
-        {
-            var reservations = (await _deskReservationRepository.GetReservationByDeskIdAsync(deskId)).Cast<IReservation>().ToList();
-            var validators = new List<IReservationValidator>()
-                {
-                    new EventStartsWithinOther(startTime, reservations),
-                    new EventEndsWithinOther(endTime, reservations),
-                    new EventCoversOther(startTime, endTime, reservations),
-                };
 
-            foreach (var validator in validators)
+        public async Task<IEnumerable<DeskReservationForManagerDto>> GetAllReservationForManager(Guid managerId)
+        {
+            var reservations = await _deskReservationRepository.GetAllReservationByManagerIdAsync(managerId);
+            return _mapper.Map<IEnumerable<DeskReservation>, IEnumerable<DeskReservationForManagerDto>>(reservations);
+        }
+
+        public async Task UpdateReservationStatus(Guid id, int status)
+        {
+            await _deskReservationRepository.UpdateReservationStatus(id, status);
+            var reservation = await _deskReservationRepository.GetAsyncWithFullInfo(id);
+            await SendStatusChangedMessage(reservation.User.Email, status, reservation.StartDate, reservation.EndDate,reservation.Desk.Office.Name,
+                reservation.Desk.Office.Address.City, reservation.Desk.Office.Address.Street, reservation.Desk.Office.Address.ZipCode, reservation.Desk.Name);
+        }
+
+        private async Task SendStatusChangedMessage(string userEmail,int status, DateTime startDate, DateTime endDate, string officeName,
+                                                    string officeCity, string OfficeStreet, string ZipCode,string itemName)
+        {
+            var statusDictionary = new Dictionary<int, string>()
             {
-                if (!validator.Verify())
-                {
-                    throw new Exception("Cannot add reservation");
-                }
-            }
+                { 0,$"Twoja rezerwacja biurka - {itemName} (w dniu {startDate.Date.ToString("d")} w godzinach {startDate.TimeOfDay} - {endDate.TimeOfDay}) w biurze {officeName} ({OfficeStreet},{ZipCode} {officeCity}) uzyskała status - Anulowana. Prosimy o wybranie innego terminu. Dziękujemy za skorzystanie z naszych usług." +
+                $"Pozdrawiamy - {officeName} " },
+                { 1,$"Twoja rezerwacja biurka - {itemName} (w dniu {startDate.Date.ToString("d")} w godzinach {startDate.TimeOfDay} - {endDate.TimeOfDay}) w biurze {officeName} ({OfficeStreet},{ZipCode} {officeCity}) uzyskała status - Potwierdzony.\n " +
+                $"Zapraszamy {startDate.Date.ToString("d")} w godzinach {startDate.TimeOfDay} - {endDate.TimeOfDay}. Dziękujemy za skorzystanie z naszych usług. " +
+                $"Pozdrawiamy - {officeName} " },
+                { 2,$"Twoja rezerwacja biurka - {itemName} (w dniu {startDate.Date.ToString("d")} w godzinach {startDate.TimeOfDay} - {endDate.TimeOfDay}) w biurze {officeName} ({OfficeStreet},{ZipCode} {officeCity}) uzyskała status - Czeka na potwierdzenie. Dziękujemy za skorzystanie z naszych usług. " +
+                $"Pozdrawiamy - {officeName} " }
+            };
+
+           var emailSubject = $"{officeName} - Rezerwacja biurka - {itemName} z {startDate.Date.ToString("d")}";
+           await _emailService.SendEmail(userEmail, statusDictionary[status], emailSubject);
+
+      
         }
 
     }

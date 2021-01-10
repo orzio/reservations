@@ -8,6 +8,6 @@ namespace Reservations.Infrastructure.Services.Email
 {
    public interface IEmailService:IService
     {
-        Task SendEmail(string to, string text);
+        Task SendEmail(string to, string text, string subject);
     }
 }

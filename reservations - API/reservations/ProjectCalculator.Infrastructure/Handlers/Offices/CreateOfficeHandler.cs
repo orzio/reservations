@@ -19,7 +19,7 @@ namespace Reservations.Infrastructure.Handlers
            
         public async Task HandleAsync(CreateOffice command)
         {
-            await _officeService.CreateAsync(Guid.NewGuid(),command.UserId, command.Name, command.Address, command.Description);
+            await _officeService.CreateAsync(Guid.NewGuid(),command.UserId, command.Name, command.Address, command.Description,command.Email, command.PhoneNumber);
         }
     }
 }

@@ -1,4 +1,28 @@
 <h1>Moje rezerwacje:</h1>
 <hr>
-<app-room-reservation-list></app-room-reservation-list>
-<app-desk-reservation-list></app-desk-reservation-list>
+
+<div class="container mt-5">
+    <ul ngbNav #nav="ngbNav" class="nav-tabs">
+        <li [ngbNavItem]="1">
+            <a style="color:black" ngbNavLink>Biurka</a>
+            <ng-template ngbNavContent>
+                <app-desk-reservation-list></app-desk-reservation-list>
+                
+            </ng-template>
+        </li>
+        
+        
+        <li [ngbNavItem]="2">
+            <a style="color:black" ngbNavLink>Sale</a>
+            <ng-template ngbNavContent>
+                <app-room-reservation-list></app-room-reservation-list>
+                
+            </ng-template>
+        </li>
+    
+      </ul>
+      
+      <div [ngbNavOutlet]="nav" class="mt-2"></div>
+      
+    
+    </div>

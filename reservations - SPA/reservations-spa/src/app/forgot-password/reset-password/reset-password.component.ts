@@ -69,7 +69,7 @@ export class ResetPasswordComponent implements OnInit {
         setTimeout(()=>{
           this.isLoading = false;
           this.router.navigate(['/']);
-        },5000)
+        },2000)
   },errorMessage => {
     this.error = errorMessage;
     this.isLoading = false;

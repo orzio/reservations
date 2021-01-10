@@ -30,7 +30,7 @@ export class ForgotPasswordComponent implements OnInit {
         setTimeout(()=>{
           this.isLoading = false;
           this.router.navigate(['/']);
-        },5000)
+        },1000)
   },
     errorMessage => {
     this.error = errorMessage;

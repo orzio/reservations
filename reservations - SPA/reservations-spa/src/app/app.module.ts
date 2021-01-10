@@ -77,7 +77,10 @@ import { ManagerDeskReservationsComponent } from './manager-reservation/manager-
 import { ManagerRoomListReservationsComponent } from './manager-reservation/manager-room-reservations/manager-room-list-reservations/manager-room-list-reservations.component';
 import { ManagerRoomListItemReservationsComponent } from './manager-reservation/manager-room-reservations/manager-room-list-reservations/manager-room-list-item-reservations/manager-room-list-item-reservations.component';
 import { StatusFilter } from './filters/StatusFilter';
+import { DeskFilter } from './filters/DeskFilter';
 import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { ManagerDeskListReservationComponent } from './manager-reservation/manager-desk-reservations/manager-desk-list-reservation/manager-desk-list-reservation.component';
+import { ManagerDeskListItemReservationsComponent } from './manager-reservation/manager-desk-reservations/manager-desk-list-reservation/manager-desk-list-item-reservations/manager-desk-list-item-reservations.component';
 
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
@@ -131,12 +134,15 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     UserProfileComponent,
     PhotoComponent,
     StatusFilter,
+    DeskFilter,
     PhotoGalerryComponent,
     ManagerReservationComponent,
     ManagerRoomReservationsComponent,
     ManagerDeskReservationsComponent,
     ManagerRoomListReservationsComponent,
-    ManagerRoomListItemReservationsComponent
+    ManagerRoomListItemReservationsComponent,
+    ManagerDeskListReservationComponent,
+    ManagerDeskListItemReservationsComponent
   ],
 
   

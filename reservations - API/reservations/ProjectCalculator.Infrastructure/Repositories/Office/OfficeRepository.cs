@@ -53,6 +53,8 @@ namespace Reservations.Infrastructure.Repositories
             officeToUpdate.Address.City = office.Address.City;
             officeToUpdate.Address.Street = office.Address.Street;
             officeToUpdate.Address.ZipCode = office.Address.ZipCode;
+            officeToUpdate.PhoneNumber = office.PhoneNumber;
+            officeToUpdate.Email = office.Email;
 
             _context.Offices.Update(officeToUpdate);
             await _context.SaveChangesAsync();

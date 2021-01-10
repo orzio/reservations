@@ -30,7 +30,8 @@ namespace Reservations.Infrastructure.EF
                          "Nowak",
                         "user",
                          passwordhash,
-                          passwordSalt
+                          passwordSalt,
+                          "224444444"
                 ));
                 context.SaveChanges();
             }

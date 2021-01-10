@@ -8,6 +8,7 @@ import { DeskReservation } from '../_models/DeskReservation';
 import { ReservationDto } from '../_models/ReservationDto';
 import { DeskOfficeReservation } from '../_models/DeskOfficeReservation';
 import { ReservationStatus } from '../_models/ReservationStatus';
+import { DeskReservationForManager } from '../_models/DeskReservationForManager';
 
 @Injectable({
     providedIn: 'root'
@@ -17,14 +18,13 @@ export class DeskReservationService {
 
     desksReservations:ReservationDto[];
     deskReservationsChanged =new Subject<ReservationDto[]>();
+    reservationsForManagerChanged = new Subject<DeskReservationForManager[]>();
     deskOfficeReservationChanged = new Subject<DeskOfficeReservation[]>();
     currentDeskIdChanged = new Subject<string>();
 
     constructor(private http:HttpClient){}
 
     addReservation(reservation:DeskReservation):Observable<Object>{
-        //console.log("reservationService");
-        //console.log(reservation);
         return this.http.post<DeskReservation>(`${this.baseUrl}`,reservation)
         .pipe(
             catchError(this.handleError)
@@ -54,6 +54,10 @@ export class DeskReservationService {
             return this.http.put(`${this.baseUrl}`,reservation);
     }
 
+    updateReservationStatus(reservationId: string, newStatus:number){
+        return this.http.put(`${this.baseUrl}/manager/updatestatus/${reservationId}`,{id:reservationId, status:newStatus});
+}
+
 
     deleteReservation(id:string){
             return this.http.delete(`${this.baseUrl}/${id}`);
@@ -77,5 +81,9 @@ export class DeskReservationService {
             // this.currentRoomIdChanged.next(this.roomId);
         })
 }
+
+    getReservationForManager(managerId:string){
+        return this.http.get<DeskReservationForManager[]>(`http://localhost:44310/DeskReservations/manager/${managerId}`);
+    }
 
 }

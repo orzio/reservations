@@ -10,13 +10,17 @@ export class DeskOfficeReservation{
     public startDate:Date;
     public endDate:Date;
     public status:number
+    public officePhoneNumber:string;
+    public officeEmail:string;
 
 
-    constructor(desk:Desk, officeName:string, officeAddress:Address, startDate:Date, endDate:Date) {
+    constructor(desk:Desk, officeName:string, officeAddress:Address, startDate:Date, endDate:Date, officePhoneNumber:string, officeEmail:string) {
         this.deskDto=desk;
         this.officeAddress =officeAddress;
         this.officeName=officeName;
         this.startDate = startDate;
         this.endDate = endDate;
+        this.officePhoneNumber = officePhoneNumber;
+        this.officeEmail = officeEmail;
     }
 }

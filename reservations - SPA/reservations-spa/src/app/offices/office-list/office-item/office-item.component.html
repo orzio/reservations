@@ -2,21 +2,21 @@
     <a style="cursor: pointer; color:black; border:none;" class="list-group-item"
     [routerLink]="[index]">
         <div class="pull-left">
-            <h4 class="list-group-item-heading">{{office.name}}, {{office.address.city}}</h4>
+            <h4 class="list-group-item-heading">{{office.name}}</h4>
         </div> 
 
     </a>
     <div>
         <div class="optionLink">
-            <a (click)="onEditOffice()">Edit</a>
+            <a (click)="onEditOffice()">Edytuj</a>
         </div>
 
         <div class="optionLink">
-            <a (click)="onDisplayRooms()">Rooms</a>
+            <a (click)="onDisplayRooms()">Sale</a>
         </div>
 
         <div class="optionLink">
-            <a (click)="onDisplayDesks()">Desks</a>
+            <a (click)="onDisplayDesks()">Biurka</a>
         </div>
     </div>
 </div>

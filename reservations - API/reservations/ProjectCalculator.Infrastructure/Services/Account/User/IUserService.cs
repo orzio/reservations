@@ -13,8 +13,8 @@ namespace Reservations.Infrastructure.Services
         Task<UserDto> GetAsync(Guid id);
         Task<IEnumerable<UserDto>> BrowseAsync();
         Task RegisterAsync(Guid userId, string email,
-            string firstname, string lastname, string password, string role);
+            string firstname, string lastname, string password, string role, string phoneNumber);
         Task LoginAsync(string email, string password);
-        Task UpdateUser(Guid userId, string firstname, string lastname);
+        Task UpdateUser(Guid userId, string firstname, string lastname, string phoneNumber);
     }
 }

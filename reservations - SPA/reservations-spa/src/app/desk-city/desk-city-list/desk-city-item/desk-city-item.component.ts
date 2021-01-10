@@ -21,6 +21,8 @@ export class DeskCityItemComponent implements OnInit {
   deskOffice : DeskOffice;
 
   @Input() officeName:string;
+  @Input() officeEmail:string;
+  @Input() officePhoneNumber:string;
   @Input() officeAddress:Address;
   @Input() desk:Desk;
   showInfo:boolean = false;
@@ -44,7 +46,7 @@ export class DeskCityItemComponent implements OnInit {
 
   
   showOfficeInfo(){
-    this.deskOffice= new DeskOffice(this.desk,this.officeName, this.officeAddress);
+    this.deskOffice= new DeskOffice(this.desk,this.officeName, this.officeAddress, this.officePhoneNumber, this.officeEmail);
     this.deskService.deskInfoChanged.next(this.deskOffice);
     this.communicationService.deskDetailsClicked.next(true);
 

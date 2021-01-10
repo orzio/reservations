@@ -1,0 +1,8 @@
+<div class="mt-2">
+    <h1>Biurka:</h1>
+    <div class="search-hero">
+        <input class="form-control mb-2" type="text" name="search" [(ngModel)]="searchDesk" autocomplete="off" placeholder="Wpisz tekst aby filtrować rezerwacje">
+      </div>
+    <app-manager-desk-list-item-reservations *ngFor="let res of deskReservations | deskFilter:searchDesk"
+    [reservation]="res"></app-manager-desk-list-item-reservations>
+   </div>

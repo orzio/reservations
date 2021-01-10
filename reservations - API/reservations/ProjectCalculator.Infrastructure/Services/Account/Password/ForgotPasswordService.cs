@@ -38,9 +38,9 @@ namespace Reservations.Infrastructure.Services.Account.Password
             user.ResetPasswordToken = bytesBase64Token;
             user.ResetPasswordTokenCreated = DateTime.UtcNow;
 
-            var url = $"http://localhost:4200/forgotpassword/resetpassword?token={bytesBase64Token}";
-            await _emailService.SendEmail(email, url);
+            var url = $"Kliknij w link aby zresetować hasło. Link ważny jest 5 minut. http://localhost:4200/forgotpassword/resetpassword?token={bytesBase64Token}";
             await _userRepository.UpdateAsync(user);
+            await _emailService.SendEmail(email, url, "Reset password");
         }
 
         public async Task ResetPassword(string token, string newPassword)

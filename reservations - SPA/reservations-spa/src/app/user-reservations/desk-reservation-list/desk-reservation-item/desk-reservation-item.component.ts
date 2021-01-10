@@ -54,7 +54,7 @@ export class DeskReservationItemComponent implements OnInit {
    }
 
    showOfficeInfo(){
-    let deskOffice= new DeskOffice(this.reservation.deskDto,this.reservation.officeName, this.reservation.officeAddress);
+    let deskOffice= new DeskOffice(this.reservation.deskDto,this.reservation.officeName, this.reservation.officeAddress,this.reservation.officePhoneNumber ,this.reservation.officeEmail);
     this.deskService.deskInfoChanged.next(deskOffice);
     this.communicationService.deskDetailsClicked.next(true);
    }

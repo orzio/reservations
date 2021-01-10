@@ -3,6 +3,8 @@
         *ngFor="let room of office.rooms"
         [officeName] = "office.name"
         [officeAddress] = "office.address"
-        [room]="room">
+        [room]="room"
+        [officePhoneNumber]=office.phoneNumber
+        [officeEmail]="office.email">>
     </app-room-city-item>
 </div>

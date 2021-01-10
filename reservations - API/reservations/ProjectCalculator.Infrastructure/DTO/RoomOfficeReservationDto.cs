@@ -11,6 +11,8 @@ namespace Reservations.Infrastructure.DTO
         public RoomDto RoomDto { get; set; }
         public Address OfficeAddress { get; set; }
         public string OfficeName { get; set; }
+        public string OfficePhoneNumber { get; set; }
+        public string OfficeEmail { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public int Status { get; set; }

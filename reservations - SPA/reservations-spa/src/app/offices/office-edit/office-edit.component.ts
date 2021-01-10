@@ -59,9 +59,13 @@ export class OfficeEditComponent implements OnInit, OnDestroy {
     let street='';
     let zipCode='';
     let description='';
+    let email='';
+    let phoneNumber='';
 
     if(this.editMode){
       name = this.officeService.getOfficeById(this.id).name;
+      email = this.officeService.getOfficeById(this.id).email;
+      phoneNumber = this.officeService.getOfficeById(this.id).phoneNumber;
       city = this.officeService.getOfficeById(this.id).address.city;
       street = this.officeService.getOfficeById(this.id).address.street;
       zipCode = this.officeService.getOfficeById(this.id).address.zipCode;
@@ -71,7 +75,9 @@ export class OfficeEditComponent implements OnInit, OnDestroy {
 
     this.officeForm = new FormGroup({
       'name': new FormControl(name, Validators.required),
+      'email': new FormControl(email, Validators.required),
       'description': new FormControl(description, Validators.required),
+      'phoneNumber': new FormControl(phoneNumber, Validators.required),
 
       'address':new FormGroup({
         'city':new FormControl(city, Validators.required),

@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.SignalR;
 using Reservations.Infrastructure.Commands;
 using Reservations.Infrastructure.Commands.ReservationCommands.Desk;
+using Reservations.Infrastructure.Commands.ReservationCommands.Room;
 using Reservations.Infrastructure.Services;
 using Reservations.Infrastructure.SignalR;
 using System;
@@ -59,6 +60,21 @@ namespace Reservations.Api.Controllers
         [HttpGet("user/{userId}")]
         public async Task<IActionResult> GetUserReservations(Guid userId)
             => Ok(await _deskReservationService.GetDeskWithOfficeReservationsAsync(userId));
+
+
+
+        [HttpGet("manager/{managerId}")]
+        public async Task<IActionResult> GetReservationForManager(Guid managerId)
+            => Ok(await _deskReservationService.GetAllReservationForManager(managerId));
+
+
+        [HttpPut("manager/updatestatus/{reservationId}")]
+        public async Task<IActionResult> PutStatusForUserReservation(UpdateDeskReservationStatus command)
+        {
+            await _commandDispatcher.DispatchAsync(command);
+            return Ok();
+        }
+
 
         private async Task<Guid> GetDeskId(Guid reservationId)
         {

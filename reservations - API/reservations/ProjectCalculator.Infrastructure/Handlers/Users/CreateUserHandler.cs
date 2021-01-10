@@ -20,7 +20,7 @@ namespace Reservations.Infrastructure.Handlers
         public async Task HandleAsync(CreateUser command)
         {
             await _userService.RegisterAsync(Guid.NewGuid(), command.Email,
-                command.FirstName,command.LastName, command.Password, command.Role);
+                command.FirstName,command.LastName, command.Password, command.Role, command.PhoneNumber);
         }
     }
 }

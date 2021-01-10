@@ -11,19 +11,23 @@ namespace Reservations.Core.Domain
         public Guid UserId { get; set; }
         public Address Address { get;  set; }
         public string Name { get;  set; }
+        public string Email { get; set; }
+        public string PhoneNumber { get; set; }
         public string Description { get; set; }
         public List<Room> Rooms { get;  set; }
         public List<Desk> Desks { get;  set; }
 
         protected Office() { }
 
-        public Office(Guid officeId,Guid userId, Address address, string name, string description)
+        public Office(Guid officeId,Guid userId, Address address, string name, string description, string email, string phoneNumber)
         {
             Id = officeId;
             UserId = userId;
             Address = address;
             Name = name;
             Description = description;
+            Email = email;
+            PhoneNumber = phoneNumber;
         }
     }
 }

@@ -1,0 +1,54 @@
+
+  <div class="col-md-10">
+    <div class="row border-bottom border-top" style="justify-content: space-between;" >
+        <div class="col-md-5">
+            <div class="card mb-7" style="max-width: 540px; border:none">
+                <a style="cursor: pointer; color:black; border:none;" class="list-group-item">
+                <div class="row no-gutters">
+                    <div class="col-md-12">
+                        <div class="card-body">
+                            <h6 class="card-title">Biuro:{{reservation.officeName}} [Biurko:{{reservation.deskName}}]</h6>
+                            <!-- <h6 class="card-title"></h6> -->
+                            <h6 class="card-title">Kto:{{reservation.userName}}</h6>
+                            <div class="pull-left" *ngIf="reservationStartDay!=reservationEndDay">
+                              <h6 class="list-group-item-heading"> Kiedy: od {{reservationStartDay}} do {{reservationEndDay}} </h6>
+                          </div> 
+                          <div class="pull-left" *ngIf="reservationStartDay==reservationEndDay">
+                              <h6 class="list-group-item-heading"> Kiedy: {{reservationStartDay}} </h6>
+                          </div> 
+                          <div class="pull-left">
+                              <h6 class="list-group-item-heading"> Czas: od {{reservationStartHour}} do {{reservationEndHour}} </h6>
+                          </div> 
+                          <div class="pull-left text-danger" *ngIf="reservation.status == 0">
+                              <h6 class="list-group-item-heading"> Status: Rezerwacja odrzucona </h6>
+                            </div> 
+                            <div class="pull-left text-success" *ngIf="reservation.status == 1">
+                                <h6 class="list-group-item-heading"> Status: Rezerwacja potwierdzona </h6>
+                            </div> 
+                                                  <div class="pull-left text-info" *ngIf="reservation.status == 2">
+                                                    <h6 class="list-group-item-heading"> Status:  Czeka na potwierdzenie </h6>
+                                                </div> 
+                          </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        </div>
+
+        <div class="col-md-2" style="position:relative">
+            <div class="row inner" >
+                <div class="center">
+                    <div>
+                        <button class="btn btn-danger" (click)="cancelReservation()">Anuluj</button>
+                    </div>
+                    <div>
+                        <button class="btn btn-warning mt-2" (click)="postopneReservation()">Czekaj</button>
+                    </div>
+                    <div>
+                        <button  class="btn btn-success mt-2" (click)="acceptReservation()">Zaakceptuj</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

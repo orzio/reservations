@@ -11,6 +11,8 @@ namespace Reservations.Infrastructure.Commands
         public Guid UserId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
+        public string Email { get; set; }
+        public string PhoneNumber { get; set; }
         public Address Address { get; set; }
     }
 }

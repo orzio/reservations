@@ -106,7 +106,13 @@ namespace Reservations.Infrastructure.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<Guid>("UserId")
@@ -255,6 +261,9 @@ namespace Reservations.Infrastructure.Migrations
                     b.Property<byte[]>("Password")
                         .IsRequired()
                         .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ResetPasswordToken")
                         .HasColumnType("nvarchar(max)");

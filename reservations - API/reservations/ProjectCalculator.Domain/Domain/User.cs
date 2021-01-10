@@ -20,6 +20,7 @@ namespace Reservations.Core.Domain
         public string FirstName { get;  set; }
         public string LastName { get;  set; }
         public string Role { get;  set; }
+        public string PhoneNumber { get; set; }
         public string ResetPasswordToken { get; set; }
         public DateTime ResetPasswordTokenCreated { get; set; }
 
@@ -36,9 +37,10 @@ namespace Reservations.Core.Domain
         }
 
         public User(Guid userId, string email, string firstName, string lastName, string role,
-            byte[] password, byte[] salt)
+            byte[] password, byte[] salt, string phoneNumber)
         {
             Id = userId;
+            PhoneNumber = phoneNumber;
             SetEmail(email);
             SetFirstName(firstName);
             SetLastName(lastName);
@@ -51,11 +53,6 @@ namespace Reservations.Core.Domain
 
         public void SetFirstName(string firstName)
         {
-            if (!NameRegex.IsMatch(firstName))
-            {
-                throw new Exception("Username is invalid.");
-            }
-
             if (String.IsNullOrEmpty(firstName))
             {
                 throw new Exception("Username is invalid.");
@@ -69,11 +66,6 @@ namespace Reservations.Core.Domain
 
         public void SetLastName(string lastName)
         {
-            if (!NameRegex.IsMatch(lastName))
-            {
-                throw new Exception("Username is invalid.");
-            }
-
             if (String.IsNullOrEmpty(lastName))
             {
                 throw new Exception("Username is invalid.");

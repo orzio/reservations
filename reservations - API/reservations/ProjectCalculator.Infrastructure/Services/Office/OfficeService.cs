@@ -21,9 +21,9 @@ namespace Reservations.Infrastructure.Services
             _mapper = mapper;
         }
 
-        public async Task CreateAsync(Guid officeId, Guid userId, string name,Address address,string description)
+        public async Task CreateAsync(Guid officeId, Guid userId, string name,Address address,string description, string email, string phoneNumber)
         {
-            var office = new Office(officeId, userId,address,name,description);
+            var office = new Office(officeId, userId,address,name,description, email, phoneNumber);
             await _officeRepository.AddAsync(office);
         }
 
@@ -32,9 +32,9 @@ namespace Reservations.Infrastructure.Services
             await _officeRepository.DeleteAsync(officeId);
         }
 
-        public async Task UpdateOffice(Guid officeId,Guid userId, Address address, string name, string description)
+        public async Task UpdateOffice(Guid officeId,Guid userId, Address address, string name, string description, string email, string phoneNumber)
         {
-            var office = new Office(officeId, userId, address, name, description);
+            var office = new Office(officeId, userId, address, name, description,email, phoneNumber);
             await _officeRepository.UpdateAsync(office);
         }
 

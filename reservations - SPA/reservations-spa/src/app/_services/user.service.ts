@@ -8,7 +8,7 @@ import { Observable, throwError, Subject, BehaviorSubject, ReplaySubject } from 
 import { Router } from '@angular/router';
 import { ResetPassword } from '../_models/ResetPassword';
 import { AuthService } from './auth.service';
-import { UpdateUser } from '../_models/UpdateUser';
+import { UpdatedUser } from '../_models/UpdatedUser';
 import { ChangePassword } from '../user-profile/user-profile.component';
 
 
@@ -20,12 +20,16 @@ export class UserService {
     currentUser:User;
     constructor(private http:HttpClient, private authService:AuthService){}
 
-    updateUser(updateUser:UpdateUser){
+    updateUser(updateUser:UpdatedUser){
         return this.http.put(`http://localhost:44310/users/${updateUser.id}`,updateUser);
     }
     
     changePassword(changePassword:ChangePassword){
         return this.http.post(`http://localhost:44310/changepassword`,changePassword);
+    }
+    
+    getUser(userId:string){
+        return this.http.get<UpdatedUser>(`http://localhost:44310/users/single/`+userId);
     }
 
 }

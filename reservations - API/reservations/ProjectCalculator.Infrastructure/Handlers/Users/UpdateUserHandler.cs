@@ -16,7 +16,7 @@ namespace Reservations.Infrastructure.Handlers.Users
 
         public async Task HandleAsync(UpdateUser command)
         {
-           await _userService.UpdateUser(command.Id, command.FirstName, command.LastName);
+           await _userService.UpdateUser(command.Id, command.FirstName, command.LastName, command.PhoneNumber);
         }
     }
 }

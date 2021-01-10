@@ -1,8 +1,8 @@
 <div class="mt-2">
     <h1>Sale:</h1>
     <div class="search-hero">
-        <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Wpisz tekst aby filtrować rezerwacje">
+        <input class="form-control mb-2" type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Wpisz tekst aby filtrować rezerwacje">
       </div>
-    <app-manager-room-list-item-reservations *ngFor="let res of roomsReservations | statusFilter:searchText"
+    <app-manager-room-list-item-reservations  *ngFor="let res of roomsReservations | statusFilter:searchText"
     [reservation]="res"></app-manager-room-list-item-reservations>
    </div>
