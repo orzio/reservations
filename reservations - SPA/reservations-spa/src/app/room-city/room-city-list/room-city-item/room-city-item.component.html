@@ -1,29 +1,10 @@
-<!-- <div style="display: flex; flex-direction: row; justify-content: space-between;" class="list-group-item" >
-    <a style="cursor: pointer; border:none;" class="list-group-item" (click)="showOfficeInfo()" 
-   >
-        <div class="pull-left">
-            <h2 class="list-group-item-heading">Sala: {{room.seats}}-osobowa</h2>
-        </div> 
-        <div class="pull-left">
-            <h3 class="list-group-item-heading">{{officeName}}, {{officeAddress.city}}, {{officeAddress.street}}</h3>
-        </div> 
-    </a>
-    <div>
-        <div class="center" ngbTooltip="Aby dokonać rezerwacji zaloguj się">
-            <button class="btn btn-primary"  [disabled]="currentUser==null"  (click)="reserveRoom()">Zarezerwuj</button>
-        </div>
-
-    </div>
-</div>
-
- -->
-<div class="col-md-10">
-    <div class="row border-bottom border-top" style="justify-content: space-between;" >
-        <div class="col-md-5">
-            <div class="card mb-7" style="max-width: 540px; border:none">
-                <a style="cursor: pointer; color:black; border:none;" class="list-group-item"
+ <div class="col-md-12 list-item-bg border-bottom">
+    <div class="row bgt" style="justify-content: space-between; " >
+        <div class="col-md-5 bgt">
+            <div class="card mb-5 bgt" style="max-width: 540px; border:none; padding:0">
+                <a style="cursor: pointer; color:black; border:none;" class="list-group-item bgt"
                 (click)="showOfficeInfo()" >
-                <div class="row no-gutters">
+                <div class="row no-gutters bgt">
                     <div class="col-md-4">
                         <img src="{{room.mainUrl}}" class="card-img" alt="...">
                     </div>
@@ -41,9 +22,10 @@
 
     <div class="col-md-2" style="position:relative">
         <div class="row inner" >
-            <div ngbTooltip="Aby dokonać rezerwacji zaloguj się">
-                <button class="btn btn-light"  [disabled]="currentUser==null"  (click)="reserveRoom()">Zarezerwuj</button>
+            <div *ngIf="currentUser==null" ngbTooltip="Aby dokonać rezerwacji zaloguj się">
+                <button class="btn btn-success"  [disabled]="currentUser==null"  (click)="reserveRoom()">Zarezerwuj</button>
             </div>
+                <button class="btn btn-success"  *ngIf="currentUser!=null"  (click)="reserveRoom()">Zarezerwuj</button>
         </div>
     </div>
 </div>

@@ -42,19 +42,22 @@ namespace Reservations
             }));
 
             var jwtKey = Configuration.GetSettings<JwtSettings>().Key;
-            //services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-            //   .AddJwtBearer(options =>
-            //   {
-            //       options.TokenValidationParameters = new TokenValidationParameters
-            //       {
-            //           ValidateIssuerSigningKey = true,
-            //           IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration.GetSettings<JwtSettings>().Key)),
-            //           ValidateIssuer = false,
-            //           ValidateAudience = false
-            //       };
-            //   });
-            //services.AddCors();
-            services.AddAuthorization(x => x.AddPolicy("admin", p => p.RequireRole("admin")));
+
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+               .AddJwtBearer(options =>
+               {
+                   options.TokenValidationParameters = new TokenValidationParameters
+                   {
+                       ValidateIssuerSigningKey = true,
+                       IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey)),
+                       ValidateIssuer = false,
+                       ValidateAudience = false
+                   };
+               });
+
+
+            services.AddCors();
+            services.AddAuthorization(x => x.AddPolicy("manager", p => p.RequireRole("manager")));
             services.AddAuthorization(x => x.AddPolicy("user", p => p.RequireRole("user")));
             services.AddDbContext<DataContext>(options =>
                         options.UseSqlServer(Configuration["sql:connectionString"]).EnableSensitiveDataLogging().EnableDetailedErrors());

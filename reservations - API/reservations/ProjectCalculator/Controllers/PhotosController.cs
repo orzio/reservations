@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Reservations.Infrastructure.Commands;
 using Reservations.Infrastructure.Commands.Photos;
 using Reservations.Infrastructure.Services.Photos;
@@ -11,6 +12,7 @@ namespace Reservations.Api.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [Authorize]
     public class PhotosController: ControllerBase
     {
         private readonly ICommandDispatcher _commandDispatcher;
@@ -30,7 +32,7 @@ namespace Reservations.Api.Controllers
             return Created($"photos/{command}", photo);
         }
 
-
+        [Authorize(Policy = "manager")]
         [HttpPost("room/{roomId}/main/{id}")]
         public async Task<IActionResult> Post(Guid roomId,Guid id)
         {
@@ -53,7 +55,7 @@ namespace Reservations.Api.Controllers
             var photo = await _photoService.GetRoomPhotos(id);
             return Ok(photo);
         }
-
+        [Authorize(Policy = "manager")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {

@@ -5,3 +5,25 @@ input.ng-invalid.ng-touched{
 .help-block{
     color:red;
 }
+
+.center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    right: 0%;
+    -ms-transform: translate(-20%, -50%);
+    transform: translate(-20%, -50%);
+  }
+
+  input{
+    background-color:rgba(255, 255, 255, 0.5) !important;
+}
+
+select{
+    background-color:rgba(255, 255, 255, 0.5) !important;
+}
+
+
+option{
+    background-color:rgba(255, 255, 255, 0.5) !important;
+}

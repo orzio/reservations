@@ -29,9 +29,5 @@
     <ProjectReference Include="..\ProjectCalculator.Infrastructure\Reservations.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="wwwroot\images\" />
-  </ItemGroup>
-
 
 </Project>

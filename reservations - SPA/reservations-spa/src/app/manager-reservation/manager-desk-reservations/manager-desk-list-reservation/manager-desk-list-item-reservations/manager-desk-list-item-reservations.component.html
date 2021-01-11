@@ -1,12 +1,12 @@
 
-  <div class="col-md-10">
-    <div class="row border-bottom border-top" style="justify-content: space-between;" >
-        <div class="col-md-5">
-            <div class="card mb-7" style="max-width: 540px; border:none">
-                <a style="cursor: pointer; color:black; border:none;" class="list-group-item">
+  <div class="col-md-12 list-item-bg border-bottom">
+    <div class="row" style="justify-content: space-between; " >
+        <div class="col-md-5 bgt">
+            <div class="card mb-5 bgt" style="max-width: 540px; border:none">
+                <a style="cursor: pointer; color:black; border:none;" class="list-group-item bgt">
                 <div class="row no-gutters">
                     <div class="col-md-12">
-                        <div class="card-body">
+                        <div class="card-body bgt ">
                             <h6 class="card-title">Biuro:{{reservation.officeName}} [Biurko:{{reservation.deskName}}]</h6>
                             <!-- <h6 class="card-title"></h6> -->
                             <h6 class="card-title">Kto:{{reservation.userName}}</h6>
@@ -25,30 +25,19 @@
                             <div class="pull-left text-success" *ngIf="reservation.status == 1">
                                 <h6 class="list-group-item-heading"> Status: Rezerwacja potwierdzona </h6>
                             </div> 
-                                                  <div class="pull-left text-info" *ngIf="reservation.status == 2">
-                                                    <h6 class="list-group-item-heading"> Status:  Czeka na potwierdzenie </h6>
-                                                </div> 
-                          </div>
+                             <div class="pull-left text-info" *ngIf="reservation.status == 2">
+                               <h6 class="list-group-item-heading"> Status:  Czeka na potwierdzenie </h6>
+                            </div> 
+                        </div>
                     </div>
+                                    <div>
+                                        <button class="btn btn-danger mt-2" (click)="cancelReservation()">Anuluj</button>
+                                        <button class="btn btn-warning mt-2 ml-2" (click)="postopneReservation()">Czekaj</button>
+                                        <button  class="btn btn-success mt-2 ml-2" (click)="acceptReservation()">Zaakceptuj</button>
+                                    </div>
                 </div>
             </a>
         </div>
-        </div>
-
-        <div class="col-md-2" style="position:relative">
-            <div class="row inner" >
-                <div class="center">
-                    <div>
-                        <button class="btn btn-danger" (click)="cancelReservation()">Anuluj</button>
-                    </div>
-                    <div>
-                        <button class="btn btn-warning mt-2" (click)="postopneReservation()">Czekaj</button>
-                    </div>
-                    <div>
-                        <button  class="btn btn-success mt-2" (click)="acceptReservation()">Zaakceptuj</button>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
 </div>

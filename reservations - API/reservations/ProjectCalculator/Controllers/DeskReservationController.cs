@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Reservations.Infrastructure.Commands;
 using Reservations.Infrastructure.Commands.ReservationCommands.Desk;
@@ -14,6 +15,7 @@ namespace Reservations.Api.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [Authorize]
     public class DeskReservationsController : ControllerBase
     {
         private readonly ICommandDispatcher _commandDispatcher;
@@ -62,12 +64,12 @@ namespace Reservations.Api.Controllers
             => Ok(await _deskReservationService.GetDeskWithOfficeReservationsAsync(userId));
 
 
-
+        [Authorize(Policy = "manager")]
         [HttpGet("manager/{managerId}")]
         public async Task<IActionResult> GetReservationForManager(Guid managerId)
             => Ok(await _deskReservationService.GetAllReservationForManager(managerId));
 
-
+        [Authorize(Policy = "manager")]
         [HttpPut("manager/updatestatus/{reservationId}")]
         public async Task<IActionResult> PutStatusForUserReservation(UpdateDeskReservationStatus command)
         {

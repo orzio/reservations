@@ -6,3 +6,11 @@ input.ng-invalid.ng-touched,
 textarea.ng-invalid.ng-touched {
   border: 1px solid red;
 }
+
+input{
+  background-color:rgba(255, 255, 255, 0.5) !important;
+}
+
+.list-item-bg{
+  background-color:rgba(255, 255, 255, 0.5) !important;
+}

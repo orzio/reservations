@@ -1,0 +1,8 @@
+.cont{
+    background-image: url(./img/pexels-jeshootscom-442574.jpg);
+    height: 100%; 
+    background-position: center center;
+    background-size:cover;
+    background-size: fixed;
+    overflow-x:hidden;
+}

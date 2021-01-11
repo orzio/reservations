@@ -111,7 +111,7 @@ updateUubscription:Subscription;
         let reservations=[];
         data.forEach(reservation => {
           let editable=reservation.userId == this.user.id ? true:false;
-          let bgColor=reservation.userId == this.user.id ? "#3788d8":"#999999"
+          let bgColor=reservation.userId == this.user.id ? "#28a745":"#999999"
           let eventTitle = reservation.userId == this.user.id ?  this.eventTitle : this.RESERVED_EVENT_STRING
             reservations.push({
             id:reservation.id,

@@ -5,3 +5,13 @@
 .optionLink:hover{
     text-decoration: underline;
 }
+
+
+.list-group-item{
+    background-color: transparent !important;
+}
+
+.list-item-bg{
+    background-color:rgba(255, 255, 255, 0.5) !important;
+}
+

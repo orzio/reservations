@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Reservations.Infrastructure.Commands;
 using Reservations.Infrastructure.Commands.ReservationCommands.Room;
@@ -13,6 +14,7 @@ namespace Reservations.Api.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [Authorize]
     public class RoomReservationController:ControllerBase
     {
         private readonly ICommandDispatcher _commandDispatcher;
@@ -59,12 +61,12 @@ namespace Reservations.Api.Controllers
         public async Task<IActionResult> GetUserReservations(Guid userId)
             => Ok(await _roomReservationService.GetRoomWithOfficeReservationsAsync(userId));
 
-
+        [Authorize(Policy = "manager")]
         [HttpGet("manager/{managerId}")]
         public async Task<IActionResult> GetReservationForManager(Guid managerId)
         => Ok(await _roomReservationService.GetAllReservationForManager(managerId));
 
-
+        [Authorize(Policy = "manager")]
         [HttpPut("manager/updatestatus/{reservationId}")]
         public async Task<IActionResult> PutStatusForUserReservation(UpdateRoomReservationStatus command)
         {

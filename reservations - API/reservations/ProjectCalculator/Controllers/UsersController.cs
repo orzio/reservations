@@ -16,6 +16,7 @@ namespace Reservations.Api.Controllers
 {
     [Route("[controller]")]
     [ApiController]
+    [Authorize]
     public class UsersController : ControllerBase
     {
         private readonly IUserService _userService;
@@ -28,7 +29,7 @@ namespace Reservations.Api.Controllers
 
         // GET: api/<UsersController>
 
-        [Authorize(Policy ="user")]
+  
         [HttpGet]
         public async Task<IActionResult> Get()
         {

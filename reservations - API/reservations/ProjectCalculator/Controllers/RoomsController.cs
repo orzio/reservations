@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Reservations.Infrastructure.Commands;
 using Reservations.Infrastructure.Commands;
 using Reservations.Infrastructure.Commands.Room;
@@ -12,6 +13,7 @@ namespace Reservations.Api.Controllers
 {
     [Route("offices/[controller]")]
     [ApiController]
+    [Authorize]
     public class RoomsController:ControllerBase
     {
         private readonly ICommandDispatcher _commandDispatcher;

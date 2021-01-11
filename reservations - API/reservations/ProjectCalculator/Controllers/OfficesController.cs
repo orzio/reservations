@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Reservations.Infrastructure.Commands;
 using Reservations.Infrastructure.Commands.OfficeCommands;
 using Reservations.Infrastructure.Services;
@@ -38,6 +39,7 @@ namespace Reservations.Api.Controllers
             return Ok(offices);
         }
 
+        [Authorize(Policy = "manager")]
         [HttpGet("user/{userId}")]
         public async Task<IActionResult>GetUserOffices([FromRoute]Guid userId)
         {
@@ -61,6 +63,7 @@ namespace Reservations.Api.Controllers
 
 
 
+        [Authorize(Policy = "manager")]
         [HttpPut]
         public async Task<IActionResult> Put([FromBody] UpdateOffice command)
         {
@@ -68,6 +71,7 @@ namespace Reservations.Api.Controllers
             return NoContent();
         }
 
+        [Authorize(Policy = "manager")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {

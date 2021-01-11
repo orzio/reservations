@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Reservations.Infrastructure.Commands;
 using Reservations.Infrastructure.Commands.AccountCommands;
 using Reservations.Infrastructure.Services.Account.Password;
@@ -11,6 +12,7 @@ namespace Reservations.Api.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize]
     public class ChangePasswordController : ControllerBase
     {
         private readonly ICommandDispatcher _commandDispatcher;

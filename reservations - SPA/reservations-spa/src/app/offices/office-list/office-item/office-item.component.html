@@ -1,12 +1,12 @@
-<div style="display: flex;  flex-direction: row; justify-content: space-between; border-left: none; border-right: none;" class="list-group-item  border-bottom border-top" >
+<div style="display: flex; flex-direction: row; justify-content: space-between; border-left: none; border-right: none;" class="list-group-item  list-item-bg border-bottom border-top" >
     <a style="cursor: pointer; color:black; border:none;" class="list-group-item"
     [routerLink]="[index]">
-        <div class="pull-left">
-            <h4 class="list-group-item-heading">{{office.name}}</h4>
+        <div class="pull-left" >
+            <h4 style="background-color:transparent !important;"  class="list-group-item-heading">{{office.name}}</h4>
         </div> 
 
     </a>
-    <div>
+    <div >
         <div class="optionLink">
             <a (click)="onEditOffice()">Edytuj</a>
         </div>

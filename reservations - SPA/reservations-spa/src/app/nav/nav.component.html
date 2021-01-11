@@ -1,7 +1,7 @@
-<div class="container-fluid">
+
     <div class="row">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" [routerLink]="['/']">Twoje-Biuro.pl</a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" style="background-color:rgba(255, 255, 255, 0.8) !important;">
+      <a class="navbar-brand" [routerLink]="['/']" style="margin-left: 1.3rem;">Twoje-Biuro.pl</a>
                   <button class="navbar-toggler ml-auto custom-toggler"type="button"data-toggle="collapse" (click)="isCollapsed = !isCollapsed"
                   [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic">
                   <span class="navbar-toggler-icon"></span>
@@ -13,10 +13,10 @@
                         <a class="nav-link" [routerLink]="['/offices']" routerLinkActive="router-link-active">Twoje Biura</a>
                       </li>
                       <li class="nav-item" *ngIf="isLoggedIn && currentUser.role=='manager'">
-                        <a class="nav-link" [routerLink]="['/manager/reservations']" routerLinkActive="router-link-active">Rezerwacje użytkowników</a>
+                        <a class="nav-link" [routerLink]="['/manager/reservations']" routerLinkActive="router-link-active" >Rezerwacje użytkowników</a>
                       </li>
                       <li class="nav-item" *ngIf="isLoggedIn">
-                        <a class="nav-link" [routerLink]="['/user/profile']" routerLinkActive="router-link-active">Twój Profil</a>
+                        <a class="nav-link" [routerLink]="['/user/profile']" routerLinkActive="router-link-active" >Twój Profil</a>
                       </li>
                       <li class="nav-item" *ngIf="isLoggedIn">
                         <a class="nav-link" [routerLink]="['/user/reservations']" routerLinkActive="router-link-active">Twoje Rezerwacje</a>
@@ -28,7 +28,7 @@
                         <a class="nav-link" [routerLink]="['/login']" routerLinkActive="router-link-active" >Logowanie</a>
                       </li>
                       <li class="nav-item"  *ngIf="isLoggedIn">
-                        <a class="nav-link" [routerLink]="['/logout']" routerLinkActive="router-link-active" (click)="logout()">Wyloguj </a>
+                        <a class="nav-link" [routerLink]="['/logout']" routerLinkActive="router-link-active" (click)="logout()" >Wyloguj </a>
                       </li>
                     </ul>
                   </div>

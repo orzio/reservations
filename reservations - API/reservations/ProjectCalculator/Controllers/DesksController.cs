@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Reservations.Infrastructure.Commands;
 using Reservations.Infrastructure.Commands;
 using Reservations.Infrastructure.Services;
@@ -22,6 +23,7 @@ namespace Reservations.Api.Controllers
             _deskService = deskService;
         }
 
+        [Authorize(Policy = "manager")]
         [HttpPost]
         public async Task<IActionResult> Post(CreateDesk command)
         {
@@ -43,7 +45,8 @@ namespace Reservations.Api.Controllers
             var desks = await _deskService.BrowseAsync();
             return Ok(desks);
         }
-
+        
+        [Authorize(Policy = "manager")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(Guid id)
         {
